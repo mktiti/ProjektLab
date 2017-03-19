@@ -8,4 +8,8 @@ public class GameEngine {
         System.out.println("Hello ProjektLab adsf");
     }
 
+    static void bar(){
+        System.out.println("Hello again");
+    }
+
 }
