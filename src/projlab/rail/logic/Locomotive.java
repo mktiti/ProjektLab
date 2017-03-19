@@ -1,7 +1,5 @@
 package projlab.rail.logic;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.util.LinkedList;
 
 public class Locomotive extends MovingEntity {

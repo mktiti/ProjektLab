@@ -1,7 +1,5 @@
 package projlab.rail.logic;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public class Car extends MovingEntity {
     public boolean hasPassengers;
     public Color color;

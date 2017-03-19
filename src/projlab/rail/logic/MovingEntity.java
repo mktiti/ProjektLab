@@ -1,7 +1,5 @@
 package projlab.rail.logic;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public abstract class MovingEntity {
     protected StaticEntity currentPosition;
     protected StaticEntity lastPosition;
