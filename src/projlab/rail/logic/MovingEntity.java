@@ -1,4 +1,4 @@
 package projlab.rail.logic;
 
-public class MovingEntity {
+public abstract class MovingEntity {
 }
