@@ -220,6 +220,8 @@ public class Szkeleton {
                     break;
                 } else {
                     System.out.println(mismatch);
+                    System.out.println("A játék folytatódik.");
+                    break;
                 }
             }
         }
