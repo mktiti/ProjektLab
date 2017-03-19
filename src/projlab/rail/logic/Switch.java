@@ -8,11 +8,17 @@ public class Switch extends StaticEntity{
     public StaticEntity outputB;
     public boolean isAActive;
 
-    public void connectA(StaticEntity a){}
+    public void connectA(StaticEntity a){
+        System.out.println("Switch.connectA called");
+    }
 
-    public void connectB(StaticEntity b){}
+    public void connectB(StaticEntity b){
+        System.out.println("Switch.connectB called");
+    }
 
-    public void connectIn(StaticEntity in){}
+    public void connectIn(StaticEntity in){
+        System.out.println("Switch.connectIn called");
+    }
 
     @Override
     public Set<StaticEntity> getConnections(){

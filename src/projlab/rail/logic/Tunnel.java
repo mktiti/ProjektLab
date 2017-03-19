@@ -10,10 +10,12 @@ public class Tunnel extends StaticEntity {
     public boolean isActive;
 
     public void connectVisible(StaticEntity visible) {
+        System.out.println("Tunnel.connectVisible called");
         visibleConnection = visible;
     }
 
     public void setHiddenConnection(StaticEntity hidden) {
+        System.out.println("Tunnel.setHiddenConnection called");
         hiddenConnection = hidden;
     }
 
