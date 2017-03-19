@@ -8,12 +8,12 @@ public abstract class MovingEntity {
     public MovingEntity next;
 
     public StaticEntity next(){
-        //TODO: Implement this method
+        System.out.println("StaticEntity.next called");
         return null;
     }
 
     public boolean move(){
-        //TODO: Implement this method
+        System.out.println("StaticEntity.move called");
         return false;
     }
 
