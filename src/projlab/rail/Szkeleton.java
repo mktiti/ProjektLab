@@ -6,14 +6,13 @@ import projlab.rail.logic.Locomotive;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Objects;
 
 public class Szkeleton {
 
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static boolean askBoolean(String message) {
-        return "I".equals(askNumbered(message, "I", "N"));
+        return "I".equals(ask(message, "I", "N"));
     }
 
     public static int askNumbered(String message, String... options) {
