@@ -112,28 +112,17 @@ public class Szkeleton {
         String[] q2Options = new String[] {"I", "N"};
         switch (askNumbered("Melyik eset fusson?", questions)){
             case 0:
-                switch (ask("Válasz: " , q1Options)) {
-                    case "I":
-                        System.out.println("Egyszerre csak egy alagút lehet a pályán!");
-                        break;
-                    case "H":
-                        System.out.println("Alagútszáj aktiválva");
-                        break;
-                    default:
-                        break;
-                }
+                if(askBoolean("Létezik már alagút a pályán? " ))
+                    System.out.println("Egyszerre csak egy alagút lehet a pályán!");
+                else
+                    System.out.println("Alagútszáj aktiválva");
                 break;
+
             case 1:
-                switch (ask("Válasz: ", q2Options)){
-                    case "I":
-                        System.out.println("Alagút létrehozva");
-                        break;
-                    case "H":
-                        System.out.println("Ez az első aktív alagútszáj");
-                        break;
-                    default:
-                        break;
-                }
+                if(askBoolean("Van-e már aktivált alagútszáj? " ))
+                    System.out.println("Egyszerre csak egy alagút lehet a pályán!");
+                else
+                    System.out.println("Alagútszáj aktiválva");
                 break;
             default:
                 break;
