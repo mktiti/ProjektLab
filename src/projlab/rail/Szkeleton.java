@@ -181,10 +181,8 @@ public class Szkeleton {
                 break;
         }
 
-        boolean last = false;
-
         char i = 0;
-        while (!last) {
+        while (true) {
             ++i;
 
             if (askBoolean("Van következő kocsi?")) {
@@ -193,7 +191,7 @@ public class Szkeleton {
             } else {
                 System.out.println("A leszállók vizsgálata véget ért.");
                 new Car().next();
-                last = true;
+                break;
             }
 
             if (askBoolean("Van utas a(z) " + i + ". kocsiban?")) {
