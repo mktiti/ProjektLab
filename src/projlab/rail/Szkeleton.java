@@ -108,24 +108,13 @@ public class Szkeleton {
     private static void tunnelPlace() {
         System.out.println("Alagút lerakás");
         String[] questions = new String[] {"Létezik már alagút a pályán?", "Van-e már aktivált alagútszáj?"};
-        String[] q1Options = new String[] {"I", "N"};
-        String[] q2Options = new String[] {"I", "N"};
-        switch (askNumbered("Melyik eset fusson?", questions)){
-            case 0:
-                if(askBoolean("Létezik már alagút a pályán? " ))
-                    System.out.println("Egyszerre csak egy alagút lehet a pályán!");
-                else
-                    System.out.println("Alagútszáj aktiválva");
-                break;
-
-            case 1:
-                if(askBoolean("Van-e már aktivált alagútszáj? " ))
-                    System.out.println("Egyszerre csak egy alagút lehet a pályán!");
-                else
-                    System.out.println("Alagútszáj aktiválva");
-                break;
-            default:
-                break;
+        if(askBoolean(questions[0]))
+            System.out.println("Egyszerre csak egy alagút lehet a pályán!");
+        else{
+            if(askBoolean(questions[1]))
+                System.out.println("Alagút létrehozva");
+            else
+                System.out.println("Ez az első aktív alagútszáj");
         }
     }
 
