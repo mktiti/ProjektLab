@@ -12,6 +12,10 @@ public class Szkeleton {
 
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+    public static boolean askBoolean(String message) {
+        return "I".equals(askNumbered(message, "I", "N"));
+    }
+
     public static int askNumbered(String message, String... options) {
         if (options == null || options.length == 0) {
             System.out.println("No possible answers given!");
@@ -20,20 +24,20 @@ public class Szkeleton {
 
         System.out.println(message);
         for (int i = 0; i < options.length; i++) {
-            System.out.println(options[i] + " [" + i + "]");
+            System.out.println("[" + i + "] " + options[i]);
         }
 
         String in;
         try {
             while ((in = br.readLine()) != null) {
-
-                try {
-                    int n = Integer.parseInt(in);
-                    if (n >= 0 && n < options.length) {
-                        return n;
-                    }
-                } catch (NumberFormatException nfe) {}
-
+                if ((in = in.trim()).length() > 0) {
+                    try {
+                        int n = Integer.parseInt(in);
+                        if (n >= 0 && n < options.length) {
+                            return n;
+                        }
+                    } catch (NumberFormatException nfe) {}
+                }
                 System.out.println("Invalid input!");
             }
         } catch (IOException e) {
@@ -58,9 +62,11 @@ public class Szkeleton {
         String in;
         try {
             while ((in = br.readLine()) != null) {
-                for (int i = 0; i < answers.length; i++) {
-                    if (Objects.equals(in, answers[i])) {
-                        return answers[i];
+                if ((in = in.trim()).length() > 0) {
+                    for (int i = 0; i < answers.length; i++) {
+                        if (in.equalsIgnoreCase(answers[i])) {
+                            return answers[i];
+                        }
                     }
                 }
                 System.out.println("Invalid input!");
@@ -141,11 +147,9 @@ public class Szkeleton {
         Car[] cars = new Car[] { new Car(), new Car(), new Car() };
 
         loc.getDestination();
-        switch (ask("Ütköznek a vonatok?", "I", "N")) {
-            case "I":
-                System.out.println("A vonatok ütköztek /gameOver()/");
-                break;
-            case "N":
+        if (askBoolean("Ütköznek a vonatok?")) {
+            System.out.println("A vonatok ütköztek /gameOver()/");
+        } else {
                 System.out.println("Nincs vonat-vonat ütközés, a vonatok léphetnek.");
                 loc.move();
 
@@ -153,20 +157,11 @@ public class Szkeleton {
                     c.move();
                 }
 
-                switch (ask("Sérül a vonat?", "I", "N")) {
-                    case "I":
-                        System.out.println("A vonat sérült /gameOver()/");
-                        break;
-                    case "N":
-                        System.out.println("A vonat továbblépett.");
-                        break;
-                    default:
-                        break;
+                if (askBoolean("Sérül a vonat?")) {
+                    System.out.println("A vonat sérült /gameOver()/");
+                } else {
+                    System.out.println("A vonat továbblépett.");
                 }
-
-                break;
-            default:
-                break;
         }
     }
 
