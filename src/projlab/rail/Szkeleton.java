@@ -149,18 +149,18 @@ public class Szkeleton {
         if (askBoolean("Ütköznek a vonatok?")) {
             System.out.println("A vonatok ütköztek /gameOver()/");
         } else {
-                System.out.println("Nincs vonat-vonat ütközés, a vonatok léphetnek.");
-                loc.move();
+            System.out.println("Nincs vonat-vonat ütközés, a vonatok léphetnek.");
+            loc.next();
 
-                for (Car c : cars) {
-                    c.move();
-                }
+            for (Car c : cars) {
+                c.next();
+            }
 
-                if (askBoolean("Sérül a vonat?")) {
-                    System.out.println("A vonat sérült /gameOver()/");
-                } else {
-                    System.out.println("A vonat továbblépett.");
-                }
+            if (askBoolean("Sérül a vonat?")) {
+                System.out.println("A vonat sérült /gameOver()/");
+            } else {
+                System.out.println("A vonat továbblépett.");
+            }
         }
     }
 
