@@ -19,11 +19,13 @@ public class Tunnel extends StaticEntity {
 
     @Override
     public Set<StaticEntity> getConnections() {
+        System.out.println("Tunnel.getConnections called");
         return null;
     }
 
     @Override
     public StaticEntity next(StaticEntity previous) {
+        System.out.println("Tunnel.next called");
         return null;
     }
 }

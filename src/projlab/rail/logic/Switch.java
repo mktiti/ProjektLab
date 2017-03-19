@@ -16,11 +16,17 @@ public class Switch extends StaticEntity{
 
     @Override
     public Set<StaticEntity> getConnections(){
+        System.out.println("Switch.getConnections called");
         return null;
     }
 
     @Override
-    public StaticEntity next(StaticEntity previous){ return null; }
+    public StaticEntity next(StaticEntity previous){
+        System.out.println("Switch.next called");
+        return null;
+    }
 
-    public void toggle(){}
+    public void toggle(){
+        System.out.println("Switch.toggle called");
+    }
 }
