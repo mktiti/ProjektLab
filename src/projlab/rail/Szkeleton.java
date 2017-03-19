@@ -1,5 +1,6 @@
 package projlab.rail;
 
+import projlab.rail.logic.Car;
 import projlab.rail.logic.Locomotive;
 
 import java.io.BufferedReader;
@@ -137,6 +138,8 @@ public class Szkeleton {
     private static void trainStep() {
         System.out.println("Vonat léptetés");
         Locomotive loc = new Locomotive();
+        Car[] cars = new Car[] { new Car(), new Car(), new Car() };
+
         loc.getDestination();
         switch (ask("Ütköznek a vonatok?", "I", "N")) {
             case "I":
@@ -146,7 +149,20 @@ public class Szkeleton {
                 System.out.println("Nincs vonat-vonat ütközés, a vonatok léphetnek.");
                 loc.move();
 
+                for (Car c : cars) {
+                    c.move();
+                }
 
+                switch (ask("Sérül a vonat?", "I", "N")) {
+                    case "I":
+                        System.out.println("A vonat sérült /gameOver()/");
+                        break;
+                    case "N":
+                        System.out.println("A vonat továbblépett.");
+                        break;
+                    default:
+                        break;
+                }
 
                 break;
             default:
