@@ -181,18 +181,19 @@ public class Szkeleton {
                 break;
         }
 
-        char i = 0;
+        int i = 1;
         while (true) {
-            ++i;
 
-            if (askBoolean("Van következő kocsi?")) {
-                System.out.println("A következő kocsit vizsgálom.");
-                new Car().next();
-            } else {
-                System.out.println("A leszállók vizsgálata véget ért.");
-                new Car().next();
-                System.out.println("A játék folytatódik.");
-                break;
+            if (i > 1) {
+                if (askBoolean("Van következő kocsi?")) {
+                    System.out.println("A következő kocsit vizsgálom.");
+                    new Car().next();
+                } else {
+                    System.out.println("A leszállók vizsgálata véget ért.");
+                    new Car().next();
+                    System.out.println("A játék folytatódik.");
+                    break;
+                }
             }
 
             if (askBoolean("Van utas a(z) " + Integer.toString(i) + ". kocsiban?")) {
@@ -224,6 +225,7 @@ public class Szkeleton {
                     break;
                 }
             }
+            i++;
         }
 
     }
