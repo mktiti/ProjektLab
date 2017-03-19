@@ -191,10 +191,11 @@ public class Szkeleton {
             } else {
                 System.out.println("A leszállók vizsgálata véget ért.");
                 new Car().next();
+                System.out.println("A játék folytatódik.");
                 break;
             }
 
-            if (askBoolean("Van utas a(z) " + i + ". kocsiban?")) {
+            if (askBoolean("Van utas a(z) " + Integer.toString(i) + ". kocsiban?")) {
                 String match = "A kocsi színe megegyezik az állomáséval, utasok leszállítása.";
                 String mismatch = "A kocsi színe nem egyezik meg az állomáséval.";
 
@@ -207,6 +208,13 @@ public class Szkeleton {
                         System.out.println("A vonat folytatja az utat.");
                     } else {
                         System.out.println("A vonat eltűnik.");
+
+                        if (askBoolean("Van még vonat a pályán?")) {
+                            System.out.println("A játék folytatódik.");
+                        } else {
+                            System.out.println("Megnyerted a pályát.");
+                            new GameEngine().gameWon();
+                        }
                     }
 
                     break;
@@ -214,12 +222,6 @@ public class Szkeleton {
                     System.out.println(mismatch);
                 }
             }
-        }
-        if (askBoolean("Van még vonat a pályán?")) {
-            System.out.println("A játék folytatódik.");
-        } else {
-            System.out.println("Megnyerted a pályát.");
-            new GameEngine().gameWon();
         }
 
     }
