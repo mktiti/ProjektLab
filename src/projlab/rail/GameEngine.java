@@ -17,22 +17,27 @@ public class GameEngine {
 
     public void connect(MovingEntity first, MovingEntity second){
         //TODO: Implement this method
+        System.out.println("GameEngine.connect called");
     }
 
     public void load(){
         //TODO: Implement this method
+        System.out.println("GameEngine.load called");
     }
 
     public void gameOver(){
         //TODO: Implement this method
+        System.out.println("GameEngine.gameOver called");
     }
 
     public void gameWon(){
         //TODO: Implement this method
+        System.out.println("GameEngine.gameWon called");
     }
 
     public void setLast(StaticEntity entity){
         //TODO: Implement this method
+        System.out.println("GameEngine.setLast called");
     }
 
 }
