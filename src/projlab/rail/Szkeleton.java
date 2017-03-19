@@ -132,11 +132,13 @@ public class Szkeleton {
     private static void trainStep() {
         System.out.println("Vonat léptetés");
         Locomotive loc = new Locomotive();
+        GameEngine ge = new GameEngine();
         Car[] cars = new Car[] { new Car(), new Car(), new Car() };
 
         loc.getDestination();
         if (askBoolean("Ütköznek a vonatok?")) {
-            System.out.println("A vonatok ütköztek /gameOver()/");
+            System.out.println("A vonatok ütköztek");
+            ge.gameOver();
         } else {
             System.out.println("Nincs vonat-vonat ütközés, a vonatok léphetnek.");
             loc.next();
@@ -146,7 +148,9 @@ public class Szkeleton {
             }
 
             if (askBoolean("Sérül a vonat?")) {
-                System.out.println("A vonat sérült /gameOver()/");
+                System.out.println("A vonat sérült");
+                ge.gameOver();
+
             } else {
                 System.out.println("A vonat továbblépett.");
             }
