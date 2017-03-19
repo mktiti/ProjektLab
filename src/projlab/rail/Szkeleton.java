@@ -1,5 +1,7 @@
 package projlab.rail;
 
+import projlab.rail.logic.Locomotive;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -103,6 +105,22 @@ public class Szkeleton {
 
     private static void trainStep() {
         System.out.println("Vonat léptetés");
+        Locomotive loc = new Locomotive();
+        loc.getDestination();
+        switch (ask("Ütköznek a vonatok?", "I", "N")) {
+            case "I":
+                System.out.println("A vonatok ütköztek /gameOver()/");
+                break;
+            case "N":
+                System.out.println("Nincs vonat-vonat ütközés, a vonatok léphetnek.");
+                loc.move();
+
+
+
+                break;
+            default:
+                break;
+        }
     }
 
     private static void passangerUnboard() {
