@@ -7,6 +7,7 @@ public class Car {
     public Color color;
 
     public void unboard(){
+        System.out.println("Car.unboard called");
         //TODO: Implement this method
     }
 }
