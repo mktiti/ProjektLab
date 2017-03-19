@@ -4,11 +4,11 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.LinkedList;
 
-public class Locomotive {
+public class Locomotive extends MovingEntity {
 
     public LinkedList<StaticEntity> getDestination() {
         //TODO: Implement this method
-        System.out.print("Locomotive.getDestination called");
+        System.out.println("Locomotive.getDestination called");
         return null;
     }
 }
