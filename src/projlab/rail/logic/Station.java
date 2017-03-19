@@ -4,5 +4,8 @@ public class Station extends Rail{
     private Color color;
 
     @Override
-    public Color getColor(){ return color; }
+    public Color getColor(){
+        System.out.println("Station.getColor called");
+        return null;
+    }
 }

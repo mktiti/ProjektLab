@@ -8,12 +8,12 @@ public abstract class MovingEntity {
     public MovingEntity next;
 
     public StaticEntity next(){
-        System.out.println("StaticEntity.next called");
+        System.out.println("MovingEntity.next called");
         return null;
     }
 
     public boolean move(){
-        System.out.println("StaticEntity.move called");
+        System.out.println("MovingEntity.move called");
         return false;
     }
 
