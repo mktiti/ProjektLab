@@ -35,9 +35,4 @@ public class GameEngine {
         //TODO: Implement this method
     }
 
-
-    public static void main(String[] args) {
-
-    }
-
 }
