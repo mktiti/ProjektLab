@@ -14,13 +14,13 @@ public class Switch extends StaticEntity{
 
     public void connectIn(StaticEntity in){}
 
+    @Override
     public Set<StaticEntity> getConnections(){
         return null;
     }
 
-    public StaticEntity next(StaticEntity previous){
-        return null;
-    }
+    @Override
+    public StaticEntity next(StaticEntity previous){ return null; }
 
     public void toggle(){}
 }

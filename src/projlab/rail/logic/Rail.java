@@ -10,11 +10,11 @@ public class Rail extends StaticEntity{
 
     public void connectB(StaticEntity b){}
 
+    @Override
     public Set<StaticEntity> getConnections(){
         return null;
     }
 
-    public StaticEntity next(StaticEntity previous){
-        return null;
-    }
+    @Override
+    public StaticEntity next(StaticEntity previous){ return null; }
 }

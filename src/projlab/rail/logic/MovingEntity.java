@@ -12,7 +12,7 @@ public abstract class MovingEntity {
         throw new NotImplementedException();
     }
 
-    public void move(){
+    public boolean move(){
         //TODO: Implement this method
         throw new NotImplementedException();
     }
