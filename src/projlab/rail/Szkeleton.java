@@ -99,6 +99,37 @@ public class Szkeleton {
 
     private static void tunnelPlace() {
         System.out.println("Alagút lerakás");
+        String[] questions = new String[] {"Létezik már alagút a pályán?", "Van-e már aktivált alagútszáj?"};
+        String[] q1Options = new String[] {"I", "N"};
+        String[] q2Options = new String[] {"I", "N"};
+        switch (askNumbered("Melyik eset fusson?", questions)){
+            case 0:
+                switch (ask("Válasz: " , q1Options)) {
+                    case "I":
+                        System.out.println("Egyszerre csak egy alagút lehet a pályán!");
+                        break;
+                    case "H":
+                        System.out.println("Alagútszáj aktiválva");
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 1:
+                switch (ask("Válasz: ", q2Options)){
+                    case "I":
+                        System.out.println("Alagút létrehozva");
+                        break;
+                    case "H":
+                        System.out.println("Ez az első aktív alagútszáj");
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     private static void trainStep() {

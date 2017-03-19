@@ -1,8 +1,6 @@
 package projlab.rail;
 
-import projlab.rail.logic.Locomotive;
-import projlab.rail.logic.MovingEntity;
-import projlab.rail.logic.StaticEntity;
+import projlab.rail.logic.*;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.LinkedList;
 
@@ -10,9 +8,9 @@ public class GameEngine {
 
     private LinkedList<StaticEntity> statics;
     private LinkedList<Locomotive> locos;
-    //private Tunnel activeTunnelA;
-    //private Tunnel activeTunnelB;
-    //private HiddenRail entryPoint;
+    private Tunnel activeTunnelA;
+    private Tunnel activeTunnelB;
+    private HiddenRail entryPoint;
     private StaticEntity last;
 
     public void connect(MovingEntity first, MovingEntity second){
