@@ -9,13 +9,12 @@ public abstract class MovingEntity {
 
     public StaticEntity next(){
         //TODO: Implement this method
-        throw new NotImplementedException();
+        return null;
     }
 
     public boolean move(){
         //TODO: Implement this method
-        throw new NotImplementedException();
+        return false;
     }
-
 
 }

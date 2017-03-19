@@ -17,27 +17,22 @@ public class GameEngine {
 
     public void connect(MovingEntity first, MovingEntity second){
         //TODO: Implement this method
-        throw new NotImplementedException();
     }
 
     public void load(){
         //TODO: Implement this method
-        throw new NotImplementedException();
     }
 
     public void gameOver(){
         //TODO: Implement this method
-        throw new NotImplementedException();
     }
 
     public void gameWon(){
         //TODO: Implement this method
-        throw new NotImplementedException();
     }
 
     public void setLast(StaticEntity entity){
         //TODO: Implement this method
-        throw new NotImplementedException();
     }
 
 
