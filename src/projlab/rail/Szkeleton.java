@@ -3,6 +3,7 @@ package projlab.rail;
 import projlab.rail.logic.Car;
 import projlab.rail.logic.Locomotive;
 import projlab.rail.logic.Switch;
+import projlab.rail.logic.Tunnel;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -119,8 +120,10 @@ public class Szkeleton {
         if(askBoolean(questions[0]))
             System.out.println("Egyszerre csak egy alagút lehet a pályán!");
         else{
-            if(askBoolean(questions[1]))
+            if(askBoolean(questions[1])) {
+                new GameEngine().buildTunnel(new Tunnel(),new Tunnel());
                 System.out.println("Alagút létrehozva");
+            }
             else
                 System.out.println("Ez az első aktív alagútszáj");
         }
