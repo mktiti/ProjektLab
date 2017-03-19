@@ -7,6 +7,6 @@ public class Locomotive {
 
     public LinkedList<StaticEntity> getDestination(){
         //TODO: Implement this method
-        throw new NotImplementedException();
+        return null;
     }
 }

@@ -8,6 +8,5 @@ public class Car {
 
     public void unboard(){
         //TODO: Implement this method
-        throw new NotImplementedException();
     }
 }
