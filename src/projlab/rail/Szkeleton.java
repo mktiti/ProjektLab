@@ -2,6 +2,7 @@ package projlab.rail;
 
 import projlab.rail.logic.Car;
 import projlab.rail.logic.Locomotive;
+import projlab.rail.logic.Switch;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -103,6 +104,13 @@ public class Szkeleton {
 
     private static void switchToggle() {
         System.out.println("Váltó állítás");
+        if (askBoolean("Van jármű a pályaelemen?")) {
+            System.out.println("Csak akkor állítható a váltó, ha üres");
+        } else {
+            new Switch().toggle();
+            System.out.println("A váltó átállt");
+        }
+
     }
 
     private static void tunnelPlace() {
