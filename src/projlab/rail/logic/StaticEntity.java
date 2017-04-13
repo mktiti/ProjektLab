@@ -16,7 +16,7 @@ public abstract class StaticEntity {
         return false;
     }
 
-    public abstract StaticEntity next(StaticEntity previous);
+    public abstract StaticEntity next(StaticEntity previous) throws CrashException;
 
     public boolean hasVehicle() {
         return vehicle != null;
