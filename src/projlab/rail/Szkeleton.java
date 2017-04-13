@@ -117,8 +117,9 @@ public class Szkeleton {
     private static void tunnelPlace() {
         System.out.println("Alagút lerakás");
         String[] questions = new String[] {"Létezik már alagút a pályán?", "Van-e már aktivált alagútszáj?"};
-        if(askBoolean(questions[0]))
+        if(askBoolean(questions[0])) {
             System.out.println("Egyszerre csak egy alagút lehet a pályán!");
+        }
         else{
             if(askBoolean(questions[1])) {
                 new GameEngine().buildTunnel(new Tunnel(),new Tunnel());
