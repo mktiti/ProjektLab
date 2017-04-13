@@ -21,7 +21,7 @@ public class Locomotive extends MovingEntity {
     }
 
     @Override
-    public boolean move() {
+    public boolean move() throws CrashException {
         super.move();
         Color color = currentPosition.getColor();
 
