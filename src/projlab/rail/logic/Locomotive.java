@@ -8,7 +8,7 @@ public class Locomotive extends MovingEntity {
         next = firstCar;
     }
 
-    public LinkedList<StaticEntity> getDestination() {
+    public LinkedList<StaticEntity> getDestination() throws CrashException {
         LinkedList<StaticEntity> ret = new LinkedList<>();
 
         MovingEntity temp = this;
