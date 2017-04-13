@@ -2,10 +2,18 @@ package projlab.rail.logic;
 
 public class Car extends MovingEntity {
     public boolean hasPassengers;
-    public Color color;
+    public final Color color; // Null represents Coal car
 
-    public void unboard(){
-        System.out.println("Car.unboard called");
-        //TODO: Implement this method
+    public Car(Color color, boolean hasPassengers) {
+        this.color = color;
+        this.hasPassengers = hasPassengers;
+    }
+
+    public Car(Color color) {
+        this(color, false);
+    }
+
+    public void unboard() {
+        hasPassengers = false;
     }
 }
