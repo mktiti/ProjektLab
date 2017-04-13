@@ -1,12 +1,12 @@
 package projlab.rail.logic;
 
-import java.util.Set;
+import java.util.List;
 
 public abstract class StaticEntity {
 
     protected MovingEntity vehicle;
 
-    public abstract Set<StaticEntity> getConnections();
+    public abstract List<StaticEntity> getConnections();
 
     public Color getColor() {
         return null;
