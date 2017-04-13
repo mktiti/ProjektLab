@@ -13,14 +13,12 @@ public class Rail extends StaticEntity {
     }
 
     public void connectA(StaticEntity a) {
-        connections.remove(0);
-        connections.add(0, a);
+        connections.set(0, a);
         connectionA = a;
     }
 
     public void connectB(StaticEntity b) {
-        connections.remove(0);
-        connections.add(1, b);
+        connections.set(1, b);
         connectionB = b;
     }
 
@@ -31,10 +29,10 @@ public class Rail extends StaticEntity {
 
     @Override
     public StaticEntity next(StaticEntity previous) throws CrashException{
-       if(previous.equals(connectionA)){
+       if(previous == connectionB){
            return connectionB;
        }
-       else if (previous.equals(connectionB)){
+       else if (previous == connectionA){
            return connectionA;
        }
        else {
