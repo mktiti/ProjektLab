@@ -5,11 +5,11 @@ public abstract class MovingEntity {
     protected StaticEntity lastPosition;
     public Car next;
 
-    public StaticEntity next(){
+    public StaticEntity next() throws CrashException {
         return currentPosition.next(lastPosition);
     }
 
-    public boolean move(){
+    public boolean move() throws CrashException {
         StaticEntity temp = currentPosition;
         currentPosition = currentPosition.next(lastPosition);
         currentPosition.vehicle = this;
