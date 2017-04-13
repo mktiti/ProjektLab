@@ -6,12 +6,21 @@ public abstract class MovingEntity {
     public Car next;
 
     public StaticEntity next(){
-        System.out.println("MovingEntity.next called");
-        return null;
+        return currentPosition.next(lastPosition);
     }
 
     public boolean move(){
-        System.out.println("MovingEntity.move called");
+        StaticEntity temp = currentPosition;
+        currentPosition = currentPosition.next(lastPosition);
+        currentPosition.vehicle = this;
+        if (temp.vehicle == this) {
+            temp.vehicle = null;
+        }
+        lastPosition = temp;
+        if (next != null) {
+            next.move();
+        }
+
         return false;
     }
 
