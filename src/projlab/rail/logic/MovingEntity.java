@@ -3,7 +3,7 @@ package projlab.rail.logic;
 public abstract class MovingEntity {
     protected StaticEntity currentPosition;
     protected StaticEntity lastPosition;
-    public MovingEntity next;
+    public Car next;
 
     public StaticEntity next(){
         System.out.println("MovingEntity.next called");
