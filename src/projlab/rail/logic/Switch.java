@@ -59,6 +59,23 @@ public class Switch extends StaticEntity{
         throw new CrashException("Coming to switch from illegal direction!");
     }
 
+    @Override
+    public void connect(StaticEntity entity, ConnectionType connectionType) throws IllegalArgumentException {
+        switch (connectionType) {
+            case A:
+                connectA(entity);
+                break;
+            case B:
+                connectB(entity);
+                break;
+            case IN:
+                connectIn(entity);
+                break;
+            default:
+                throw new IllegalArgumentException("Illegal connection type");
+        }
+    }
+
     public void toggle() {
         isAActive = !isAActive;
     }

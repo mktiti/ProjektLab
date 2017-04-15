@@ -12,6 +12,10 @@ public abstract class MovingEntity {
     public boolean move() throws CrashException {
         StaticEntity temp = currentPosition;
         currentPosition = currentPosition.next(lastPosition);
+        if (currentPosition == null) {
+            throw new CrashException("Rail line ended unexpectedly!");
+        }
+
         currentPosition.vehicle = this;
         if (temp.vehicle == this) {
             temp.vehicle = null;
@@ -22,6 +26,12 @@ public abstract class MovingEntity {
         }
 
         return false;
+    }
+
+    public void setPosition(StaticEntity current, StaticEntity previous) {
+        this.currentPosition = current;
+        currentPosition.vehicle = this;
+        this.lastPosition = previous;
     }
 
 }

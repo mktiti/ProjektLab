@@ -4,7 +4,9 @@ import java.util.List;
 
 public abstract class StaticEntity {
 
-    protected MovingEntity vehicle;
+    public enum ConnectionType { A, B, IN, X, Y, VISIBLE, INVISIBLE }
+
+    MovingEntity vehicle;
 
     public abstract List<StaticEntity> getConnections();
 
@@ -25,5 +27,7 @@ public abstract class StaticEntity {
     public boolean board(Color c){
         return false;
     }
+
+    public abstract void connect(StaticEntity entity, ConnectionType connectionType) throws IllegalArgumentException;
 
 }

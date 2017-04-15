@@ -29,14 +29,26 @@ public class Rail extends StaticEntity {
 
     @Override
     public StaticEntity next(StaticEntity previous) throws CrashException{
-       if(previous == connectionB){
-           return connectionB;
-       }
-       else if (previous == connectionA){
+       if (previous == connectionB){
            return connectionA;
-       }
-       else {
+       } else if (previous == connectionA) {
+           return connectionB;
+       } else {
            throw new CrashException("Comming to Rail from illegal direction.");
        }
+    }
+
+    @Override
+    public void connect(StaticEntity entity, ConnectionType connectionType) throws IllegalArgumentException {
+        switch (connectionType) {
+            case A:
+                connectA(entity);
+                break;
+            case B:
+                connectB(entity);
+                break;
+            default:
+                throw new IllegalArgumentException("Illegal connection type");
+        }
     }
 }

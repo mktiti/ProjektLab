@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Szkeleton {
-
+/*
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static boolean askBoolean(String message) {
@@ -230,4 +230,5 @@ public class Szkeleton {
         }
 
     }
+    */
 }

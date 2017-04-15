@@ -2,20 +2,28 @@ package projlab.rail;
 
 import projlab.rail.logic.*;
 
-import java.util.LinkedList;
+import java.util.*;
 
 public class GameEngine {
 
-    private LinkedList<StaticEntity> statics;
-    private LinkedList<Locomotive> locos;
+    List<StaticEntity> statics = new LinkedList<>();
+    List<Locomotive> locos = new LinkedList<>();
     private Tunnel activeTunnelA;
     private Tunnel activeTunnelB;
-    private HiddenRail entryPoint;
+    HiddenRail entryPoint;
+    HiddenRail entrySecond;
     private StaticEntity last;
 
-    public void connect(MovingEntity first, MovingEntity second){
-        //TODO: Implement this method
-        System.out.println("GameEngine.connect called");
+    GameEngine() {
+        HiddenRail prev = new HiddenRail();
+        for (Color c : Color.values()) {
+            HiddenRail current = new HiddenRail();
+            prev.connectA(current);
+            current.connectB(prev);
+            entryPoint = current;
+            entrySecond = prev;
+            prev = current;
+        }
     }
 
     public void load(){
@@ -36,6 +44,25 @@ public class GameEngine {
     public void setLast(StaticEntity entity){
         //TODO: Implement this method
         System.out.println("GameEngine.setLast called");
+    }
+
+    public void step() throws CrashException {
+        Set<StaticEntity> occupied = new HashSet<>();
+        int occupiedCount = 0;
+
+        for (Locomotive l : locos) {
+            Collection<StaticEntity> occ = l.getDestination();
+            occupied.addAll(occ);
+            occupiedCount += occ.size();
+        }
+
+        if (occupied.size() < occupiedCount) {
+            throw new CrashException("Train crash!");
+        }
+
+        for (Locomotive l : locos) {
+            l.move();
+        }
     }
 
     public void buildTunnel(Tunnel start, Tunnel end) {

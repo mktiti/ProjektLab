@@ -4,6 +4,8 @@ import java.util.LinkedList;
 
 public class Locomotive extends MovingEntity {
 
+    public Locomotive() {}
+
     public Locomotive(Car firstCar) {
         next = firstCar;
     }

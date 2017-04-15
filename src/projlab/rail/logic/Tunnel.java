@@ -23,7 +23,7 @@ public class Tunnel extends StaticEntity {
         visibleConnection = visible;
     }
 
-    public void setHiddenConnection(StaticEntity hidden) {
+    public void connectHidden(StaticEntity hidden) {
         conns.set(1, hidden);
         hiddenConnection = hidden;
     }
@@ -46,5 +46,19 @@ public class Tunnel extends StaticEntity {
         }
 
         throw new CrashException("Coming to tunnel from illegal direction!");
+    }
+
+    @Override
+    public void connect(StaticEntity entity, ConnectionType connectionType) throws IllegalArgumentException {
+        switch (connectionType) {
+            case VISIBLE:
+                connectVisible(entity);
+                break;
+            case INVISIBLE:
+                connectHidden(entity);
+                break;
+            default:
+                throw new IllegalArgumentException("Illegal connection type");
+        }
     }
 }
