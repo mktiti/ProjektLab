@@ -169,9 +169,10 @@ public class ProtoTest {
         int train1 = createSampleTrain();
         int train2 = createSampleTrain();
         //55 össz, 27-nél indít a második
-        int stepNumber = 0;
+
 
         Throwable exception = expectThrows(CrashException.class, () -> {
+            int stepNumber = 0;
             proto.activateTunnel(tunnelLeft);
             proto.activateTunnel(tunnelRight1);
             proto.launch(train1);
