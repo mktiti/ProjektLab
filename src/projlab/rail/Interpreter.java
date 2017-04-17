@@ -129,14 +129,33 @@ public class Interpreter {
     }
 
     private String createCar(String[] params) throws CrashException {
-        return "";
+        if (params == null || !(params.length == 1 || params.length == 0)) {
+            throw new IllegalArgumentException("Illegal parameters for command!");
+        }
+
+        if (params.length == 0 || params[0].trim().length() == 0) {
+            return "Coal Car created, id: " + proto.createCar(null);
+        }
+
+        Color color = Color.lookup(params[0]);
+        if (color == null) {
+            return "Invalid color!";
+        } else {
+            return "Car created with id: " + proto.createCar(color);
+        }
+
     }
 
     private String createLocomotive(String[] params) throws CrashException {
-        return "";
+        assertParams(params, 0);
+        return "Locomotive created, id: " + proto.createLocomotive();
     }
 
     private String connectToTrain(String[] params) throws CrashException {
+        assertParams(params, 2);
+
+
+
         return "";
     }
 
