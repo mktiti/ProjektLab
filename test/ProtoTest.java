@@ -35,11 +35,11 @@ public class ProtoTest {
         proto.connect(leftLine, A, cross, A);
         proto.connect(rightLine, A, cross, X);
 
-        leftLine = createRails(cross, B, 15);
+        leftLine = createRails(cross, Y, 15);
         int tunnelLeft = proto.createRail(TUNNEL);
         proto.connect(leftLine, A, tunnelLeft, VISIBLE);
 
-        rightLine = createRails(rightLine, A, 3);
+        rightLine = createRails(rightLine, B, 3);
         int s2 = proto.createRail(SWITCH);
         proto.connect(rightLine, A, s2, IN);
 
