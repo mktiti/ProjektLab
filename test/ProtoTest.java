@@ -131,10 +131,23 @@ public class ProtoTest {
 
     @Test (expected = CrashException.class)
     public void crashTest(){
-        int loco1 = proto.createLocomotive();
-        int loco2 = proto.createLocommotive();
-
+        int train1 = createSampleTrain();
+        int train2 = createSampleTrain();
         //55 össz, 27-nél indít a második
+        int stepNumber = 0;
+
+        Throwable exception = expectThrows(CrashException.class, () -> {
+            proto.activateTunnel(tunnelLeft);
+            proto.activateTunnel(tunnelRight1);
+            proto.launch(train1);
+            while(true){
+                if(stepNumber == 27) {
+                    proto.launch(train2);
+                }
+                proto.step();
+                stepNumber++;
+            }
+        });
 
     }
 
