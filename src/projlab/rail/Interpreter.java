@@ -2,6 +2,7 @@ package projlab.rail;
 
 import projlab.rail.logic.Color;
 import projlab.rail.logic.CrashException;
+import projlab.rail.logic.StaticEntity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -159,7 +160,15 @@ public class Interpreter {
     }
 
     private String connect(String[] params) throws CrashException {
-        return "";
+        assertParams(params, 4);
+
+        try{
+            proto.connect(Integer.parseInt(params[0]), StaticEntity.ConnectionType.valueOf(params[1]),
+                    Integer.parseInt(params[2]), StaticEntity.ConnectionType.valueOf(params[3]));
+        }catch(IllegalArgumentException e){
+            throw new IllegalArgumentException("Invalid connection type!");
+        }
+        return params[0] + " and " + params[2] + " connected";
     }
 
     private String addPerson(String[] params) throws CrashException {
