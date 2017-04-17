@@ -1,38 +1,83 @@
 package projlab.rail.logic;
 
-import java.util.Set;
+import projlab.rail.exception.IllegalMoveException;
+import projlab.rail.exception.IllegalSwitchStateException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Switch extends StaticEntity{
     public StaticEntity input;
     public StaticEntity outputA;
     public StaticEntity outputB;
-    public boolean isAActive;
+    public boolean isAActive = true;
 
-    public void connectA(StaticEntity a){
-        System.out.println("Switch.connectA called");
+    private final ArrayList<StaticEntity> conns = new ArrayList<>(3);
+
+    public Switch() {
+        for (int i = 0; i < 3; i++) {
+            conns.add(null);
+        }
     }
 
-    public void connectB(StaticEntity b){
-        System.out.println("Switch.connectB called");
+    public void connectA(StaticEntity a) {
+        conns.set(1, a);
+        outputA = a;
     }
 
-    public void connectIn(StaticEntity in){
-        System.out.println("Switch.connectIn called");
+    public void connectB(StaticEntity b) {
+        conns.set(2, b);
+        outputB = b;
+    }
+
+    public void connectIn(StaticEntity in) {
+        conns.set(0, in);
+        input = in;
     }
 
     @Override
-    public Set<StaticEntity> getConnections(){
-        System.out.println("Switch.getConnections called");
-        return null;
+    public List<StaticEntity> getConnections() {
+        return conns;
     }
 
     @Override
-    public StaticEntity next(StaticEntity previous){
-        System.out.println("Switch.next called");
-        return null;
+    public StaticEntity next(StaticEntity previous) throws IllegalMoveException, IllegalSwitchStateException {
+        if (previous == input) {
+            return isAActive ? outputA : outputB;
+        } else if (previous == outputA) {
+            if (isAActive) {
+                return input;
+            } else {
+                throw new IllegalSwitchStateException(this, true);
+            }
+        } else if (previous == outputB) {
+            if (!isAActive) {
+                return input;
+            } else {
+                throw new IllegalSwitchStateException(this, false);
+            }
+        }
+        throw new IllegalMoveException(this, previous);
     }
 
-    public void toggle(){
-        System.out.println("Switch.toggle called");
+    @Override
+    public void connect(StaticEntity entity, ConnectionType connectionType) throws IllegalArgumentException {
+        switch (connectionType) {
+            case A:
+                connectA(entity);
+                break;
+            case B:
+                connectB(entity);
+                break;
+            case IN:
+                connectIn(entity);
+                break;
+            default:
+                throw new IllegalArgumentException("Illegal connection type");
+        }
+    }
+
+    public void toggle() {
+        isAActive = !isAActive;
     }
 }

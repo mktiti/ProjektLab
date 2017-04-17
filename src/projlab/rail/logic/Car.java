@@ -1,13 +1,28 @@
 package projlab.rail.logic;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public class Car extends MovingEntity {
     public boolean hasPassengers;
-    public Color color;
+    public final Color color; // Null represents Coal car
 
-    public void unboard(){
-        System.out.println("Car.unboard called");
-        //TODO: Implement this method
+    public Car(Color color, Car next, boolean hasPassengers) {
+        this.color = color;
+        this.next = next;
+        this.hasPassengers = hasPassengers;
+    }
+
+    public Car(Color color, Car next) {
+        this(color, next, true);
+    }
+
+    public Car(Color color, boolean hasPassengers) {
+        this(color, null, hasPassengers);
+    }
+
+    public Car(Color color) {
+        this(color, null, true);
+    }
+
+    public void unboard() {
+        hasPassengers = false;
     }
 }
