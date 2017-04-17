@@ -121,8 +121,12 @@ public class ProtoTest {
 
     }
 
-    @Test
+    @Test (expected = CrashException.class)
     public void crashTest(){
+        int loco1 = proto.createLocomotive();
+        int loco2 = proto.createLocommotive();
+
+        //55 össz, 27-nél indít a második
 
     }
 
