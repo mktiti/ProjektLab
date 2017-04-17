@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import projlab.rail.Proto;
 import projlab.rail.exception.CrashException;
@@ -17,15 +18,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ProtoTest {
 
-    private static Proto proto = new Proto();
+    private static Proto proto = null;
 
     private static int tunnelLeft;
     private static int tunnelRight1;
 
-    private static int tunnelRight2;
+    private int tunnelRight2;
 
-    @BeforeAll
-    public static void initProto() {
+    @BeforeEach
+    public void initProto() {
         proto = new Proto();
 
         int prev = createRails(-1, A, 10);
