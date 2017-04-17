@@ -48,8 +48,8 @@ public class StationTest {
         prev = locoId;
         for (int i = 0; i < Color.values().length; i++) {
             current = proto.createCar(i == 0 ? stationColor : colors.get(i - 1));
-            if (hasPassengers) {
-                proto.addPerson(current);
+            if (!hasPassengers) {
+                proto.cars.get(current).hasPassengers = false;
             }
             proto.connectToTrain(prev, current);
             prev = current;
