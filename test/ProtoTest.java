@@ -168,6 +168,7 @@ public class ProtoTest {
     public void crashTest(){
         int train1 = createSampleTrain();
         int train2 = createSampleTrain();
+        //
         //55 össz, 27-nél indít a második
 
         boolean result = false;
@@ -177,8 +178,10 @@ public class ProtoTest {
             proto.activateTunnel(tunnelRight1);
             proto.launch(train1);
             while(true){
+                System.out.println("Step: " + stepNumber);
                 if(stepNumber == 27) {
-                    proto.launch(train2);
+                    //int train2 = createSampleTrain();
+                    //proto.launch(train2);
                 }
                 proto.step();
                 stepNumber++;
