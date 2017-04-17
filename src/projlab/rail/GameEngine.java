@@ -14,8 +14,8 @@ public class GameEngine {
     /** List of all locomotives */
     List<Locomotive> locos = new LinkedList<>();
     /** Active tunnel connections */
-    private Tunnel activeTunnelA;
-    private Tunnel activeTunnelB;
+    public Tunnel activeTunnelA;
+    public Tunnel activeTunnelB;
     /** Entry point of the level */
     public HiddenRail entryPoint;
     /** Direction the trains are arriving from to the entry point */
