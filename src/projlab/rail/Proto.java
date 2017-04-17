@@ -62,12 +62,12 @@ public class Proto {
         engine.step();
     }
 
-    public boolean activateTunnel(int tunnelId) throws IllegalArgumentException {
-        return false;
+    public void activateTunnel(int tunnelId) throws IllegalArgumentException {
+        engine.activateTunnel(tunnels.get(tunnelId));
     }
 
-    public boolean deactivateTunnel(int tunnelId) throws IllegalArgumentException {
-        return false;
+    public void deactivateTunnel(int tunnelId) throws IllegalArgumentException {
+        engine.deactivateTunnel(tunnels.get(tunnelId));
     }
 
     public void toggle(int switchId) throws IllegalArgumentException {

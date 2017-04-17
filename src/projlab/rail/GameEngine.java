@@ -65,8 +65,57 @@ public class GameEngine {
         }
     }
 
-    public void buildTunnel(Tunnel start, Tunnel end) {
-        System.out.println("GameEngine.buildTunnel called");
+    public void deactivateTunnel(Tunnel tunnel) throws IllegalArgumentException {
+        if (activeTunnelA == tunnel) {
+            destroyTunnel();
+            activeTunnelA = null;
+        } else if (activeTunnelB == tunnel) {
+            destroyTunnel();
+            activeTunnelB = null;
+        } else {
+            throw new IllegalArgumentException("Tunnel not active!");
+        }
+    }
+
+    private void destroyTunnel() {
+        if (activeTunnelA == null || activeTunnelB == null) {
+            return;
+        }
+
+        activeTunnelA.connectHidden(null);
+        activeTunnelB.connectHidden(null);
+    }
+
+    public void activateTunnel(Tunnel tunnel) throws IllegalArgumentException {
+        if (activeTunnelA == null) {
+            activeTunnelA = tunnel;
+            buildTunnel();
+        } else if (activeTunnelB == null) {
+            activeTunnelB = tunnel;
+            buildTunnel();
+        } else {
+            throw new IllegalArgumentException("Tunnel already built!");
+        }
+    }
+
+    private void buildTunnel() {
+        if (activeTunnelA != null && activeTunnelB != null) {
+            return;
+        }
+
+        HiddenRail[] tunnel = new HiddenRail[10];
+        for (int i = 0; i < tunnel.length; i++) {
+            tunnel[i] = new HiddenRail();
+            if (i > 0) {
+                tunnel[i].connectB(tunnel[i - 1]);
+                tunnel[i - 1].connectA(tunnel[i]);
+            }
+        }
+        tunnel[0].connectB(activeTunnelA);
+        activeTunnelA.connectHidden(tunnel[0]);
+
+        tunnel[tunnel.length - 1].connectA(activeTunnelB);
+        activeTunnelB.connectHidden(tunnel[tunnel.length - 1]);
     }
 
 }
