@@ -121,11 +121,12 @@ public class Interpreter {
 
     private String createStation(String[] params) throws CrashException {
         assertParams(params, 1);
-        if(Color.lookup(params[0]) != null){
-            proto.createStation(Color.lookup(params[0]));
+        Color color = Color.lookup(params[0]);
+        if (color == null) {
+            return "Invalid color!";
+        } else {
+            return "Station created with id: " + proto.createStation(color);
         }
-
-        return "Station created";
     }
 
     private String createCar(String[] params) throws CrashException {
