@@ -65,4 +65,64 @@ public class ProtoTest {
 
     }
 
+    @Test
+    public void tunnelTest() {
+
+    }
+
+    @Test
+    public void crashTest(){
+
+    }
+
+    @Test
+    public void obstacleCrashTest(){
+
+    }
+
+    @Test
+    public void toggleCrashTest(){
+
+    }
+
+    @Test
+    public void unBoardTest(){
+
+    }
+
+    @Test
+    public void unBoardFailedTest(){
+
+    }
+
+    @Test
+    public void boardTest(){
+
+    }
+
+    @Test
+    public void victoryTest(){
+
+    }
+
+    @Test
+    public void tunnelCreationTest(){
+
+    }
+
+    @Test
+    public void tunnelDeletionTest(){
+
+    }
+
+    @Test
+    public void defeatTest(){
+
+    }
+
+    @Test
+    public void toggleTest(){
+
+    }
+
 }
