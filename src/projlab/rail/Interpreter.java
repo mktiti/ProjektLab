@@ -1,5 +1,6 @@
 package projlab.rail;
 
+import projlab.rail.logic.Color;
 import projlab.rail.logic.CrashException;
 
 import java.io.BufferedReader;
@@ -119,7 +120,12 @@ public class Interpreter {
     }
 
     private String createStation(String[] params) throws CrashException {
-        return "";
+        assertParams(params, 1);
+        if(Color.lookup(params[0]) != null){
+            proto.createStation(Color.lookup(params[0]));
+        }
+
+        return "Station created";
     }
 
     private String createCar(String[] params) throws CrashException {
