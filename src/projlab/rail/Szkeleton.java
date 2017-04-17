@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Szkeleton {
-
+/*
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static boolean askBoolean(String message) {
@@ -117,8 +117,9 @@ public class Szkeleton {
     private static void tunnelPlace() {
         System.out.println("Alagút lerakás");
         String[] questions = new String[] {"Létezik már alagút a pályán?", "Van-e már aktivált alagútszáj?"};
-        if(askBoolean(questions[0]))
+        if(askBoolean(questions[0])) {
             System.out.println("Egyszerre csak egy alagút lehet a pályán!");
+        }
         else{
             if(askBoolean(questions[1])) {
                 new GameEngine().buildTunnel(new Tunnel(),new Tunnel());
@@ -159,124 +160,75 @@ public class Szkeleton {
 
     private static void passangerUnboard() {
         System.out.println("Utasok leszállítása, vonat eltűnés és győzelem");
-        char color;
+        String color = ask("Milyen színű az állomás?", "P", "K", "Z", "S", "F");
 
-        switch (ask("Milyen színű az állomás?", "P", "K", "Z", "S", "F")) {
+        switch (color) {
             case "P":
-                color = 'p';
                 System.out.println("Az állomás színe piros.");
                 break;
             case "K":
-                color = 'k';
                 System.out.println("Az állomás színe kék.");
                 break;
             case "Z":
-                color = 'z';
                 System.out.println("Az állomás színe zöld.");
                 break;
             case "S":
-                color = 's';
                 System.out.println("Az állomás színe sárga.");
                 break;
             case "F":
-                color = 'f';
                 System.out.println("Az állomás színe fehér.");
                 break;
             default:
-                color = 'd';
                 break;
         }
 
-        boolean last = false;
-        boolean matched = false;
+        int i = 1;
+        while (true) {
 
-        String q = "Van utas a(z) n kocsiban?";
-
-        char i = 0;
-        while (!last && !matched) {
-            ++i;
-
-            if (askBoolean("Van következő kocsi?")) {
-                System.out.println("A következő kocsit vizsgálom.");
-                new Car().next();
-            } else {
-                System.out.println("A leszállók vizsgálata véget ért.");
-                new Car().next();
-                last = true;
+            if (i > 1) {
+                if (askBoolean("Van következő kocsi?")) {
+                    System.out.println("A következő kocsit vizsgálom.");
+                    new Car().next();
+                } else {
+                    System.out.println("A leszállók vizsgálata véget ért.");
+                    new Car().next();
+                    System.out.println("A játék folytatódik.");
+                    break;
+                }
             }
 
-            q.toCharArray()[14] = i;
-            q.toString();
-
-            if (askBoolean(q)) {
+            if (askBoolean("Van utas a(z) " + Integer.toString(i) + ". kocsiban?")) {
                 String match = "A kocsi színe megegyezik az állomáséval, utasok leszállítása.";
                 String mismatch = "A kocsi színe nem egyezik meg az állomáséval.";
-                String msg;
 
-                switch (ask("Milyen színű ez a kocsi?", "P", "K", "Z", "S", "F")) {
-                    case "P":
-                        if (color == 'p') {
-                            matched = true;
-                            msg = match;
-                        } else {
-                            msg = mismatch;
-                        }
-                        System.out.println(msg);
-                        break;
-                    case "K":
-                        if (color == 'k') {
-                            matched = true;
-                            msg = match;
-                        } else {
-                            msg = mismatch;
-                        }
-                        System.out.println(msg);
-                        break;
-                    case "Z":
-                        if (color == 'z') {
-                            matched = true;
-                            msg = match;
-                        } else {
-                            msg = mismatch;
-                        }
-                        System.out.println(msg);
-                        break;
-                    case "S":
-                        if (color == 's') {
-                            matched = true;
-                            msg = match;
-                        } else {
-                            msg = mismatch;
-                        }
-                        System.out.println(msg);
-                        break;
-                    case "F":
-                        if (color == 'f') {
-                            matched = true;
-                            msg = match;
-                        } else {
-                            msg = mismatch;
-                        }
-                        System.out.println(msg);
-                        break;
-                    default:
-                        break;
-                }
-                if(matched) {
+                String ans = ask("Milyen színű ez a kocsi?", "P", "K", "Z", "S", "F");
+
+                if (color.equalsIgnoreCase(ans)) {
+                    System.out.println(match);
+
                     if (askBoolean("Van még utas valamelyik kocsiban?")) {
                         System.out.println("A vonat folytatja az utat.");
                     } else {
                         System.out.println("A vonat eltűnik.");
+
+                        if (askBoolean("Van még vonat a pályán?")) {
+                            System.out.println("A játék folytatódik.");
+                        } else {
+                            System.out.println("Megnyerted a pályát.");
+                            new GameEngine().gameWon();
+                        }
                     }
+
+                    break;
+                } else {
+                    System.out.println(mismatch);
+                    System.out.println("A játék folytatódik.");
+                    break;
                 }
             }
-        }
-        if (askBoolean("Van még vonat a pályán?")) {
-            System.out.println("A játék folytatódik.");
-        } else {
-            System.out.println("Megnyerted a pályát.");
-            new GameEngine().gameWon();
+            i++;
         }
 
     }
+    */
 }
