@@ -237,8 +237,13 @@ public class ProtoTest {
     }
 
     @Test
-    public void toggleTest(){
+    public void toggleTest() throws IllegalSwitchStateException, IllegalMoveException {
+        Switch sw = proto.switches.get(switch1);
+        sw.toggle();
 
+        StaticEntity se = sw.next(sw.input);
+
+        assertEquals(sw.outputB, se);
     }
 
 }
