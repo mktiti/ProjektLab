@@ -48,8 +48,8 @@ public class StationTest {
         prev = locoId;
         for (int i = 0; i < Color.values().length; i++) {
             current = proto.createCar(i == 0 ? stationColor : colors.get(i - 1));
-            if (hasPassengers) {
-                proto.addPerson(current);
+            if (!hasPassengers) {
+                proto.cars.get(current).hasPassengers = false;
             }
             proto.connectToTrain(prev, current);
             prev = current;
@@ -96,11 +96,11 @@ public class StationTest {
 
     @Test
     public void victoryTest() throws TrainException {
-        int loco = createTrain(true);
+        int loco = createTrain(false);
         Car firstCar = proto.locomotives.get(loco).next;
+        firstCar.hasPassengers = true;
         proto.launch(loco);
         for (int i = 0; i < 11; i++) {
-            assertEquals(true, firstCar.hasPassengers);
             proto.step();
         }
         assertEquals(GameState.VICTORY, proto.engine.state);
