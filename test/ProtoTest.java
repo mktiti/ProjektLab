@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import projlab.rail.Proto;
 import projlab.rail.logic.Color;
 import projlab.rail.logic.CrashException;
+import projlab.rail.logic.Locomotive;
 import projlab.rail.logic.StaticEntity;
 
 import static projlab.rail.logic.StaticEntity.ConnectionType.*;
@@ -14,10 +15,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ProtoTest {
 
-    private Proto proto = new Proto();
+    private static Proto proto = new Proto();
+
+    private static int tunnelLeft;
+    private static int tunnelRight1;
+    private static int tunnelRight2;
 
     @BeforeAll
-    public void initProto() {
+    public static void initProto() {
         proto = new Proto();
 
         int prev = createRails(-1, A, 10);
@@ -37,21 +42,21 @@ public class ProtoTest {
         proto.connect(rightLine, A, cross, X);
 
         leftLine = createRails(cross, Y, 15);
-        int tunnelLeft = proto.createRail(TUNNEL);
+        tunnelLeft = proto.createRail(TUNNEL);
         proto.connect(leftLine, A, tunnelLeft, VISIBLE);
 
-        rightLine = createRails(rightLine, B, 3);
+        rightLine = createRails(cross, B, 3);
         int s2 = proto.createRail(SWITCH);
         proto.connect(rightLine, A, s2, IN);
 
-        int tunnelRight1 = proto.createRail(TUNNEL);
-        int tunnelRight2 = proto.createRail(TUNNEL);
+        tunnelRight1 = proto.createRail(TUNNEL);
+        tunnelRight2 = proto.createRail(TUNNEL);
 
         proto.connect(s2, A, tunnelRight1, VISIBLE);
         proto.connect(s2, B, tunnelRight2, VISIBLE);
     }
 
-    private int createRails(int toConnect, StaticEntity.ConnectionType connectionType, int number) {
+    private static int createRails(int toConnect, StaticEntity.ConnectionType connectionType, int number) {
         int current;
         for (int i = 0; i < number; i++) {
             current = proto.createRail(Proto.RailType.PLAIN);
@@ -59,6 +64,11 @@ public class ProtoTest {
             toConnect = current;
         }
         return toConnect;
+    }
+
+    public static void main(String[] args) {
+        ProtoTest.initProto();
+        new ProtoTest().levelTest();
     }
 
     @Test
@@ -71,16 +81,31 @@ public class ProtoTest {
                 proto.step();
                 stepNumber++;
             }
-        } catch (CrashException e) {
-            e.printStackTrace();
-        }
+        } catch (CrashException e) {}
 
         assertEquals(38, stepNumber);
     }
 
     @Test
-    public void stepTest() {
+    public void levelTest2() {
+        int loco = proto.createLocomotive();
+        int stepNumber = 0;
+        try {
+            proto.activateTunnel(tunnelLeft);
+            proto.activateTunnel(tunnelRight1);
+            proto.launch(loco);
+            while (true) {
+                proto.step();
+                stepNumber++;
+            }
+        } catch (CrashException e) {}
 
+        assertEquals(64, stepNumber);
+    }
+
+    @Test
+    public void stepTest() {
+        int locoId = proto.createLocomotive();
     }
 
     @Test

@@ -66,6 +66,7 @@ public class GameEngine {
     }
 
     public void deactivateTunnel(Tunnel tunnel) throws IllegalArgumentException {
+        tunnel.isActive = false;
         if (activeTunnelA == tunnel) {
             destroyTunnel();
             activeTunnelA = null;
@@ -87,6 +88,7 @@ public class GameEngine {
     }
 
     public void activateTunnel(Tunnel tunnel) throws IllegalArgumentException {
+        tunnel.isActive = true;
         if (activeTunnelA == null) {
             activeTunnelA = tunnel;
             buildTunnel();
@@ -99,7 +101,7 @@ public class GameEngine {
     }
 
     private void buildTunnel() {
-        if (activeTunnelA != null && activeTunnelB != null) {
+        if (activeTunnelA == null || activeTunnelB == null) {
             return;
         }
 
