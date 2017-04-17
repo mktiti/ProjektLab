@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import projlab.rail.Proto;
 import projlab.rail.exception.CrashException;
@@ -17,15 +18,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ProtoTest {
 
-    private static Proto proto = new Proto();
+    private Proto proto = null;
 
-    private static int tunnelLeft;
-    private static int tunnelRight1;
+    private int tunnelLeft;
+    private int tunnelRight1;
 
-    private static int tunnelRight2;
+    private int tunnelRight2;
 
-    @BeforeAll
-    public static void initProto() {
+    @BeforeEach
+    public void initProto() {
         proto = new Proto();
 
         int prev = createRails(-1, A, 10);
@@ -59,7 +60,7 @@ public class ProtoTest {
         proto.connect(s2, B, tunnelRight2, VISIBLE);
     }
 
-    private static int createRails(int toConnect, StaticEntity.ConnectionType connectionType, int number) {
+    private int createRails(int toConnect, StaticEntity.ConnectionType connectionType, int number) {
         int current;
         for (int i = 0; i < number; i++) {
             current = proto.createRail(Proto.RailType.PLAIN);
@@ -69,7 +70,7 @@ public class ProtoTest {
         return toConnect;
     }
 
-    private static int createSampleTrain(){
+    private int createSampleTrain(){
         int current, prev;
         int locoId = proto.createLocomotive();
         prev = locoId;
