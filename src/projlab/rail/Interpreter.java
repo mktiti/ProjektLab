@@ -85,7 +85,12 @@ public class Interpreter {
     }
 
     private String toggle(String[] params) throws CrashException {
-        return "";
+        if (params == null || params.length != 1){
+            throw new IllegalArgumentException("Illegal parameters for command!");
+        }
+
+        proto.toggle(Integer.parseInt(params[0]));
+        return "The switch has been toggled";
     }
 
     private String launch(String[] params) throws CrashException, NumberFormatException {
