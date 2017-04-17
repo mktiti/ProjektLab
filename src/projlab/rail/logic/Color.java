@@ -10,6 +10,11 @@ public enum Color {
         this.value = value;
     }
 
+    /**
+        Retrieves Color with the given name. Case insensitive and null-safe.
+        @param in the name of the color
+        @return The color or null if the color is not found
+     */
     public static Color lookup(String in) {
         if (in == null || (in = in.trim()).length() == 0) {
             return null;

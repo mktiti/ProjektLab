@@ -1,5 +1,7 @@
 package projlab.rail.logic;
 
+import projlab.rail.exception.TrainException;
+
 import java.util.LinkedList;
 
 public class Locomotive extends MovingEntity {
@@ -10,7 +12,12 @@ public class Locomotive extends MovingEntity {
         next = firstCar;
     }
 
-    public LinkedList<StaticEntity> getDestination() throws CrashException {
+    /**
+     * The list of positions the whole train will occupy in the next timeframe. Used for crash detection.
+     * @return The list of positions the whole train will occupy in the next timeframe.
+     * @throws TrainException if the route cannot be continued
+     */
+    public LinkedList<StaticEntity> getDestination() throws TrainException {
         LinkedList<StaticEntity> ret = new LinkedList<>();
 
         MovingEntity temp = this;
@@ -23,7 +30,7 @@ public class Locomotive extends MovingEntity {
     }
 
     @Override
-    public boolean move() throws CrashException {
+    public boolean move() throws TrainException {
         super.move();
         Color color = currentPosition.getColor();
 
@@ -32,6 +39,7 @@ public class Locomotive extends MovingEntity {
             return false;
         }
 
+        // iterating through all cars
         Car temp = next;
         while (temp != null) {
             if (temp.color == color) {
@@ -50,6 +58,9 @@ public class Locomotive extends MovingEntity {
         return false;
     }
 
+    /**
+     * Boards all accepted waiting passengers
+     */
     private void board() {
         Car temp = next;
         while (temp != null) {
@@ -60,6 +71,9 @@ public class Locomotive extends MovingEntity {
         }
     }
 
+    /**
+     * @return Whether the train has any people on it
+     */
     private boolean isEmpty() {
         Car temp = next;
         while (temp != null) {

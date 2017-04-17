@@ -1,16 +1,22 @@
 package projlab.rail.logic;
 
+import projlab.rail.exception.IllegalMoveException;
+import projlab.rail.exception.IllegalSwitchStateException;
+
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 public class Switch extends StaticEntity{
+    /** Input, connected to either A or B */
     public StaticEntity input;
+    /** A connection */
     public StaticEntity outputA;
+    /** B connection */
     public StaticEntity outputB;
+    /** Whether A or B is connected to the input */
     public boolean isAActive = true;
 
+    /** A list of all the connections */
     private final ArrayList<StaticEntity> conns = new ArrayList<>(3);
 
     public Switch() {
@@ -19,16 +25,17 @@ public class Switch extends StaticEntity{
         }
     }
 
+    /** connects A connection */
     public void connectA(StaticEntity a) {
         conns.set(1, a);
         outputA = a;
     }
-
+    /** connects B connection */
     public void connectB(StaticEntity b) {
         conns.set(2, b);
         outputB = b;
     }
-
+    /** connects input */
     public void connectIn(StaticEntity in) {
         conns.set(0, in);
         input = in;
@@ -40,23 +47,23 @@ public class Switch extends StaticEntity{
     }
 
     @Override
-    public StaticEntity next(StaticEntity previous) throws CrashException {
+    public StaticEntity next(StaticEntity previous) throws IllegalMoveException, IllegalSwitchStateException {
         if (previous == input) {
             return isAActive ? outputA : outputB;
         } else if (previous == outputA) {
             if (isAActive) {
                 return input;
             } else {
-                throw new CrashException("Switch in bad state");
+                throw new IllegalSwitchStateException(this, true);
             }
         } else if (previous == outputB) {
             if (!isAActive) {
                 return input;
             } else {
-                throw new CrashException("Switch in bad state");
+                throw new IllegalSwitchStateException(this, false);
             }
         }
-        throw new CrashException("Coming to switch from illegal direction!");
+        throw new IllegalMoveException(this, previous);
     }
 
     @Override
@@ -76,6 +83,9 @@ public class Switch extends StaticEntity{
         }
     }
 
+    /**
+     * Changes the state of the switch
+     */
     public void toggle() {
         isAActive = !isAActive;
     }

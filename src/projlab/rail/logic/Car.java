@@ -1,8 +1,10 @@
 package projlab.rail.logic;
 
 public class Car extends MovingEntity {
+    /** Whether the car carries people or not */
     public boolean hasPassengers;
-    public final Color color; // Null represents Coal car
+    /** Null represents Coal car */
+    public final Color color;
 
     public Car(Color color, Car next, boolean hasPassengers) {
         this.color = color;
@@ -22,6 +24,9 @@ public class Car extends MovingEntity {
         this(color, null, true);
     }
 
+    /**
+     * Removes all passengers from the car
+     */
     public void unboard() {
         hasPassengers = false;
     }

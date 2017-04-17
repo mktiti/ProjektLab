@@ -1,19 +1,37 @@
 package projlab.rail.logic;
 
+import projlab.rail.exception.TrainException;
+
+/** Represents a vehicle (Car or Locomotive) */
 public abstract class MovingEntity {
-    protected StaticEntity currentPosition;
-    protected StaticEntity lastPosition;
+
+    /** The position it"s occupying */
+    public StaticEntity currentPosition;
+    /** The position it occupied in the last timeframe */
+    public StaticEntity lastPosition;
+    /** the car connected to this vehicle (null if this is the last one) */
+
     public Car next;
 
-    public StaticEntity next() throws CrashException {
+    /**
+     * Where this vehicle should go
+     * @return the position it should occupy in the next timeframe
+     * @throws TrainException if the route cannot be continued
+     */
+    public StaticEntity next() throws TrainException {
         return currentPosition.next(lastPosition);
     }
 
-    public boolean move() throws CrashException {
+    /**
+     * Moves the vehicle to the next position
+     * @return whther the train should disappear
+     * @throws TrainException if the route cannot be continued
+     */
+    public boolean move() throws TrainException {
         StaticEntity temp = currentPosition;
         currentPosition = currentPosition.next(lastPosition);
         if (currentPosition == null) {
-            throw new CrashException("Rail line ended unexpectedly!");
+            throw new NullPointerException("Rail line ended unexpectedly!");
         }
 
         currentPosition.vehicle = this;
@@ -28,6 +46,11 @@ public abstract class MovingEntity {
         return false;
     }
 
+    /**
+     * Sets the position of the vehicle to an arbitrary place
+     * @param current the position to jump to
+     * @param previous the direction it should pretend to be coming from
+     */
     public void setPosition(StaticEntity current, StaticEntity previous) {
         this.currentPosition = current;
         currentPosition.vehicle = this;

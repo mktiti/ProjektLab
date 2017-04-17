@@ -1,11 +1,13 @@
 package projlab.rail;
 
+import projlab.rail.exception.TrainException;
 import projlab.rail.logic.*;
 
 import java.util.*;
 
 public class Proto {
 
+    /** The types of rail */
     public enum RailType {
         PLAIN, CROSS, SWITCH, TUNNEL;
 
@@ -21,12 +23,20 @@ public class Proto {
         }
     }
 
+    /** id counter of vehicles */
     private int movingCounter = 0;
 
-    class MovingStore<E extends MovingEntity> {
+    /** Vehicle storage */
+    public class MovingStore<E extends MovingEntity> {
         final Map<Integer, E> store = new HashMap<>();
 
-        E get(int id) throws IllegalArgumentException {
+        /**
+         * Gets the vehicle by id
+         * @param id the id
+         * @return the vehcle
+         * @throws IllegalArgumentException if no vehicle is found
+         */
+        public E get(int id) throws IllegalArgumentException {
             E ret = store.get(id);
             if (ret != null) {
                 return ret;
@@ -34,21 +44,38 @@ public class Proto {
             throw new IllegalArgumentException("Illegal MovingEntity id!");
         }
 
+        /**
+         * Adds new vehicle
+         * @param entity the vehilce to be added
+         * @return the id of the vehicle
+         */
         private int add(E entity) {
             int id = movingCounter++;
             store.put(id, entity);
             return id;
         }
 
+        /**
+         * Checks if the vehicle exists
+         * @param id the of the vehicle
+         * @return whether the vehicle exists
+         */
         boolean contains(int id) {
             return store.get(id) != null;
         }
     }
 
-    class StaticStore<E extends StaticEntity> {
+    /** Entity storage */
+    public class StaticStore<E extends StaticEntity> {
         final Map<Integer, E> store = new HashMap<>();
 
-        E get(int id) throws IllegalArgumentException {
+        /**
+         * Gets the entity by id
+         * @param id the id
+         * @return the entity
+         * @throws IllegalArgumentException if no entity is found
+         */
+        public E get(int id) throws IllegalArgumentException {
             E ret = store.get(id);
             if (ret != null) {
                 return ret;
@@ -56,6 +83,11 @@ public class Proto {
             throw new IllegalArgumentException("Illegal StaticEntity id!");
         }
 
+        /**
+         * Adds new entity
+         * @param entity the entity to be added
+         * @return the id of the entity
+         */
         private int add(E entity) {
             statics.add(entity);
             int id = statics.size() - 1;
@@ -64,25 +96,31 @@ public class Proto {
             return id;
         }
 
+        /**
+         * Checks if the entity exists
+         * @param id the of the entity
+         * @return whether the entity exists
+         */
         boolean contains(int id) {
             return store.get(id) != null;
         }
     }
 
-    final MovingStore<Locomotive> locomotives = new MovingStore<>();
-    final MovingStore<Car> cars = new MovingStore<>();
+    public final MovingStore<Locomotive> locomotives = new MovingStore<>();
+    public final MovingStore<Car> cars = new MovingStore<>();
 
+    /** all static entities */
     final List<StaticEntity> statics = new ArrayList<>(100);
 
-    final StaticStore<Rail> rails = new StaticStore<>();
-    final StaticStore<Switch> switches = new StaticStore<>();
-    final StaticStore<CrossRail> crosses = new StaticStore<>();
-    final StaticStore<Station> stations = new StaticStore<>();
-    final StaticStore<Tunnel> tunnels = new StaticStore<>();
+    public final StaticStore<Rail> rails = new StaticStore<>();
+    public final StaticStore<Switch> switches = new StaticStore<>();
+    public final StaticStore<CrossRail> crosses = new StaticStore<>();
+    public final StaticStore<Station> stations = new StaticStore<>();
+    public final StaticStore<Tunnel> tunnels = new StaticStore<>();
 
-    private final GameEngine engine = new GameEngine();
+    public final GameEngine engine = new GameEngine();
 
-    public void step() throws CrashException {
+    public void step() throws TrainException {
         engine.step();
     }
 
@@ -98,7 +136,7 @@ public class Proto {
         switches.get(switchId).toggle();
     }
 
-    public void launch(int trainId) throws IllegalArgumentException, CrashException {
+    public void launch(int trainId) throws IllegalArgumentException, TrainException {
         Locomotive loc = locomotives.get(trainId);
 
         loc.setPosition(engine.entryPoint, engine.entrySecond);
@@ -106,7 +144,6 @@ public class Proto {
         StaticEntity posPrev = engine.entryPoint;
 
         for (Car car = loc.next; car != null; car = car.next) {
-            System.out.println("Set up");
             car.setPosition(pos, pos.next(posPrev));
             StaticEntity tmp = pos;
             pos = pos.next(posPrev);
@@ -184,7 +221,7 @@ public class Proto {
         stations.get(stationId).addPerson(color);
     }
 
-    public static void main(String[] args) throws CrashException {
+    public static void main(String[] args) throws TrainException {
         Proto p = new Proto();
 
         int lId = p.createLocomotive();
