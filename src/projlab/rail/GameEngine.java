@@ -57,6 +57,8 @@ public class GameEngine {
         int occupiedCount = 0;
 
         for (Locomotive l : locos) {
+            if(l.currentPosition == null)
+                continue;
             Collection<StaticEntity> occ = l.getDestination();
             occupied.addAll(occ);
             occupiedCount += occ.size();
@@ -67,6 +69,8 @@ public class GameEngine {
         }
 
         for (Locomotive l : locos) {
+            if(l.currentPosition == null)
+                continue;
             l.move();
         }
     }
