@@ -159,11 +159,30 @@ public class Interpreter {
     }
 
     private String connect(String[] params) throws CrashException {
+
         return "";
     }
 
-    private String addPerson(String[] params) throws CrashException {
-        return "";
+    private String addPerson(String[] params) throws CrashException, IllegalArgumentException {
+        if (params == null || params.length > 2){
+            throw new IllegalArgumentException("Illegal parameters for command!");
+        }
+
+        if(params.length == 1){
+            proto.addPerson(Integer.parseInt(params[0]));
+            return "Passanger added to car " + params[0];
+        }
+
+        else{
+            try {
+                Color.lookup(params[1]);
+            } catch( IllegalArgumentException e){
+                throw new IllegalArgumentException("Invalid color!");
+            }
+
+            proto.addPerson(Integer.parseInt(params[0]), Color.valueOf(params[1]));
+            return "Passanger added to station " + params[0];
+        }
     }
 
     public static void main(String[] args) {
