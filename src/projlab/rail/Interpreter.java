@@ -2,6 +2,7 @@ package projlab.rail;
 
 import projlab.rail.logic.Color;
 import projlab.rail.logic.CrashException;
+import projlab.rail.logic.StaticEntity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -159,11 +160,36 @@ public class Interpreter {
     }
 
     private String connect(String[] params) throws CrashException {
-        return "";
+        assertParams(params, 4);
+        try{
+            proto.connect(Integer.parseInt(params[0]),
+                          StaticEntity.ConnectionType.valueOf(params[1]),
+                          Integer.parseInt(params[2]),
+                          StaticEntity.ConnectionType.valueOf(params[3]));
+
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid connection type!");
+        }
+        return params[0] + " and " + params[2] + " connected";
     }
 
-    private String addPerson(String[] params) throws CrashException {
-        return "";
+    private String addPerson(String[] params) throws CrashException, IllegalArgumentException {
+        if (params == null || params.length > 2){
+            throw new IllegalArgumentException("Illegal parameters for command!");
+        }
+
+        if(params.length == 1){
+            proto.addPerson(Integer.parseInt(params[0]));
+            return "Passanger added to car " + params[0];
+        }
+        else{
+            if(Color.lookup(params[1]) == null) {
+                throw new IllegalArgumentException("Invalid color!");
+            }
+
+            proto.addPerson(Integer.parseInt(params[0]), Color.valueOf(params[1]));
+            return "Passanger added to station " + params[0];
+        }
     }
 
     public static void main(String[] args) {

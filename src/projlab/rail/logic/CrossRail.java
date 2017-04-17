@@ -28,12 +28,12 @@ public class CrossRail extends StaticEntity {
 
     public void connectX(StaticEntity x) {
         connections.set(2, x);
-        connectionA = x;
+        connectionX = x;
     }
 
     public void connectY(StaticEntity y) {
         connections.set(3, y);
-        connectionB = y;
+        connectionY = y;
     }
 
     @Override
