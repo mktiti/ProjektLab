@@ -3,8 +3,8 @@ package projlab.rail.logic;
 import projlab.rail.exception.TrainException;
 
 public abstract class MovingEntity {
-    protected StaticEntity currentPosition;
-    protected StaticEntity lastPosition;
+    public StaticEntity currentPosition;
+    public StaticEntity lastPosition;
     public Car next;
 
     public StaticEntity next() throws TrainException {

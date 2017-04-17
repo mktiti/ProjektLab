@@ -10,10 +10,10 @@ public class GameEngine {
 
     List<StaticEntity> statics = new LinkedList<>();
     List<Locomotive> locos = new LinkedList<>();
-    private Tunnel activeTunnelA;
-    private Tunnel activeTunnelB;
-    HiddenRail entryPoint;
-    HiddenRail entrySecond;
+    public Tunnel activeTunnelA;
+    public Tunnel activeTunnelB;
+    public HiddenRail entryPoint;
+    public HiddenRail entrySecond;
     private StaticEntity last;
 
     GameEngine() {

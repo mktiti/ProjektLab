@@ -9,7 +9,7 @@ public abstract class StaticEntity {
 
     public enum ConnectionType { A, B, IN, X, Y, VISIBLE, INVISIBLE }
 
-    MovingEntity vehicle;
+    public MovingEntity vehicle;
 
     public abstract List<StaticEntity> getConnections();
 
