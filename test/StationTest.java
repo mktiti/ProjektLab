@@ -90,17 +90,24 @@ public class StationTest {
     }
 
     @Test
-    public void boardTest(){
-
+    public void boardTest() throws TrainException {
+        int locoId = createTrain(true);
+        Locomotive loco = proto.locomotives.get(locoId);
+        loco.next.hasPassengers = false;
+        proto.addPerson(station, stationColor);
+        for (int i = 0; i < 11; i++) {
+            proto.step();
+        }
+        assertEquals(true,loco.next.hasPassengers);
     }
 
     @Test
     public void victoryTest() throws TrainException {
-        int loco = createTrain(true);
+        int loco = createTrain(false);
         Car firstCar = proto.locomotives.get(loco).next;
+        firstCar.hasPassengers = true;
         proto.launch(loco);
         for (int i = 0; i < 11; i++) {
-            assertEquals(true, firstCar.hasPassengers);
             proto.step();
         }
         assertEquals(GameState.VICTORY, proto.engine.state);
