@@ -130,7 +130,7 @@ public class ProtoTest {
 
     }
 
-    @Test (expected = CrashException.class)
+    @Test
     public void crashTest(){
         int train1 = createSampleTrain();
         int train2 = createSampleTrain();
@@ -149,7 +149,6 @@ public class ProtoTest {
                 stepNumber++;
             }
         });
-
     }
 
     @Test
