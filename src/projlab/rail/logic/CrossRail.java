@@ -1,16 +1,20 @@
 package projlab.rail.logic;
 
-import projlab.rail.exception.CrashException;
 import projlab.rail.exception.IllegalMoveException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CrossRail extends StaticEntity {
+    /** A connection, connected to B */
     private StaticEntity connectionA;
+    /** B connection, connected to A */
     private StaticEntity connectionB;
+    /** X connection, connected to Y */
     private StaticEntity connectionX;
+    /** Y connection, connected to X */
     private StaticEntity connectionY;
+    /** A list of all connections */
     private List<StaticEntity> connections = new ArrayList<>(4);
 
     public CrossRail() {
@@ -19,21 +23,22 @@ public class CrossRail extends StaticEntity {
         }
     }
 
+    /** connects A connection */
     public void connectA(StaticEntity a) {
         connections.set(0, a);
         connectionA = a;
     }
-
+    /** connects B connection */
     public void connectB(StaticEntity b) {
         connections.set(1, b);
         connectionB = b;
     }
-
+    /** connects X connection */
     public void connectX(StaticEntity x) {
         connections.set(2, x);
         connectionX = x;
     }
-
+    /** connects Y connection */
     public void connectY(StaticEntity y) {
         connections.set(3, y);
         connectionY = y;

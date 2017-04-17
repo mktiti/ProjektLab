@@ -6,13 +6,15 @@ import projlab.rail.exception.InactiveTunnelException;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Represents a tunnel opening */
 public class Tunnel extends StaticEntity {
-
+    /** Visible connection, connected to hidden */
     public StaticEntity visibleConnection;
+    /** Hidden connection, connected to visible */
     public StaticEntity hiddenConnection;
-
+    /** Whether the tunnel is activated or not */
     public boolean isActive;
-
+    /** A list of all connections */
     private final ArrayList<StaticEntity> conns = new ArrayList<>(3);
 
     public Tunnel() {
@@ -21,11 +23,12 @@ public class Tunnel extends StaticEntity {
         }
     }
 
+    /** connects visible connection */
     public void connectVisible(StaticEntity visible) {
         conns.set(0, visible);
         visibleConnection = visible;
     }
-
+    /** connects hidden connection */
     public void connectHidden(StaticEntity hidden) {
         conns.set(1, hidden);
         hiddenConnection = hidden;

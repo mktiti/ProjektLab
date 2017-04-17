@@ -4,9 +4,13 @@ import projlab.rail.exception.IllegalMoveException;
 
 import java.util.*;
 
+/** Represents a simple rail elem */
 public class Rail extends StaticEntity {
+    /** Connection A */
     private StaticEntity connectionA;
+    /** Connection B */
     private StaticEntity connectionB;
+    /** A list of all connections */
     private List<StaticEntity> connections = new ArrayList<>(2);
 
     public Rail(){
@@ -14,11 +18,12 @@ public class Rail extends StaticEntity {
         connections.add(null);
     }
 
+    /** connects A connection */
     public void connectA(StaticEntity a) {
         connections.set(0, a);
         connectionA = a;
     }
-
+    /** connects B connection */
     public void connectB(StaticEntity b) {
         connections.set(1, b);
         connectionB = b;

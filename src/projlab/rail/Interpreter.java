@@ -35,6 +35,7 @@ public class Interpreter {
         commandLookup.put("addPerson",          this::addPerson);
     }
 
+    /** Checks if the right number of parameters are given */
     private static void assertParams(String[] params, int num) throws IllegalArgumentException {
         if (params == null) {
             if (num > 0) {
@@ -45,6 +46,7 @@ public class Interpreter {
         }
     }
 
+    /** runs specified command */
     private String callCommand(String in) throws TrainException {
         String[] ss = in.split(" ");
         String[] params = new String[ss.length - 1];
@@ -59,6 +61,7 @@ public class Interpreter {
         throw new IllegalArgumentException("Unknown command!");
     }
 
+    /** runs the interpreter */
     private void run() throws TrainException {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             String line;

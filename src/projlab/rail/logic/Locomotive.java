@@ -12,6 +12,11 @@ public class Locomotive extends MovingEntity {
         next = firstCar;
     }
 
+    /**
+     * The list of positions the whole train will occupy in the next timeframe. Used for crash detection.
+     * @return The list of positions the whole train will occupy in the next timeframe.
+     * @throws TrainException if the route cannot be continued
+     */
     public LinkedList<StaticEntity> getDestination() throws TrainException {
         LinkedList<StaticEntity> ret = new LinkedList<>();
 
@@ -34,6 +39,7 @@ public class Locomotive extends MovingEntity {
             return false;
         }
 
+        // iterating through all cars
         Car temp = next;
         while (temp != null) {
             if (temp.color == color) {
@@ -52,6 +58,9 @@ public class Locomotive extends MovingEntity {
         return false;
     }
 
+    /**
+     * Boards all accepted waiting passengers
+     */
     private void board() {
         Car temp = next;
         while (temp != null) {
@@ -62,6 +71,9 @@ public class Locomotive extends MovingEntity {
         }
     }
 
+    /**
+     * @return Whether the train has any people on it
+     */
     private boolean isEmpty() {
         Car temp = next;
         while (temp != null) {

@@ -6,15 +6,20 @@ import projlab.rail.logic.*;
 
 import java.util.*;
 
+/** Controls the logic of the game */
 public class GameEngine {
 
+    /** List of all static entities */
     List<StaticEntity> statics = new LinkedList<>();
+    /** List of all locomotives */
     List<Locomotive> locos = new LinkedList<>();
+    /** Active tunnel connections */
     private Tunnel activeTunnelA;
     private Tunnel activeTunnelB;
+    /** Entry point of the level */
     HiddenRail entryPoint;
+    /** Direction the trains are arriving from to the entry point */
     HiddenRail entrySecond;
-    private StaticEntity last;
 
     GameEngine() {
         HiddenRail prev = new HiddenRail();
@@ -28,26 +33,25 @@ public class GameEngine {
         }
     }
 
+    /** Loads the needed level */
     public void load(){
         //TODO: Implement this method
         System.out.println("GameEngine.load called");
     }
 
+    /** Ends lost game */
     public void gameOver(){
         //TODO: Implement this method
         System.out.println("GameEngine.gameOver called");
     }
 
+    /** Ends won game */
     public void gameWon(){
         //TODO: Implement this method
         System.out.println("GameEngine.gameWon called");
     }
 
-    public void setLast(StaticEntity entity){
-        //TODO: Implement this method
-        System.out.println("GameEngine.setLast called");
-    }
-
+    /** iterates one on the whole level */
     public void step() throws TrainException {
         Set<StaticEntity> occupied = new HashSet<>();
         int occupiedCount = 0;
@@ -67,6 +71,11 @@ public class GameEngine {
         }
     }
 
+    /**
+     * Deactivates a tunnel
+     * @param tunnel the tunnel to be deactivated
+     * @throws IllegalArgumentException if the tunnel is not active
+     */
     public void deactivateTunnel(Tunnel tunnel) throws IllegalArgumentException {
         tunnel.isActive = false;
         if (activeTunnelA == tunnel) {
@@ -80,6 +89,9 @@ public class GameEngine {
         }
     }
 
+    /**
+     * Destroys the built tunnel
+     */
     private void destroyTunnel() {
         if (activeTunnelA == null || activeTunnelB == null) {
             return;
@@ -89,6 +101,11 @@ public class GameEngine {
         activeTunnelB.connectHidden(null);
     }
 
+    /**
+     * Activates a tunnel
+     * @param tunnel the tunnel to be activated
+     * @throws IllegalArgumentException if the tunnel is active
+     */
     public void activateTunnel(Tunnel tunnel) throws IllegalArgumentException {
         tunnel.isActive = true;
         if (activeTunnelA == null) {
@@ -102,6 +119,9 @@ public class GameEngine {
         }
     }
 
+    /**
+     * Builds a tunnel if the two tunnels are active
+     */
     private void buildTunnel() {
         if (activeTunnelA == null || activeTunnelB == null) {
             return;

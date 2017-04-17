@@ -7,11 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Switch extends StaticEntity{
+    /** Input, connected to either A or B */
     public StaticEntity input;
+    /** A connection */
     public StaticEntity outputA;
+    /** B connection */
     public StaticEntity outputB;
+    /** Whether A or B is connected to the input */
     public boolean isAActive = true;
 
+    /** A list of all the connections */
     private final ArrayList<StaticEntity> conns = new ArrayList<>(3);
 
     public Switch() {
@@ -20,16 +25,17 @@ public class Switch extends StaticEntity{
         }
     }
 
+    /** connects A connection */
     public void connectA(StaticEntity a) {
         conns.set(1, a);
         outputA = a;
     }
-
+    /** connects B connection */
     public void connectB(StaticEntity b) {
         conns.set(2, b);
         outputB = b;
     }
-
+    /** connects input */
     public void connectIn(StaticEntity in) {
         conns.set(0, in);
         input = in;
@@ -77,6 +83,9 @@ public class Switch extends StaticEntity{
         }
     }
 
+    /**
+     * Changes the state of the switch
+     */
     public void toggle() {
         isAActive = !isAActive;
     }

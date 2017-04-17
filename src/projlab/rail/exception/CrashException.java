@@ -1,7 +1,6 @@
 package projlab.rail.exception;
 
-import projlab.rail.logic.MovingEntity;
-
+/** Thrown when two or more trains crash -or would crash- into each other */
 public class CrashException extends TrainException {
 
     public CrashException() {

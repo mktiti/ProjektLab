@@ -7,6 +7,7 @@ import java.util.*;
 
 public class Proto {
 
+    /** The types of rail */
     public enum RailType {
         PLAIN, CROSS, SWITCH, TUNNEL;
 
@@ -22,11 +23,19 @@ public class Proto {
         }
     }
 
+    /** id counter of vehicles */
     private int movingCounter = 0;
 
+    /** Vehicle storage */
     public class MovingStore<E extends MovingEntity> {
         final Map<Integer, E> store = new HashMap<>();
 
+        /**
+         * Gets the vehicle by id
+         * @param id the id
+         * @return the vehcle
+         * @throws IllegalArgumentException if no vehicle is found
+         */
         E get(int id) throws IllegalArgumentException {
             E ret = store.get(id);
             if (ret != null) {
@@ -35,20 +44,37 @@ public class Proto {
             throw new IllegalArgumentException("Illegal MovingEntity id!");
         }
 
+        /**
+         * Adds new vehicle
+         * @param entity the vehilce to be added
+         * @return the id of the vehicle
+         */
         private int add(E entity) {
             int id = movingCounter++;
             store.put(id, entity);
             return id;
         }
 
+        /**
+         * Checks if the vehicle exists
+         * @param id the of the vehicle
+         * @return whether the vehicle exists
+         */
         boolean contains(int id) {
             return store.get(id) != null;
         }
     }
 
+    /** Entity storage */
     public class StaticStore<E extends StaticEntity> {
         final Map<Integer, E> store = new HashMap<>();
 
+        /**
+         * Gets the entity by id
+         * @param id the id
+         * @return the entity
+         * @throws IllegalArgumentException if no entity is found
+         */
         E get(int id) throws IllegalArgumentException {
             E ret = store.get(id);
             if (ret != null) {
@@ -57,6 +83,11 @@ public class Proto {
             throw new IllegalArgumentException("Illegal StaticEntity id!");
         }
 
+        /**
+         * Adds new entity
+         * @param entity the entity to be added
+         * @return the id of the entity
+         */
         private int add(E entity) {
             statics.add(entity);
             int id = statics.size() - 1;
@@ -65,6 +96,11 @@ public class Proto {
             return id;
         }
 
+        /**
+         * Checks if the entity exists
+         * @param id the of the entity
+         * @return whether the entity exists
+         */
         boolean contains(int id) {
             return store.get(id) != null;
         }
@@ -73,6 +109,7 @@ public class Proto {
     public final MovingStore<Locomotive> locomotives = new MovingStore<>();
     public final MovingStore<Car> cars = new MovingStore<>();
 
+    /** all static entities */
     final List<StaticEntity> statics = new ArrayList<>(100);
 
     public final StaticStore<Rail> rails = new StaticStore<>();
