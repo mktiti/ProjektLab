@@ -33,20 +33,21 @@ public class Locomotive extends MovingEntity {
     public boolean move() throws TrainException {
         super.move();
         Color color = currentPosition.getColor();
-        boolean test = isEmpty();
 
         if (color == null) {
             // Not a station
             return false;
         }
-
         // iterating through all cars
         Car temp = next;
         while (temp != null) {
             if (temp.color == color) {
                 if (temp.hasPassengers) {
                     temp.unboard();
-
+                    board();
+                    return isEmpty();
+                }
+                else{
                     board();
                     return isEmpty();
                 }
