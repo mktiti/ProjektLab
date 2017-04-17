@@ -106,6 +106,13 @@ public class ProtoTest {
     @Test
     public void stepTest() {
         int locoId = proto.createLocomotive();
+
+        try {
+            proto.launch(locoId);
+        } catch (CrashException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Test
