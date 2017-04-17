@@ -21,7 +21,7 @@ public class Proto {
         }
     }
 
-    private class StaticStore<E extends StaticEntity> {
+    class StaticStore<E extends StaticEntity> {
         final Map<Integer, E> store = new HashMap<>();
 
         E get(int id) throws IllegalArgumentException {
