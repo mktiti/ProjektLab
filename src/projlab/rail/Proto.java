@@ -22,9 +22,9 @@ public class Proto {
     }
 
     private class StaticStore<E extends StaticEntity> {
-        private final Map<Integer, E> store = new HashMap<>();
+        final Map<Integer, E> store = new HashMap<>();
 
-        private E get(int id) throws IllegalArgumentException {
+        E get(int id) throws IllegalArgumentException {
             E ret = store.get(id);
             if (ret != null) {
                 return ret;
@@ -40,7 +40,7 @@ public class Proto {
             return id;
         }
 
-        private boolean contains(int id) {
+        boolean contains(int id) {
             return store.get(id) != null;
         }
     }
