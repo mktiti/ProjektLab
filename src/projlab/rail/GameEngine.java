@@ -17,9 +17,9 @@ public class GameEngine {
     private Tunnel activeTunnelA;
     private Tunnel activeTunnelB;
     /** Entry point of the level */
-    HiddenRail entryPoint;
+    public HiddenRail entryPoint;
     /** Direction the trains are arriving from to the entry point */
-    HiddenRail entrySecond;
+    public HiddenRail entrySecond;
 
     GameEngine() {
         HiddenRail prev = new HiddenRail();
