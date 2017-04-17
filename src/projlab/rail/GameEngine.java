@@ -1,5 +1,7 @@
 package projlab.rail;
 
+import projlab.rail.exception.CrashException;
+import projlab.rail.exception.TrainException;
 import projlab.rail.logic.*;
 
 import java.util.*;
@@ -46,7 +48,7 @@ public class GameEngine {
         System.out.println("GameEngine.setLast called");
     }
 
-    public void step() throws CrashException {
+    public void step() throws TrainException {
         Set<StaticEntity> occupied = new HashSet<>();
         int occupiedCount = 0;
 
@@ -57,7 +59,7 @@ public class GameEngine {
         }
 
         if (occupied.size() < occupiedCount) {
-            throw new CrashException("Train crash!");
+            throw new CrashException();
         }
 
         for (Locomotive l : locos) {

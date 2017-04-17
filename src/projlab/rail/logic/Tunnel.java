@@ -1,5 +1,8 @@
 package projlab.rail.logic;
 
+import projlab.rail.exception.IllegalMoveException;
+import projlab.rail.exception.InactiveTunnelException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,9 +37,9 @@ public class Tunnel extends StaticEntity {
     }
 
     @Override
-    public StaticEntity next(StaticEntity previous) throws CrashException {
+    public StaticEntity next(StaticEntity previous) throws IllegalMoveException, InactiveTunnelException {
         if (!isActive) {
-            throw new CrashException("Inactive tunnel!");
+            throw new InactiveTunnelException(this);
         }
 
         if (previous == hiddenConnection) {
@@ -45,7 +48,7 @@ public class Tunnel extends StaticEntity {
             return hiddenConnection;
         }
 
-        throw new CrashException("Coming to tunnel from illegal direction!");
+        throw new IllegalMoveException(this, previous);
     }
 
     @Override

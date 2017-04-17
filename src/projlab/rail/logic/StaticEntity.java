@@ -1,5 +1,8 @@
 package projlab.rail.logic;
 
+import projlab.rail.exception.IllegalMoveException;
+import projlab.rail.exception.TrainException;
+
 import java.util.List;
 
 public abstract class StaticEntity {
@@ -18,7 +21,7 @@ public abstract class StaticEntity {
         return false;
     }
 
-    public abstract StaticEntity next(StaticEntity previous) throws CrashException;
+    public abstract StaticEntity next(StaticEntity previous) throws TrainException;
 
     public boolean hasVehicle() {
         return vehicle != null;

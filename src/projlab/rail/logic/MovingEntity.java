@@ -1,19 +1,21 @@
 package projlab.rail.logic;
 
+import projlab.rail.exception.TrainException;
+
 public abstract class MovingEntity {
     protected StaticEntity currentPosition;
     protected StaticEntity lastPosition;
     public Car next;
 
-    public StaticEntity next() throws CrashException {
+    public StaticEntity next() throws TrainException {
         return currentPosition.next(lastPosition);
     }
 
-    public boolean move() throws CrashException {
+    public boolean move() throws TrainException {
         StaticEntity temp = currentPosition;
         currentPosition = currentPosition.next(lastPosition);
         if (currentPosition == null) {
-            throw new CrashException("Rail line ended unexpectedly!");
+            throw new NullPointerException("Rail line ended unexpectedly!");
         }
 
         currentPosition.vehicle = this;

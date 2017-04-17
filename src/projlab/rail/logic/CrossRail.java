@@ -1,5 +1,8 @@
 package projlab.rail.logic;
 
+import projlab.rail.exception.CrashException;
+import projlab.rail.exception.IllegalMoveException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +45,7 @@ public class CrossRail extends StaticEntity {
     }
 
     @Override
-    public StaticEntity next(StaticEntity previous) throws CrashException {
+    public StaticEntity next(StaticEntity previous) throws IllegalMoveException {
         if (previous == connectionB) {
             return connectionA;
         } else if (previous == connectionA) {
@@ -52,7 +55,7 @@ public class CrossRail extends StaticEntity {
         } else if (previous == connectionY) {
             return connectionX;
         } else {
-            throw new CrashException("Comming to Rail from illegal direction.");
+            throw new IllegalMoveException(this, previous);
         }
     }
 

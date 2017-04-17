@@ -1,5 +1,7 @@
 package projlab.rail.logic;
 
+import projlab.rail.exception.TrainException;
+
 import java.util.LinkedList;
 
 public class Locomotive extends MovingEntity {
@@ -10,7 +12,7 @@ public class Locomotive extends MovingEntity {
         next = firstCar;
     }
 
-    public LinkedList<StaticEntity> getDestination() throws CrashException {
+    public LinkedList<StaticEntity> getDestination() throws TrainException {
         LinkedList<StaticEntity> ret = new LinkedList<>();
 
         MovingEntity temp = this;
@@ -23,7 +25,7 @@ public class Locomotive extends MovingEntity {
     }
 
     @Override
-    public boolean move() throws CrashException {
+    public boolean move() throws TrainException {
         super.move();
         Color color = currentPosition.getColor();
 
