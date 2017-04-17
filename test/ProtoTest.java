@@ -18,8 +18,9 @@ public class ProtoTest {
 
     private int tunnelLeft;
     private int tunnelRight1;
-
     private int tunnelRight2;
+
+    private int switch1;
 
     @BeforeEach
     public void initProto() {
@@ -27,15 +28,15 @@ public class ProtoTest {
 
         int prev = createRails(-1, A, 10);
 
-        int s1 = proto.createRail(SWITCH);
-        proto.connect(prev, A, s1, A);
+        switch1 = proto.createRail(SWITCH);
+        proto.connect(prev, A, switch1, A);
 
-        int leftLine = createRails(s1, B, 4);
+        int leftLine = createRails(switch1, B, 4);
         int station = proto.createStation(RED);
         proto.connect(leftLine, A, station, B);
         leftLine = createRails(station, A, 4);
 
-        int rightLine = createRails(s1, IN, 10);
+        int rightLine = createRails(switch1, IN, 10);
 
         int cross = proto.createRail(CROSS);
         proto.connect(leftLine, A, cross, A);
@@ -66,13 +67,14 @@ public class ProtoTest {
         return toConnect;
     }
 
-    private int createSampleTrain(){
+    private int createSampleTrain() {
         int current, prev;
         int locoId = proto.createLocomotive();
         prev = locoId;
         Color[] colors = Color.values();
         for(int i = 0; i < colors.length; i++){
             current = proto.createCar(colors[i]);
+            proto.addPerson(current);
             proto.connectToTrain(prev, current);
             prev = current;
         }
@@ -194,11 +196,20 @@ public class ProtoTest {
 
     @Test
     public void toggleCrashTest(){
-
+        assertThrows(IllegalSwitchStateException.class, () -> {
+            proto.toggle(switch1);
+            proto.launch(createSampleTrain());
+            for (int i = 0; i < 12; i++) {
+                proto.step();
+            }
+        });
     }
 
     @Test
     public void unBoardTest(){
+
+        Proto proto = new Proto();
+
 
     }
 
