@@ -4,6 +4,9 @@ import projlab.rail.Proto;
 import projlab.rail.exception.*;
 import projlab.rail.logic.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 import static projlab.rail.logic.StaticEntity.ConnectionType.*;
@@ -31,22 +34,63 @@ public class StationTest {
 
     }
 
-    @Test
-    public void unBoardTest(){
+    private int createTrain(boolean hasPassengers) {
+        List<Color> colors = new ArrayList<>(Color.values().length - 1);
+        for (Color c : Color.values()) {
+            if (c != stationColor) {
+                colors.add(c);
+            }
+        }
 
-
-
+        int current, prev;
+        int locoId = proto.createLocomotive();
+        prev = locoId;
+        for (int i = 0; i < Color.values().length; i++) {
+            current = proto.createCar(i == 0 ? stationColor : colors.get(i - 1));
+            if (hasPassengers) {
+                proto.addPerson(current);
+            }
+            proto.connectToTrain(prev, current);
+            prev = current;
+        }
+        return locoId;
     }
 
     @Test
-    public void unBoardFailedTest(){
+    public void unBoardTest() throws TrainException {
+        int loco = createTrain(true);
+        Car firstCar = proto.locomotives.get(loco).next;
+        proto.launch(loco);
+        for (int i = 0; i < 11; i++) {
+            assertEquals(true, firstCar.hasPassengers);
+            proto.step();
+        }
+        assertEquals(false, firstCar.hasPassengers);
+    }
 
+    // TODO
+    @Test
+    public void unBoardFailedTest() throws TrainException {
+        int loco = createTrain(true);
+        Car secondCar = proto.locomotives.get(loco).next;
+        int firstCarId = proto.createCar(stationColor);
+        Car firstCar = proto.cars.get(firstCarId);
+        firstCar.hasPassengers = false;
+        proto.locomotives.get(loco).next = firstCar;
+        firstCar.next = secondCar;
+        secondCar.next = secondCar.next.next;
+
+        proto.launch(loco);
+        for (int i = 0; i < 12; i++) {
+            assertEquals(false, firstCar.hasPassengers);
+            assertEquals(true, secondCar.hasPassengers);
+            proto.step();
+        }
     }
 
     @Test
     public void boardTest(){
 
     }
-
 
 }
