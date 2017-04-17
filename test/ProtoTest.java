@@ -26,27 +26,27 @@ public class ProtoTest {
     public void initProto() {
         proto = new Proto();
 
-        int prev = createRails(-1, A, 10);
+        int prev = createRails(proto, -1, A, 10);
 
         switch1 = proto.createRail(SWITCH);
         proto.connect(prev, A, switch1, A);
 
-        int leftLine = createRails(switch1, B, 4);
+        int leftLine = createRails(proto, switch1, B, 4);
         int station = proto.createStation(RED);
         proto.connect(leftLine, A, station, B);
-        leftLine = createRails(station, A, 4);
+        leftLine = createRails(proto, station, A, 4);
 
-        int rightLine = createRails(switch1, IN, 10);
+        int rightLine = createRails(proto, switch1, IN, 10);
 
         int cross = proto.createRail(CROSS);
         proto.connect(leftLine, A, cross, A);
         proto.connect(rightLine, A, cross, X);
 
-        leftLine = createRails(cross, Y, 15);
+        leftLine = createRails(proto, cross, Y, 15);
         tunnelLeft = proto.createRail(TUNNEL);
         proto.connect(leftLine, A, tunnelLeft, VISIBLE);
 
-        rightLine = createRails(cross, B, 3);
+        rightLine = createRails(proto, cross, B, 3);
         int s2 = proto.createRail(SWITCH);
         proto.connect(rightLine, A, s2, IN);
 
@@ -57,7 +57,7 @@ public class ProtoTest {
         proto.connect(s2, B, tunnelRight2, VISIBLE);
     }
 
-    private int createRails(int toConnect, StaticEntity.ConnectionType connectionType, int number) {
+    static int createRails(Proto proto, int toConnect, StaticEntity.ConnectionType connectionType, int number) {
         int current;
         for (int i = 0; i < number; i++) {
             current = proto.createRail(Proto.RailType.PLAIN);
@@ -198,24 +198,6 @@ public class ProtoTest {
                 proto.step();
             }
         });
-    }
-
-    @Test
-    public void unBoardTest(){
-
-        Proto proto = new Proto();
-
-
-    }
-
-    @Test
-    public void unBoardFailedTest(){
-
-    }
-
-    @Test
-    public void boardTest(){
-
     }
 
     @Test
