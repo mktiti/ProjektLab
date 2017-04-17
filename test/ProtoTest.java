@@ -19,6 +19,7 @@ public class ProtoTest {
 
     private static int tunnelLeft;
     private static int tunnelRight1;
+
     private static int tunnelRight2;
 
     @BeforeAll
@@ -106,6 +107,13 @@ public class ProtoTest {
     @Test
     public void stepTest() {
         int locoId = proto.createLocomotive();
+
+        try {
+            proto.launch(locoId);
+        } catch (CrashException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Test

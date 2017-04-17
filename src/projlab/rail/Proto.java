@@ -69,16 +69,16 @@ public class Proto {
         }
     }
 
-    final MovingStore<Locomotive> locomotives = new MovingStore<>();
-    final MovingStore<Car> cars = new MovingStore<>();
+    public final MovingStore<Locomotive> locomotives = new MovingStore<>();
+    public final MovingStore<Car> cars = new MovingStore<>();
 
     final List<StaticEntity> statics = new ArrayList<>(100);
 
-    final StaticStore<Rail> rails = new StaticStore<>();
-    final StaticStore<Switch> switches = new StaticStore<>();
-    final StaticStore<CrossRail> crosses = new StaticStore<>();
-    final StaticStore<Station> stations = new StaticStore<>();
-    final StaticStore<Tunnel> tunnels = new StaticStore<>();
+    public final StaticStore<Rail> rails = new StaticStore<>();
+    public final StaticStore<Switch> switches = new StaticStore<>();
+    public final StaticStore<CrossRail> crosses = new StaticStore<>();
+    public final StaticStore<Station> stations = new StaticStore<>();
+    public final StaticStore<Tunnel> tunnels = new StaticStore<>();
 
     private final GameEngine engine = new GameEngine();
 
