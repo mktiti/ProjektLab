@@ -67,6 +67,19 @@ public class ProtoTest {
         return toConnect;
     }
 
+    private static int createSampleTrain(){
+        int current, prev;
+        int locoId = proto.createLocomotive();
+        prev = locoId;
+        Color[] colors = Color.values();
+        for(int i = 0; i < colors.length; i++){
+            current = proto.createCar(colors[i]);
+            proto.connectToTrain(prev, current);
+            prev = current;
+        }
+        return locoId;
+    }
+
     public static void main(String[] args) {
         ProtoTest.initProto();
         new ProtoTest().levelTest();
@@ -105,14 +118,9 @@ public class ProtoTest {
     }
 
     @Test
-    public void stepTest() {
-        int locoId = proto.createLocomotive();
+    public void stepTest() throws CrashException {
+        int locoId = createSampleTrain();
 
-        try {
-            proto.launch(locoId);
-        } catch (CrashException e) {
-            e.printStackTrace();
-        }
 
     }
 
