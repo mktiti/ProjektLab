@@ -4,11 +4,13 @@ import projlab.rail.exception.TrainException;
 
 /** Represents a vehicle (Car or Locomotive) */
 public abstract class MovingEntity {
+
     /** The position it"s occupying */
-    protected StaticEntity currentPosition;
+    public StaticEntity currentPosition;
     /** The position it occupied in the last timeframe */
-    protected StaticEntity lastPosition;
+    public StaticEntity lastPosition;
     /** the car connected to this vehicle (null if this is the last one) */
+
     public Car next;
 
     /**

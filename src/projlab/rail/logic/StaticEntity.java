@@ -11,7 +11,7 @@ public abstract class StaticEntity {
     public enum ConnectionType { A, B, IN, X, Y, VISIBLE, INVISIBLE }
 
     /** The currently occupying vehicle, or null if empty */
-    MovingEntity vehicle;
+    public MovingEntity vehicle;
 
     /**
      *   All of the entity's connections. (Used for drawings and traversing)

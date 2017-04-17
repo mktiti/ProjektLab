@@ -36,7 +36,7 @@ public class Proto {
          * @return the vehcle
          * @throws IllegalArgumentException if no vehicle is found
          */
-        E get(int id) throws IllegalArgumentException {
+        public E get(int id) throws IllegalArgumentException {
             E ret = store.get(id);
             if (ret != null) {
                 return ret;
@@ -75,7 +75,7 @@ public class Proto {
          * @return the entity
          * @throws IllegalArgumentException if no entity is found
          */
-        E get(int id) throws IllegalArgumentException {
+        public E get(int id) throws IllegalArgumentException {
             E ret = store.get(id);
             if (ret != null) {
                 return ret;
@@ -118,7 +118,7 @@ public class Proto {
     public final StaticStore<Station> stations = new StaticStore<>();
     public final StaticStore<Tunnel> tunnels = new StaticStore<>();
 
-    private final GameEngine engine = new GameEngine();
+    public final GameEngine engine = new GameEngine();
 
     public void step() throws TrainException {
         engine.step();

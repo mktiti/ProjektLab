@@ -3,12 +3,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import projlab.rail.Proto;
-import projlab.rail.exception.CrashException;
-import projlab.rail.exception.IllegalSwitchStateException;
-import projlab.rail.exception.InactiveTunnelException;
-import projlab.rail.exception.TrainException;
-import projlab.rail.logic.Color;
-import projlab.rail.logic.StaticEntity;
+import projlab.rail.exception.*;
+import projlab.rail.logic.*;
 
 import static projlab.rail.logic.StaticEntity.ConnectionType.*;
 import static projlab.rail.Proto.RailType.*;
@@ -120,20 +116,75 @@ public class ProtoTest {
     }
 
     @Test
-    public void stepTest() throws CrashException {
+    public void stepTest() throws TrainException {
         int locoId = createSampleTrain();
 
-
+        Locomotive loco = proto.locomotives.get(locoId);
+        StaticEntity first = proto.engine.entryPoint.next(proto.engine.entrySecond);
+        proto.launch(locoId);
+        StaticEntity prev = proto.engine.entryPoint;
+        int cnt = Color.values().length+1;
+        StaticEntity[] firstFive = new StaticEntity[cnt];
+        firstFive[0] = first;
+        for(int i = 1; i < firstFive.length; i++){
+            firstFive[i] = firstFive[i-1].next(prev);
+            prev = firstFive[i-1];
+        }
+        boolean matched = true;
+        for(int i = 0; i < cnt; i++)
+            proto.step();
+        Car active = loco.next;
+        for(int i = 0; i < cnt; i++){
+            if(i == 0)
+                matched = (loco.currentPosition == firstFive[cnt-(i+1)]);
+            else {
+                matched = active.currentPosition == firstFive[cnt - (i + 1)];
+                active = active.next;
+            }
+            if(!matched)
+                break;
+        }
+        assertEquals(true, matched);
     }
 
     @Test
-    public void tunnelTest() {
+    public void tunnelTest() throws TrainException {
+        int locoId = proto.createLocomotive();
+        Locomotive loco = proto.locomotives.get(locoId);
+        proto.activateTunnel(tunnelLeft);
+        proto.activateTunnel(tunnelRight1);
+        Tunnel tun1 = proto.tunnels.get(tunnelRight1);
+        Tunnel tun2 = proto.tunnels.get(tunnelLeft);
+
+        loco.setPosition(tun1, tun1.visibleConnection);
+        for(int i = 0; i < 10; i++){
+            proto.step();
+        }
+        assertEquals(loco.currentPosition, tun2.hiddenConnection);
 
     }
 
     @Test
     public void crashTest(){
+        int train1 = createSampleTrain();
+        int train2 = createSampleTrain();
+        //55 össz, 27-nél indít a második
 
+
+        Throwable exception = expectThrows(CrashException.class, () -> {
+            int stepNumber = 0;
+            proto.activateTunnel(tunnelLeft);
+            proto.activateTunnel(tunnelRight1);
+            proto.launch(train1);
+            while(true){
+                if(stepNumber == 27) {
+                    proto.launch(train2);
+                }
+                proto.step();
+                stepNumber++;
+            }
+        });
+        //assertEquals("Train crash!", exception.getMessage());
     }
 
     @Test
