@@ -181,7 +181,7 @@ public class ProtoTest {
                 System.out.println("Step: " + stepNumber);
                 if(stepNumber == 27) {
                     //int train2 = createSampleTrain();
-                    //proto.launch(train2);
+                    proto.launch(train2);
                 }
                 proto.step();
                 stepNumber++;
