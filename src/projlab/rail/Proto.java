@@ -144,7 +144,6 @@ public class Proto {
         StaticEntity posPrev = engine.entryPoint;
 
         for (Car car = loc.next; car != null; car = car.next) {
-            System.out.println("Set up");
             car.setPosition(pos, pos.next(posPrev));
             StaticEntity tmp = pos;
             pos = pos.next(posPrev);
