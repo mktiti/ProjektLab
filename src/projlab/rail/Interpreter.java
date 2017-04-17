@@ -172,11 +172,8 @@ public class Interpreter {
             proto.addPerson(Integer.parseInt(params[0]));
             return "Passanger added to car " + params[0];
         }
-
         else{
-            try {
-                Color.lookup(params[1]);
-            } catch( IllegalArgumentException e){
+            if(Color.lookup(params[1]) == null) {
                 throw new IllegalArgumentException("Invalid color!");
             }
 
