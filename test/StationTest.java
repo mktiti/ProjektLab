@@ -90,8 +90,15 @@ public class StationTest {
     }
 
     @Test
-    public void boardTest(){
-
+    public void boardTest() throws TrainException {
+        int locoId = createTrain(true);
+        Locomotive loco = proto.locomotives.get(locoId);
+        loco.next.hasPassengers = false;
+        proto.addPerson(station, stationColor);
+        for (int i = 0; i < 11; i++) {
+            proto.step();
+        }
+        assertEquals(true,loco.next.hasPassengers);
     }
 
     @Test
