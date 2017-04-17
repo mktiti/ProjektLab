@@ -3,6 +3,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import projlab.rail.Proto;
 import projlab.rail.logic.Color;
+import projlab.rail.logic.CrashException;
 import projlab.rail.logic.StaticEntity;
 
 import static projlab.rail.logic.StaticEntity.ConnectionType.*;
@@ -58,6 +59,23 @@ public class ProtoTest {
             toConnect = current;
         }
         return toConnect;
+    }
+
+    @Test
+    public void levelTest() {
+        int loco = proto.createLocomotive();
+        int stepNumber = 0;
+        try {
+            proto.launch(loco);
+            while (true) {
+                proto.step();
+                stepNumber++;
+            }
+        } catch (CrashException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(38, stepNumber);
     }
 
     @Test
