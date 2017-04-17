@@ -82,7 +82,6 @@ public class GameEngine {
 
 
             Iterator<Locomotive> i = locos.iterator();
-
             while (i.hasNext()){
                 Locomotive l = i.next();
                 if(l.currentPosition == null)

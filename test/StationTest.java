@@ -95,6 +95,7 @@ public class StationTest {
         Locomotive loco = proto.locomotives.get(locoId);
         loco.next.hasPassengers = false;
         proto.addPerson(station, stationColor);
+        proto.launch(locoId);
         for (int i = 0; i < 11; i++) {
             proto.step();
         }
