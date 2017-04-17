@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import projlab.rail.GameState;
 import projlab.rail.Proto;
 import projlab.rail.exception.*;
 import projlab.rail.logic.*;
@@ -233,7 +234,16 @@ public class ProtoTest {
 
     @Test
     public void defeatTest(){
-
+        try {
+            proto.toggle(switch1);
+            proto.launch(createSampleTrain());
+            for (int i = 0; i < 12; i++) {
+                proto.step();
+            }
+        } catch (TrainException e){
+            e.printStackTrace();
+        }
+        assertEquals(GameState.DEFEAT,proto.engine.state);
     }
 
     @Test

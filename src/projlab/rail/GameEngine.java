@@ -20,6 +20,8 @@ public class GameEngine {
     public HiddenRail entryPoint;
     /** Direction the trains are arriving from to the entry point */
     public HiddenRail entrySecond;
+    /** State of the game*/
+    public GameState state;
 
     GameEngine() {
         HiddenRail prev = new HiddenRail();
@@ -31,6 +33,7 @@ public class GameEngine {
             entrySecond = prev;
             prev = current;
         }
+        state = GameState.INGAME;
     }
 
     /** Loads the needed level */
@@ -41,38 +44,68 @@ public class GameEngine {
 
     /** Ends lost game */
     public void gameOver(){
-        //TODO: Implement this method
-        System.out.println("GameEngine.gameOver called");
+        state = GameState.DEFEAT;
+        System.out.println("Game over");
     }
 
     /** Ends won game */
     public void gameWon(){
-        //TODO: Implement this method
-        System.out.println("GameEngine.gameWon called");
+        state = GameState.VICTORY;
+        System.out.println("Game Won");
+    }
+
+    public void removeTrain(Locomotive l){
+        for(MovingEntity current = l; current != null; current = current.next){
+            current.currentPosition.vehicle = null;
+            current.currentPosition = null;
+            current.lastPosition = null;
+        }
     }
 
     /** iterates one on the whole level */
     public void step() throws TrainException {
-        Set<StaticEntity> occupied = new HashSet<>();
-        int occupiedCount = 0;
+        try {
+            Set<StaticEntity> occupied = new HashSet<>();
+            int occupiedCount = 0;
 
-        for (Locomotive l : locos) {
-            if(l.currentPosition == null)
-                continue;
-            Collection<StaticEntity> occ = l.getDestination();
-            occupied.addAll(occ);
-            occupiedCount += occ.size();
-        }
+            for (Locomotive l : locos) {
+                if (l.currentPosition == null)
+                    continue;
+                Collection<StaticEntity> occ = l.getDestination();
+                occupied.addAll(occ);
+                occupiedCount += occ.size();
+            }
 
-        if (occupied.size() < occupiedCount) {
-            throw new CrashException();
-        }
+            if (occupied.size() < occupiedCount) {
+                throw new CrashException();
+            }
 
-        for (Locomotive l : locos) {
-            if(l.currentPosition == null)
-                continue;
-            l.move();
+
+            Iterator<Locomotive> i = locos.iterator();
+
+            while (i.hasNext()){
+                Locomotive l = i.next();
+                if(l.currentPosition == null)
+                    continue;
+                if(l.move()){
+                    removeTrain(l);
+                    i.remove();
+                }
+            }
+
+            /*for (Locomotive l : locos) {
+                if (l.currentPosition == null)
+                    continue;
+                if(l.move()){
+                    removeTrain(l);
+                }
+            }*/
+        } catch (TrainException te){
+            gameOver();
+            throw te;
         }
+        if(locos.isEmpty())
+            gameWon();
     }
 
     /**
