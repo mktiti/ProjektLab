@@ -18,10 +18,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ProtoTest {
 
-    private static Proto proto = null;
+    private Proto proto = null;
 
-    private static int tunnelLeft;
-    private static int tunnelRight1;
+    private int tunnelLeft;
+    private int tunnelRight1;
 
     private int tunnelRight2;
 
@@ -60,7 +60,7 @@ public class ProtoTest {
         proto.connect(s2, B, tunnelRight2, VISIBLE);
     }
 
-    private static int createRails(int toConnect, StaticEntity.ConnectionType connectionType, int number) {
+    private int createRails(int toConnect, StaticEntity.ConnectionType connectionType, int number) {
         int current;
         for (int i = 0; i < number; i++) {
             current = proto.createRail(Proto.RailType.PLAIN);
@@ -70,7 +70,7 @@ public class ProtoTest {
         return toConnect;
     }
 
-    private static int createSampleTrain(){
+    private int createSampleTrain(){
         int current, prev;
         int locoId = proto.createLocomotive();
         prev = locoId;
