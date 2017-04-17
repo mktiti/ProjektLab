@@ -2,9 +2,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import projlab.rail.Proto;
+import projlab.rail.exception.CrashException;
+import projlab.rail.exception.IllegalSwitchStateException;
+import projlab.rail.exception.InactiveTunnelException;
+import projlab.rail.exception.TrainException;
 import projlab.rail.logic.Color;
-import projlab.rail.logic.CrashException;
-import projlab.rail.logic.Locomotive;
 import projlab.rail.logic.StaticEntity;
 
 import static projlab.rail.logic.StaticEntity.ConnectionType.*;
@@ -80,13 +82,8 @@ public class ProtoTest {
         return locoId;
     }
 
-    public static void main(String[] args) {
-        ProtoTest.initProto();
-        new ProtoTest().levelTest();
-    }
-
     @Test
-    public void levelTest() {
+    public void levelTest() throws TrainException {
         int loco = proto.createLocomotive();
         int stepNumber = 0;
         try {
@@ -95,13 +92,15 @@ public class ProtoTest {
                 proto.step();
                 stepNumber++;
             }
-        } catch (CrashException e) {}
+        } catch (InactiveTunnelException ite) {
+            // running until hitting tunnel
+        }
 
         assertEquals(38, stepNumber);
     }
 
     @Test
-    public void levelTest2() {
+    public void levelTest2() throws TrainException {
         int loco = proto.createLocomotive();
         int stepNumber = 0;
         try {
@@ -112,7 +111,9 @@ public class ProtoTest {
                 proto.step();
                 stepNumber++;
             }
-        } catch (CrashException e) {}
+        } catch (IllegalSwitchStateException isse) {
+            // running until hitting 2nd switch
+        }
 
         assertEquals(64, stepNumber);
     }

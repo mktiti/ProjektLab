@@ -1,9 +1,10 @@
 package projlab.rail.logic;
 
+import projlab.rail.exception.IllegalMoveException;
+import projlab.rail.exception.IllegalSwitchStateException;
+
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 public class Switch extends StaticEntity{
     public StaticEntity input;
@@ -40,23 +41,23 @@ public class Switch extends StaticEntity{
     }
 
     @Override
-    public StaticEntity next(StaticEntity previous) throws CrashException {
+    public StaticEntity next(StaticEntity previous) throws IllegalMoveException, IllegalSwitchStateException {
         if (previous == input) {
             return isAActive ? outputA : outputB;
         } else if (previous == outputA) {
             if (isAActive) {
                 return input;
             } else {
-                throw new CrashException("Switch in bad state");
+                throw new IllegalSwitchStateException(this, true);
             }
         } else if (previous == outputB) {
             if (!isAActive) {
                 return input;
             } else {
-                throw new CrashException("Switch in bad state");
+                throw new IllegalSwitchStateException(this, false);
             }
         }
-        throw new CrashException("Coming to switch from illegal direction!");
+        throw new IllegalMoveException(this, previous);
     }
 
     @Override

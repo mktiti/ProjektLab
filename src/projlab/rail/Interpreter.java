@@ -1,7 +1,7 @@
 package projlab.rail;
 
+import projlab.rail.exception.TrainException;
 import projlab.rail.logic.Color;
-import projlab.rail.logic.CrashException;
 import projlab.rail.logic.StaticEntity;
 
 import java.io.BufferedReader;
@@ -14,7 +14,7 @@ public class Interpreter {
 
     @FunctionalInterface
     private interface Command {
-        String call(String[] params) throws CrashException, IllegalArgumentException, NumberFormatException;
+        String call(String[] params) throws TrainException, IllegalArgumentException, NumberFormatException;
     }
 
     private final Proto proto = new Proto();
@@ -45,7 +45,7 @@ public class Interpreter {
         }
     }
 
-    private String callCommand(String in) throws CrashException {
+    private String callCommand(String in) throws TrainException {
         String[] ss = in.split(" ");
         String[] params = new String[ss.length - 1];
         for (int i = 0; i < params.length; i++) {
@@ -59,7 +59,7 @@ public class Interpreter {
         throw new IllegalArgumentException("Unknown command!");
     }
 
-    private void run() throws CrashException {
+    private void run() throws TrainException {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             String line;
             System.out.print(">");
@@ -72,27 +72,27 @@ public class Interpreter {
         }
     }
 
-    private String step(String[] params) throws CrashException {
+    private String step(String[] params) throws TrainException {
         assertParams(params, 0);
         proto.step();
         return "";
     }
 
-    private String activateTunnel(String[] params) throws CrashException {
+    private String activateTunnel(String[] params) throws TrainException {
         assertParams(params, 1);
         proto.activateTunnel(Integer.parseInt(params[0]));
 
         return "Tunnel activated";
     }
 
-    private String deactivateTunnel(String[] params) throws CrashException {
+    private String deactivateTunnel(String[] params) throws TrainException {
         assertParams(params, 1);
         proto.deactivateTunnel(Integer.parseInt(params[0]));
 
         return "Tunnel deactivated";
     }
 
-    private String toggle(String[] params) throws CrashException {
+    private String toggle(String[] params) throws TrainException {
         if (params == null || params.length != 1){
             throw new IllegalArgumentException("Illegal parameters for command!");
         }
@@ -101,14 +101,14 @@ public class Interpreter {
         return "The switch has been toggled";
     }
 
-    private String launch(String[] params) throws CrashException, NumberFormatException {
+    private String launch(String[] params) throws TrainException, NumberFormatException {
         assertParams(params, 1);
         proto.launch(Integer.parseInt(params[0]));
 
         return "Train has been started";
     }
 
-    private String createRail(String[] params) throws CrashException {
+    private String createRail(String[] params) throws TrainException {
         if (params == null || !(params.length == 1 || params.length == 0)) {
             throw new IllegalArgumentException("Illegal parameters for command!");
         }
@@ -120,7 +120,7 @@ public class Interpreter {
         return "Created with id: " + proto.createRail(type);
     }
 
-    private String createStation(String[] params) throws CrashException {
+    private String createStation(String[] params) throws TrainException {
         assertParams(params, 1);
         Color color = Color.lookup(params[0]);
         if (color == null) {
@@ -130,7 +130,7 @@ public class Interpreter {
         }
     }
 
-    private String createCar(String[] params) throws CrashException {
+    private String createCar(String[] params) throws TrainException {
         if (params == null || !(params.length == 1 || params.length == 0)) {
             throw new IllegalArgumentException("Illegal parameters for command!");
         }
@@ -148,18 +148,18 @@ public class Interpreter {
 
     }
 
-    private String createLocomotive(String[] params) throws CrashException {
+    private String createLocomotive(String[] params) throws TrainException {
         assertParams(params, 0);
         return "Locomotive created, id: " + proto.createLocomotive();
     }
 
-    private String connectToTrain(String[] params) throws CrashException, NumberFormatException {
+    private String connectToTrain(String[] params) throws TrainException, NumberFormatException {
         assertParams(params, 2);
         proto.connectToTrain(Integer.parseInt(params[0]), Integer.parseInt(params[1]));
         return "Connected";
     }
 
-    private String connect(String[] params) throws CrashException {
+    private String connect(String[] params) throws TrainException {
         assertParams(params, 4);
         try{
             proto.connect(Integer.parseInt(params[0]),
@@ -173,7 +173,7 @@ public class Interpreter {
         return params[0] + " and " + params[2] + " connected";
     }
 
-    private String addPerson(String[] params) throws CrashException, IllegalArgumentException {
+    private String addPerson(String[] params) throws TrainException, IllegalArgumentException {
         if (params == null || params.length > 2){
             throw new IllegalArgumentException("Illegal parameters for command!");
         }
@@ -195,8 +195,8 @@ public class Interpreter {
     public static void main(String[] args) {
         try {
             new Interpreter().run();
-        } catch (CrashException ce) {
-            System.out.print("Crash exception! - " + ce.getMessage());
+        } catch (TrainException te) {
+            te.printStackTrace();
         }
     }
 

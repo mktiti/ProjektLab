@@ -1,5 +1,6 @@
 package projlab.rail;
 
+import projlab.rail.exception.TrainException;
 import projlab.rail.logic.*;
 
 import java.util.*;
@@ -23,7 +24,7 @@ public class Proto {
 
     private int movingCounter = 0;
 
-    class MovingStore<E extends MovingEntity> {
+    public class MovingStore<E extends MovingEntity> {
         final Map<Integer, E> store = new HashMap<>();
 
         E get(int id) throws IllegalArgumentException {
@@ -45,7 +46,7 @@ public class Proto {
         }
     }
 
-    class StaticStore<E extends StaticEntity> {
+    public class StaticStore<E extends StaticEntity> {
         final Map<Integer, E> store = new HashMap<>();
 
         E get(int id) throws IllegalArgumentException {
@@ -82,7 +83,7 @@ public class Proto {
 
     private final GameEngine engine = new GameEngine();
 
-    public void step() throws CrashException {
+    public void step() throws TrainException {
         engine.step();
     }
 
@@ -98,7 +99,7 @@ public class Proto {
         switches.get(switchId).toggle();
     }
 
-    public void launch(int trainId) throws IllegalArgumentException, CrashException {
+    public void launch(int trainId) throws IllegalArgumentException, TrainException {
         Locomotive loc = locomotives.get(trainId);
 
         loc.setPosition(engine.entryPoint, engine.entrySecond);
@@ -184,7 +185,7 @@ public class Proto {
         stations.get(stationId).addPerson(color);
     }
 
-    public static void main(String[] args) throws CrashException {
+    public static void main(String[] args) throws TrainException {
         Proto p = new Proto();
 
         int lId = p.createLocomotive();
