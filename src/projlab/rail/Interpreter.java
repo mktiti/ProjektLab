@@ -120,7 +120,13 @@ public class Interpreter {
     }
 
     private String createStation(String[] params) throws CrashException {
-        return "";
+        assertParams(params, 1);
+        Color color = Color.lookup(params[0]);
+        if (color == null) {
+            return "Invalid color!";
+        } else {
+            return "Station created with id: " + proto.createStation(color);
+        }
     }
 
     private String createCar(String[] params) throws CrashException {
@@ -146,12 +152,10 @@ public class Interpreter {
         return "Locomotive created, id: " + proto.createLocomotive();
     }
 
-    private String connectToTrain(String[] params) throws CrashException {
+    private String connectToTrain(String[] params) throws CrashException, NumberFormatException {
         assertParams(params, 2);
-
-
-
-        return "";
+        proto.connectToTrain(Integer.parseInt(params[0]), Integer.parseInt(params[1]));
+        return "Connected";
     }
 
     private String connect(String[] params) throws CrashException {
