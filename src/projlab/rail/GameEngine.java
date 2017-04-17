@@ -38,4 +38,8 @@ public class GameEngine {
         System.out.println("GameEngine.setLast called");
     }
 
+    public void buildTunnel(Tunnel start, Tunnel end) {
+        System.out.println("GameEngine.buildTunnel called");
+    }
+
 }

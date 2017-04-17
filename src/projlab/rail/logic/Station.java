@@ -6,6 +6,6 @@ public class Station extends Rail{
     @Override
     public Color getColor(){
         System.out.println("Station.getColor called");
-        return color;
+        return null;
     }
 }
