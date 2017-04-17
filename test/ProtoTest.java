@@ -150,6 +150,7 @@ public class ProtoTest {
                 stepNumber++;
             }
         });
+        //assertEquals("Train crash!", exception.getMessage());
     }
 
     @Test
