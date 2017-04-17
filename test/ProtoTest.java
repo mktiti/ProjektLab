@@ -19,6 +19,7 @@ public class ProtoTest {
 
     private static int tunnelLeft;
     private static int tunnelRight1;
+
     private static int tunnelRight2;
 
     @BeforeAll
