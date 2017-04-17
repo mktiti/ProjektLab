@@ -88,8 +88,14 @@ public class Interpreter {
         return "";
     }
 
-    private String launch(String[] params) throws CrashException {
-        return "";
+    private String launch(String[] params) throws CrashException, NumberFormatException {
+        if (params == null || params.length != 1) {
+            throw new IllegalArgumentException("Illegal parameters for command!");
+        }
+
+        proto.launch(Integer.parseInt(params[0]));
+
+        return "Train has been started";
     }
 
     private String createRail(String[] params) throws CrashException {
