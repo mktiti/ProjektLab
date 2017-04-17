@@ -26,5 +26,4 @@ public class Station extends Rail{
         return color;
     }
 
-
 }

@@ -6,7 +6,20 @@ import java.util.*;
 
 public class Proto {
 
-    public enum RailType { PLAIN, CROSS, SWITCH, TUNNEL }
+    public enum RailType {
+        PLAIN, CROSS, SWITCH, TUNNEL;
+
+        public static RailType lookup(String in, RailType defaultType) {
+            if (in == null || (in = in.trim()).length() == 0) {
+                return defaultType;
+            }
+            try {
+                return valueOf(in.toUpperCase());
+            } catch (IllegalArgumentException iea) {
+                return defaultType;
+            }
+        }
+    }
 
     private class StaticStore<E extends StaticEntity> {
         private final Map<Integer, E> store = new HashMap<>();
