@@ -170,8 +170,8 @@ public class ProtoTest {
         int train2 = createSampleTrain();
         //55 össz, 27-nél indít a második
 
-
-        Throwable exception = expectThrows(CrashException.class, () -> {
+        boolean result = false;
+        try{
             int stepNumber = 0;
             proto.activateTunnel(tunnelLeft);
             proto.activateTunnel(tunnelRight1);
@@ -183,8 +183,11 @@ public class ProtoTest {
                 proto.step();
                 stepNumber++;
             }
-        });
-        //assertEquals("Train crash!", exception.getMessage());
+        }catch (TrainException e) {
+            e.printStackTrace();
+            result = true;
+        }
+        assertEquals(true,result );
     }
 
     @Test
