@@ -80,7 +80,7 @@ public class ProtoTest {
     }
 
     @Test
-    public void levelTest() throws TrainException {
+    public void obstacleCrashTest() throws TrainException {
         int loco = proto.createLocomotive();
         int stepNumber = 0;
         try {
@@ -188,11 +188,6 @@ public class ProtoTest {
     }
 
     @Test
-    public void obstacleCrashTest(){
-
-    }
-
-    @Test
     public void toggleCrashTest(){
 
     }
@@ -219,12 +214,28 @@ public class ProtoTest {
 
     @Test
     public void tunnelCreationTest(){
+        Tunnel t1 = proto.tunnels.get(tunnelLeft);
+        Tunnel t2 = proto.tunnels.get(tunnelRight1);
 
+        proto.activateTunnel(tunnelLeft);
+        proto.activateTunnel(tunnelRight1);
+
+        assertNotEquals(null, t1.hiddenConnection);
+        assertNotEquals(null, t2.hiddenConnection);
     }
 
     @Test
     public void tunnelDeletionTest(){
+        Tunnel t1 = proto.tunnels.get(tunnelLeft);
+        Tunnel t2 = proto.tunnels.get(tunnelRight1);
 
+        proto.activateTunnel(tunnelLeft);
+        proto.activateTunnel(tunnelRight1);
+
+        proto.deactivateTunnel(tunnelLeft);
+
+        assertEquals(null, t1.hiddenConnection);
+        assertEquals(null, t2.hiddenConnection);
     }
 
     @Test
