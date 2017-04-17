@@ -21,6 +21,30 @@ public class Proto {
         }
     }
 
+    private int movingCounter = 0;
+
+    class MovingStore<E extends MovingEntity> {
+        final Map<Integer, E> store = new HashMap<>();
+
+        E get(int id) throws IllegalArgumentException {
+            E ret = store.get(id);
+            if (ret != null) {
+                return ret;
+            }
+            throw new IllegalArgumentException("Illegal MovingEntity id!");
+        }
+
+        private int add(E entity) {
+            int id = movingCounter++;
+            store.put(id, entity);
+            return id;
+        }
+
+        boolean contains(int id) {
+            return store.get(id) != null;
+        }
+    }
+
     class StaticStore<E extends StaticEntity> {
         final Map<Integer, E> store = new HashMap<>();
 
@@ -45,8 +69,8 @@ public class Proto {
         }
     }
 
-    final List<Locomotive> locomotives = new LinkedList<>();
-    final List<Car> cars = new LinkedList<>();
+    final MovingStore<Locomotive> locomotives = new MovingStore<>();
+    final MovingStore<Car> cars = new MovingStore<>();
 
     final List<StaticEntity> statics = new ArrayList<>(100);
 
@@ -108,27 +132,26 @@ public class Proto {
     }
 
     public int createCar(Color color) {
-        cars.add(new Car(color));
-        return cars.size() - 1;
+        return cars.add(new Car(color));
     }
 
     public int createLocomotive() {
         Locomotive locomotive = new Locomotive();
-        locomotives.add(locomotive);
+        int id = locomotives.add(locomotive);
         engine.locos.add(locomotive);
-        return locomotives.size() - 1;
+        return id;
     }
 
     public void connectToTrain(int trainId, int carId) throws IllegalArgumentException {
-        if (trainId < 0 || trainId >= locomotives.size() || carId < 0 || carId >= cars.size()) {
-            throw new IllegalArgumentException("Invalid entity id");
+        MovingEntity host;
+
+        if (locomotives.contains(trainId)) {
+            host = locomotives.get(trainId);
+        } else {
+            host = cars.get(trainId);
         }
 
-        MovingEntity temp = locomotives.get(trainId);
-        while (temp.next != null) {
-            temp = temp.next;
-        }
-        temp.next = cars.get(carId);
+        host.next = cars.get(carId);
     }
 
     public void connect(int aId, StaticEntity.ConnectionType aConn, int bId, StaticEntity.ConnectionType bConn) throws IllegalArgumentException {
@@ -154,10 +177,6 @@ public class Proto {
     }
 
     public void addPerson(int carId) {
-        if (carId < 0 || carId >= cars.size()) {
-            throw new IllegalArgumentException("Invalid car id");
-        }
-
         cars.get(carId).hasPassengers = true;
     }
 
