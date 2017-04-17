@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import projlab.rail.GameState;
 import projlab.rail.Proto;
 import projlab.rail.exception.*;
 import projlab.rail.logic.*;
@@ -91,6 +92,18 @@ public class StationTest {
     @Test
     public void boardTest(){
 
+    }
+
+    @Test
+    public void victoryTest() throws TrainException {
+        int loco = createTrain(true);
+        Car firstCar = proto.locomotives.get(loco).next;
+        proto.launch(loco);
+        for (int i = 0; i < 11; i++) {
+            assertEquals(true, firstCar.hasPassengers);
+            proto.step();
+        }
+        assertEquals(GameState.VICTORY, proto.engine.state);
     }
 
 }

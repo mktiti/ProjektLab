@@ -97,7 +97,7 @@ public class GameEngine {
                 if (l.currentPosition == null)
                     continue;
                 if(l.move()){
-                    removeTrain(l);
+
                 }
             }*/
         } catch (TrainException te){

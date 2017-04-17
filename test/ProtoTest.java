@@ -202,11 +202,6 @@ public class ProtoTest {
     }
 
     @Test
-    public void victoryTest(){
-
-    }
-
-    @Test
     public void tunnelCreationTest(){
         Tunnel t1 = proto.tunnels.get(tunnelLeft);
         Tunnel t2 = proto.tunnels.get(tunnelRight1);
