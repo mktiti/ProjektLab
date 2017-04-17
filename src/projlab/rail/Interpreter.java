@@ -77,11 +77,17 @@ public class Interpreter {
     }
 
     private String activateTunnel(String[] params) throws CrashException {
-        return "";
+        assertParams(params, 1);
+        proto.activateTunnel(Integer.parseInt(params[0]));
+
+        return "Tunnel activated";
     }
 
     private String deactivateTunnel(String[] params) throws CrashException {
-        return "";
+        assertParams(params, 1);
+        proto.deactivateTunnel(Integer.parseInt(params[0]));
+
+        return "Tunnel deactivated";
     }
 
     private String toggle(String[] params) throws CrashException {
@@ -89,10 +95,7 @@ public class Interpreter {
     }
 
     private String launch(String[] params) throws CrashException, NumberFormatException {
-        if (params == null || params.length != 1) {
-            throw new IllegalArgumentException("Illegal parameters for command!");
-        }
-
+        assertParams(params, 1);
         proto.launch(Integer.parseInt(params[0]));
 
         return "Train has been started";
