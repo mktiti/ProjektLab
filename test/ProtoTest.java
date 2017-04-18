@@ -235,9 +235,7 @@ public class ProtoTest {
             for (int i = 0; i < 12; i++) {
                 proto.step();
             }
-        } catch (TrainException e){
-            e.printStackTrace();
-        }
+        } catch (TrainException e) {}
         assertEquals(GameState.DEFEAT,proto.engine.state);
     }
 

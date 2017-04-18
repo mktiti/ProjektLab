@@ -69,7 +69,6 @@ public class StationTest {
         assertEquals(false, firstCar.hasPassengers);
     }
 
-    // TODO
     @Test
     public void unBoardFailedTest() throws TrainException {
         int loco = createTrain(true);
@@ -82,7 +81,7 @@ public class StationTest {
         secondCar.next = secondCar.next.next;
 
         proto.launch(loco);
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 14; i++) {
             assertEquals(false, firstCar.hasPassengers);
             assertEquals(true, secondCar.hasPassengers);
             proto.step();
