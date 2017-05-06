@@ -2,6 +2,7 @@ package projlab.rail.logic;
 
 import projlab.rail.exception.IllegalMoveException;
 import projlab.rail.exception.InactiveTunnelException;
+import projlab.rail.ui.Direction;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -18,7 +19,11 @@ public class Tunnel extends StaticEntity {
     /** A list of all connections */
     private final ArrayList<StaticEntity> conns = new ArrayList<>(3);
 
-    public Tunnel() {
+    public final Direction visDire;
+
+    public Tunnel(Direction visDire) {
+        this.visDire = visDire;
+
         for (int i = 0; i < 2; i++) {
             conns.add(null);
         }
