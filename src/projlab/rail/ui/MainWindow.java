@@ -1,21 +1,50 @@
 package projlab.rail.ui;
 
+import projlab.rail.logic.CrossRail;
 import projlab.rail.logic.Rail;
+import projlab.rail.logic.Switch;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class MainWindow extends JFrame {
 
-    public MainWindow() {
+    private static final int WINDOW_SIZE = 1000;
+
+    private final GraphicsEngine graphicsEngine = new GraphicsEngine();
+
+    private static class BackgroundPanel extends JComponent {
+        private BufferedImage backgroundImage;
+
+        private BackgroundPanel(BufferedImage backgroundImage) {
+            this.backgroundImage = backgroundImage;
+            setPreferredSize(new Dimension(WINDOW_SIZE, WINDOW_SIZE));
+            setSize(WINDOW_SIZE, WINDOW_SIZE);
+            setLayout(null);
+        }
+
+        @Override
+        protected void paintComponent(Graphics graphics) {
+            graphics.drawImage(backgroundImage, 0, 0, this);
+        }
+    }
+
+    private MainWindow() {
+        init(0);
+    }
+
+    private void init(int map) {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(500, 500);
+        setSize(WINDOW_SIZE, WINDOW_SIZE);
+        setPreferredSize(new Dimension(WINDOW_SIZE, WINDOW_SIZE));
         setLocationRelativeTo(null);
-        Rail r = new Rail(Direction.EAST, Direction.SOUTH);
-        EntityPanel ep = new EntityPanel(r);
         setLayout(null);
-        ep.update();
-        add(ep);
+        setResizable(false);
+
+        add(new BackgroundPanel(ResourceManager.getMap(map)));
+
+        pack();
         setVisible(true);
     }
 
