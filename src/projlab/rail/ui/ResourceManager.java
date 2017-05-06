@@ -14,12 +14,15 @@ public class ResourceManager {
 
     private static final BufferedImage RAIL_STRAIGHT_VERT;
     private static final BufferedImage RAIL_STRAIGHT_HORI;
-    private static final BufferedImage RAIL_CURVE;
+    private static final BufferedImage[] RAIL_CURVES = new BufferedImage[4];
 
     static {
         RAIL_STRAIGHT_HORI = read("/rail_straight.png");
         RAIL_STRAIGHT_VERT = rotate(RAIL_STRAIGHT_HORI, 1);
-        RAIL_CURVE = read("/rail_curve.png");
+        RAIL_CURVES[0] = read("/rail_curve.png");
+        for (int i = 1; i < 4; i++) {
+            RAIL_CURVES[i] = rotate(RAIL_CURVES[0], i);
+        }
     }
 
     private static BufferedImage read(String path) {
@@ -60,10 +63,9 @@ public class ResourceManager {
             return RAIL_STRAIGHT_HORI;
         } else if (aDir == NORTH && bDir == SOUTH) {
             return RAIL_STRAIGHT_VERT;
-        } else if (aDir == EAST) {
-            return
+        } else {
+            return RAIL_CURVES[aDir.value];
         }
-        return RAIL_CURVE.;
     }
 
     public static BufferedImage getSwitch(Direction inDir, Direction aDir, Direction bDir, boolean isAActive) {
