@@ -1,8 +1,13 @@
 package projlab.rail.logic;
 
 import projlab.rail.exception.IllegalMoveException;
+import projlab.rail.ui.Direction;
+import projlab.rail.ui.EntityPanel;
+import projlab.rail.ui.ResourceManager;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /** Represents a simple rail elem */
 public class Rail extends StaticEntity {
@@ -13,7 +18,12 @@ public class Rail extends StaticEntity {
     /** A list of all connections */
     private List<StaticEntity> connections = new ArrayList<>(2);
 
-    public Rail(){
+    private final Direction aDir;
+    private final Direction bDir;
+
+    public Rail(Direction aDir, Direction bDir){
+        this.aDir = aDir;
+        this.bDir = bDir;
         connections.add(null);
         connections.add(null);
     }
@@ -57,5 +67,14 @@ public class Rail extends StaticEntity {
             default:
                 throw new IllegalArgumentException("Illegal connection type");
         }
+    }
+
+    @Override
+    public Image image() {
+        Image image = ResourceManager.getRail(aDir, bDir);
+        if (vehicle != null) {
+            //TODO
+        }
+        return image;
     }
 }

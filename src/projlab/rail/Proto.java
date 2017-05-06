@@ -160,7 +160,7 @@ public class Proto {
             case TUNNEL:
                 return tunnels.add(new Tunnel());
             default:
-                return rails.add(new Rail());
+                return rails.add(new Rail(aDir, bDir));
         }
     }
 

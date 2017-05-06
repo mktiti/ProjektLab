@@ -12,6 +12,7 @@ public class Station extends Rail{
     private final Set<Color> people = new HashSet<>(Color.values().length);
 
     public Station(Color color) {
+        super(aDir, bDir);
         this.color = color;
     }
 
