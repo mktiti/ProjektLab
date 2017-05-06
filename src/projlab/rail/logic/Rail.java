@@ -6,6 +6,7 @@ import projlab.rail.ui.EntityPanel;
 import projlab.rail.ui.ResourceManager;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.*;
 import java.util.List;
 
@@ -70,10 +71,17 @@ public class Rail extends StaticEntity {
     }
 
     @Override
-    public Image image() {
-        Image image = ResourceManager.getRail(aDir, bDir);
+    public BufferedImage image() {
+        BufferedImage image = ResourceManager.getRail(aDir, bDir);
         if (vehicle != null) {
-            //TODO
+            BufferedImage vehicleImage = vehicle.image();
+            int w = Math.max(image.getWidth(), image.getWidth());
+            int h = Math.max(image.getHeight(), vehicleImage.getHeight());
+            BufferedImage combined = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+            Graphics g = combined.getGraphics();
+            g.drawImage(image, 0, 0, null);
+            g.drawImage(vehicleImage, 0, 0, null);
+            return combined;
         }
         return image;
     }

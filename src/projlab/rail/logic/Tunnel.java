@@ -19,10 +19,10 @@ public class Tunnel extends StaticEntity {
     /** A list of all connections */
     private final ArrayList<StaticEntity> conns = new ArrayList<>(3);
 
-    public final Direction visDire;
+    public final Direction visDir;
 
     public Tunnel(Direction visDire) {
-        this.visDire = visDire;
+        this.visDir = visDire;
 
         for (int i = 0; i < 2; i++) {
             conns.add(null);

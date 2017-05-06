@@ -2,6 +2,7 @@ package projlab.rail.logic;
 
 import projlab.rail.exception.IllegalMoveException;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,5 +83,10 @@ public class CrossRail extends StaticEntity {
             default:
                 throw new IllegalArgumentException("Illegal connection type");
         }
+    }
+
+    @Override
+    public BufferedImage image() {
+        return null;
     }
 }

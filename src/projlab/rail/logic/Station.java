@@ -1,5 +1,7 @@
 package projlab.rail.logic;
 
+import projlab.rail.ui.Direction;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,7 +13,7 @@ public class Station extends Rail{
     /** The people waiting at the station */
     private final Set<Color> people = new HashSet<>(Color.values().length);
 
-    public Station(Color color) {
+    public Station(Direction aDir, Direction bDir, Color color) {
         super(aDir, bDir);
         this.color = color;
     }
