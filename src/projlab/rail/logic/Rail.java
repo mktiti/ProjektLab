@@ -73,6 +73,8 @@ public class Rail extends StaticEntity {
 
     @Override
     public BufferedImage image() {
+        if (isHidden()) return null;
+
         BufferedImage image = ResourceManager.getRail(aDir, bDir);
         if (vehicle != null) {
             BufferedImage vehicleImage = vehicle.image();
