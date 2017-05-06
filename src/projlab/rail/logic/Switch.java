@@ -2,6 +2,7 @@ package projlab.rail.logic;
 
 import projlab.rail.exception.IllegalMoveException;
 import projlab.rail.exception.IllegalSwitchStateException;
+import projlab.rail.ui.Direction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,14 @@ public class Switch extends StaticEntity{
     /** A list of all the connections */
     private final ArrayList<StaticEntity> conns = new ArrayList<>(3);
 
-    public Switch() {
+    private final Direction inDir;
+    private final Direction aDir;
+    private final Direction bDir;
+
+    public Switch(Direction inDir, Direction aDir, Direction bDir) {
+        this.inDir = inDir;
+        this.aDir = aDir;
+        this.bDir = bDir;
         for (int i = 0; i < 3; i++) {
             conns.add(null);
         }
