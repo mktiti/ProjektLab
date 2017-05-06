@@ -27,6 +27,7 @@ public class EntityPanel {
         this.mainPanel = mainPanel;
         this.x = x;
         this.y = y;
+        update();
     }
 
     public void update() {

@@ -1,20 +1,25 @@
 package projlab.rail.ui;
 
+import jdk.internal.org.xml.sax.SAXException;
+import projlab.rail.GameEngine;
 import projlab.rail.logic.CrossRail;
 import projlab.rail.logic.Rail;
 import projlab.rail.logic.Switch;
 
 import javax.swing.*;
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class MainWindow extends JFrame {
 
     public static final int WINDOW_SIZE = 1000;
 
     private final GraphicsEngine graphicsEngine = new GraphicsEngine(this);
+    private GameEngine gameEngine = new GameEngine();
 
     private static class BackgroundPanel extends JComponent {
         private BufferedImage backgroundImage;
@@ -47,12 +52,19 @@ public class MainWindow extends JFrame {
         setLayout(null);
         setResizable(false);
 
+        try {
+            gameEngine.load(0);
+        } catch (ParserConfigurationException | IOException | org.xml.sax.SAXException e) {
+            e.printStackTrace();
+        }
+
         pack();
-        graphicsEngine.init(null,null,0,0,null,0);
+        graphicsEngine.init(gameEngine.entryPoint,null,10,10,gameEngine,0);
         setContentPane(graphicsEngine);
         setVisible(true);
         repaint();
     }
+
 
     public static void main(String[] args) {
         new MainWindow();

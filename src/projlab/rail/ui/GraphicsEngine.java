@@ -57,6 +57,7 @@ public class GraphicsEngine extends JPanel {
             entities[i][j] = new EntityPanel(active, engine, j,i, this);
 
         for(Pair<StaticEntity,Direction> pair: active.getConnections()){
+            if(pair == null) return;
             if(pair.getKey() == null || pair.getValue() == null)
                 continue;
             if(processedElements.contains(pair.getKey()))
@@ -77,8 +78,10 @@ public class GraphicsEngine extends JPanel {
             if(entry != null) {
                 StaticEntity current = entry.next(engine.entrySecond);
                 initPanel(startX, startY, processedElements, current);
-                for(Pair<Tunnel,Point> p: tunnels)
-                    initPanel(p.getValue().GetY(), p.getValue().GetX(), processedElements,p.getKey());
+                if(tunnels != null) {
+                    for (Pair<Tunnel, Point> p : tunnels)
+                        initPanel(p.getValue().GetY(), p.getValue().GetX(), processedElements, p.getKey());
+                }
             }
         } catch (IllegalMoveException e) {
             e.printStackTrace();
