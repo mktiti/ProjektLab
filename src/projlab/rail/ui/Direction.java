@@ -24,4 +24,8 @@ public enum Direction {
     public Direction rotateCCW(){
         return this == WEST ? SOUTH : this == SOUTH ? EAST : this == EAST ? NORTH : WEST;
     }
+
+    public Direction invert(){
+        return this == WEST ? EAST : this == EAST ? WEST : this == NORTH ? SOUTH : NORTH;
+    }
 }

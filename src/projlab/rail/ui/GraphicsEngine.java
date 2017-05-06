@@ -48,8 +48,7 @@ public class GraphicsEngine extends JPanel {
 
     private void initPanel(int i, int j, ArrayList<StaticEntity> processedElements, StaticEntity active){
         processedElements.add(active);
-
-        if(active.getClass() == Tunnel.class)
+        if(active.getClass()  == Tunnel.class)
             entities[i][j] = new TunnelPanel((Tunnel)active, engine,j,i,this);
         else if(active.getClass() == Switch.class)
             entities[i][j] = new SwitchPanel((Switch)active,engine,j,i,this);
