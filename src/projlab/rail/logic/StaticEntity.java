@@ -1,6 +1,8 @@
 package projlab.rail.logic;
 
+import javafx.util.Pair;
 import projlab.rail.exception.TrainException;
+import projlab.rail.ui.Direction;
 import projlab.rail.ui.EntityPanel;
 
 import javax.swing.*;
@@ -21,7 +23,7 @@ public abstract class StaticEntity {
      *   All of the entity's connections. (Used for drawings and traversing)
      *   return all of the entity's connections
      */
-    public abstract List<StaticEntity> getConnections();
+    public abstract List<Pair<StaticEntity,Direction>> getConnections();
 
     /**
      * The color of the entity, if it has any (is station).

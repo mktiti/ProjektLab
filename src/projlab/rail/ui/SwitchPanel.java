@@ -1,5 +1,6 @@
 package projlab.rail.ui;
 
+import projlab.rail.GameEngine;
 import projlab.rail.logic.Switch;
 
 import java.awt.event.MouseEvent;
@@ -7,8 +8,8 @@ import java.awt.event.MouseListener;
 
 public class SwitchPanel extends EntityPanel implements MouseListener {
 
-    public SwitchPanel(Switch entity) {
-        super(entity);
+    public SwitchPanel(Switch entity, GameEngine engine) {
+        super(entity, engine);
         addMouseListener(this);
     }
 

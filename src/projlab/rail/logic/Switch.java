@@ -1,5 +1,6 @@
 package projlab.rail.logic;
 
+import javafx.util.Pair;
 import projlab.rail.exception.IllegalMoveException;
 import projlab.rail.exception.IllegalSwitchStateException;
 import projlab.rail.ui.Direction;
@@ -20,7 +21,7 @@ public class Switch extends StaticEntity {
     public boolean isAActive = true;
 
     /** A list of all the connections */
-    private final ArrayList<StaticEntity> conns = new ArrayList<>(3);
+    private final ArrayList<Pair<StaticEntity,Direction>> conns = new ArrayList<>(3);
 
     private final Direction inDir;
 
@@ -33,22 +34,22 @@ public class Switch extends StaticEntity {
 
     /** connects A connection */
     public void connectA(StaticEntity a) {
-        conns.set(1, a);
+        conns.set(1, new Pair<>(a,inDir.rotateCW()));
         outputA = a;
     }
     /** connects B connection */
     public void connectB(StaticEntity b) {
-        conns.set(2, b);
+        conns.set(2, new Pair<>(b, inDir.rotateCCW()));
         outputB = b;
     }
     /** connects input */
     public void connectIn(StaticEntity in) {
-        conns.set(0, in);
+        conns.set(0, new Pair<>(in, inDir));
         input = in;
     }
 
     @Override
-    public List<StaticEntity> getConnections() {
+    public List<Pair<StaticEntity,Direction>> getConnections() {
         return conns;
     }
 

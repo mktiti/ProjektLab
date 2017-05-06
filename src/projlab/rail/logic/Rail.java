@@ -1,5 +1,6 @@
 package projlab.rail.logic;
 
+import javafx.util.Pair;
 import projlab.rail.exception.IllegalMoveException;
 import projlab.rail.ui.Direction;
 import projlab.rail.ui.EntityPanel;
@@ -17,7 +18,7 @@ public class Rail extends StaticEntity {
     /** Connection B */
     private StaticEntity connectionB;
     /** A list of all connections */
-    private List<StaticEntity> connections = new ArrayList<>(2);
+    private List<Pair<StaticEntity,Direction>> connections = new ArrayList<>(2);
 
     private final Direction aDir;
     private final Direction bDir;
@@ -31,29 +32,29 @@ public class Rail extends StaticEntity {
 
     /** connects A connection */
     public void connectA(StaticEntity a) {
-        connections.set(0, a);
+        connections.set(0, new Pair<>(a,aDir));
         connectionA = a;
     }
     /** connects B connection */
     public void connectB(StaticEntity b) {
-        connections.set(1, b);
+        connections.set(1, new Pair<>(b,bDir));
         connectionB = b;
     }
 
     @Override
-    public List<StaticEntity> getConnections() {
+    public List<Pair<StaticEntity,Direction>> getConnections() {
         return connections;
     }
 
     @Override
     public StaticEntity next(StaticEntity previous) throws IllegalMoveException {
-       if (previous == connectionB){
-           return connectionA;
-       } else if (previous == connectionA) {
-           return connectionB;
-       } else {
-           throw new IllegalMoveException(this, previous);
-       }
+        if (previous == connectionB){
+            return connectionA;
+        } else if (previous == connectionA) {
+            return connectionB;
+        } else {
+            throw new IllegalMoveException(this, previous);
+        }
     }
 
     @Override
