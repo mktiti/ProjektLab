@@ -1,7 +1,8 @@
 package projlab.rail.logic;
 
+import javafx.util.Pair;
 import projlab.rail.exception.IllegalMoveException;
-import projlab.rail.ui.ResourceManager;
+import projlab.rail.ui.Direction;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class CrossRail extends StaticEntity {
     /** Y connection, connected to X */
     private StaticEntity connectionY;
     /** A list of all connections */
-    private List<StaticEntity> connections = new ArrayList<>(4);
+    private List<Pair<StaticEntity,Direction>> connections = new ArrayList<>(4);
 
     public CrossRail() {
         for (int i = 0; i < 4; i++) {
@@ -27,27 +28,27 @@ public class CrossRail extends StaticEntity {
 
     /** connects A connection */
     public void connectA(StaticEntity a) {
-        connections.set(0, a);
+        connections.set(0, new Pair<>(a,Direction.WEST));
         connectionA = a;
     }
     /** connects B connection */
     public void connectB(StaticEntity b) {
-        connections.set(1, b);
+        connections.set(1, new Pair<>(b,Direction.EAST));
         connectionB = b;
     }
     /** connects X connection */
     public void connectX(StaticEntity x) {
-        connections.set(2, x);
+        connections.set(2, new Pair<>(x,Direction.NORTH));
         connectionX = x;
     }
     /** connects Y connection */
     public void connectY(StaticEntity y) {
-        connections.set(3, y);
+        connections.set(3, new Pair<>(y,Direction.SOUTH));
         connectionY = y;
     }
 
     @Override
-    public List<StaticEntity> getConnections() {
+    public List<Pair<StaticEntity,Direction>> getConnections() {
         return connections;
     }
 
@@ -88,6 +89,6 @@ public class CrossRail extends StaticEntity {
 
     @Override
     public BufferedImage image() {
-        return ResourceManager.getCrossRail();
+        return null;
     }
 }
