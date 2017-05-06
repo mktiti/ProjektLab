@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import static projlab.rail.ui.Direction.*;
 
@@ -20,6 +22,9 @@ public class ResourceManager {
     private static final BufferedImage CROSS_RAIL;
     private static final BufferedImage[] SWITCH_AS = new BufferedImage[4];
     private static final BufferedImage[] SWITCH_BS = new BufferedImage[4];
+
+    private static final Map<Color, BufferedImage[]> CARS = new HashMap<>();
+    private static final BufferedImage[] LOCOMOTIVES = new BufferedImage[4];
 
     static {
         for (int i = 0; i < 5; i++) {
@@ -44,6 +49,27 @@ public class ResourceManager {
         for (int i = 1; i < 4; i++) {
             SWITCH_BS[i] = rotate(SWITCH_BS[0], i);
         }
+
+        LOCOMOTIVES[0] = read("/train/locomotive.png");
+        for (int i = 1; i < 4; i++) {
+            LOCOMOTIVES[i] = rotate(LOCOMOTIVES[0], i);
+        }
+
+        for (Color c : Color.values()) {
+            BufferedImage[] cars = new BufferedImage[4];
+            cars[0] = read("/train/" + c.name().toLowerCase() + ".png");
+            for (int i = 1; i < 4; i++) {
+                cars[i] = rotate(cars[0], i);
+            }
+            CARS.put(c, cars);
+        }
+
+        BufferedImage[] cars = new BufferedImage[4];
+        cars[0] = read("/train/coal.png");
+        for (int i = 1; i < 4; i++) {
+            cars[i] = rotate(cars[0], i);
+        }
+        CARS.put(null, cars);
     }
 
     private static BufferedImage read(String path) {

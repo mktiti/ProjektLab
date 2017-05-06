@@ -15,8 +15,6 @@ public class GraphicsEngine {
     private EntityPanel[][] entities;
     private GameEngine engine;
 
-
-
     private void initPanel(int i, int j, ArrayList<StaticEntity> processedElements, StaticEntity active){
         processedElements.add(active);
 
@@ -53,7 +51,6 @@ public class GraphicsEngine {
         }
 
     }
-
 
     public void draw(){
         for(int i = 0; i < SIZE; i++){

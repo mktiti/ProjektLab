@@ -1,0 +1,46 @@
+<map>
+    <entry x="0" y="0" />
+    <entities>
+        <rail id="1">
+            <dir-a>WEST</dir-a>
+            <dir-b>EAST</dir-b>
+            <A>2</A>
+            <B>0</B>
+        </rail>
+        <rail id="2">
+            <dir-a>WEST</dir-a>
+            <dir-b>EAST</dir-b>
+            <A>3</A>
+            <B>1</B>
+        </rail>
+        <rail id="3">
+            <dir-a>WEST</dir-a>
+            <dir-b>EAST</dir-b>
+            <A>4</A>
+            <B>2</B>
+        </rail>
+        <rail id="4">
+            <dir-a>WEST</dir-a>
+            <dir-b>SOUTH</dir-b>
+            <A>5</A>
+            <B>3</B>
+        </rail>
+        <rail id="5">
+            <dir-a>NORTH</dir-a>
+            <dir-b>EAST</dir-b>
+            <A>6</A>
+            <B>4</B>
+        </rail>
+        <rail id="6">
+            <dir-a>WEST</dir-a>
+            <dir-b>EAST</dir-b>
+            <A>7</A>
+            <B>5</B>
+        </rail>
+        <station id="7" color="RED">
+            <dir-a>WEST</dir-a>
+            <dir-b>EAST</dir-b>
+            <B>6</B>
+        </station>
+    </entities>
+</map>
