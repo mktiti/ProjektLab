@@ -5,7 +5,7 @@ import projlab.rail.ui.Direction;
 public class HiddenRail extends Rail {
 
     public HiddenRail() {
-        super(Direction.EAST, Direction.WEST);
+        super(Direction.WEST, Direction.EAST);
     }
 
     /** Should not be drawn */

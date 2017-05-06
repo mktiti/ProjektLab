@@ -110,7 +110,7 @@ public class ResourceManager {
             bDir = temp;
         }
 
-        if (aDir == EAST && bDir == WEST) {
+        if (aDir == WEST && bDir == EAST) {
             return RAIL_STRAIGHT_HORI;
         } else if (aDir == NORTH && bDir == SOUTH) {
             return RAIL_STRAIGHT_VERT;
