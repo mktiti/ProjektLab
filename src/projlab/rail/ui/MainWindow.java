@@ -11,7 +11,7 @@ public class MainWindow extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(500, 500);
         setLocationRelativeTo(null);
-        Rail r = new Rail(Direction.EAST, Direction.WEST);
+        Rail r = new Rail(Direction.EAST, Direction.SOUTH);
         EntityPanel ep = new EntityPanel(r);
         setLayout(null);
         ep.update();

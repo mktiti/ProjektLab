@@ -1,7 +1,7 @@
 package projlab.rail.ui;
 
 public enum Direction {
-    EAST(0), WEST(1), NORTH(2), SOUTH(3);
+    WEST(0), NORTH(1), EAST(2), SOUTH(3);
 
     public final int value;
 
