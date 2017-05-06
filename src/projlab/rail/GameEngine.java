@@ -1,10 +1,22 @@
 package projlab.rail;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 import projlab.rail.exception.CrashException;
 import projlab.rail.exception.TrainException;
 import projlab.rail.logic.*;
+import projlab.rail.ui.Direction;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.util.*;
+
+import static projlab.rail.logic.StaticEntity.ConnectionType.*;
 
 /** Controls the logic of the game */
 public class GameEngine {
@@ -23,7 +35,7 @@ public class GameEngine {
     /** State of the game*/
     public GameState state;
 
-    GameEngine() {
+    public GameEngine() {
         HiddenRail prev = new HiddenRail();
         for (Color c : Color.values()) {
             HiddenRail current = new HiddenRail();
@@ -36,10 +48,115 @@ public class GameEngine {
         state = GameState.INGAME;
     }
 
+    public void start() {
+        new Thread(() -> {
+
+
+
+        }).start();
+    }
+
     /** Loads the needed level */
-    public void load(){
-        //TODO: Implement this method
-        System.out.println("GameEngine.load called");
+    public void load(int mapId) throws ParserConfigurationException, IOException, SAXException {
+        String path = "/map/" + (mapId + 1) + ".xml";
+        Map<Integer, StaticEntity> allStatics = new HashMap<>();
+
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+
+        Document doc = builder.parse(GameEngine.class.getResourceAsStream(path));
+
+        Element map = (Element)doc.getElementsByTagName("map").item(0);
+        NodeList entities = byName(map, "entities").getChildNodes();
+
+        for (int i = 0; i < entities.getLength(); i++) {
+            if (entities.item(i).getNodeType() != Node.ELEMENT_NODE) continue;
+
+            Element e = (Element)entities.item(i);
+            StaticEntity se;
+            int id = Integer.parseInt(e.getAttribute("id"));
+            switch (e.getNodeName()) {
+                case "rail":
+                    se = new Rail(getDir(e, "dir-a"), getDir(e, "dir-b"));
+                    break;
+                case "cross":
+                    se = new CrossRail();
+                    break;
+                case "station":
+                    se = new Station(getDir(e, "dir-a"), getDir(e, "dir-b"), Color.valueOf(e.getAttribute("color")));
+                    break;
+                case "switch":
+                    se = new Switch(getDir(e, "dir-in"));
+                    break;
+                case "tunnel":
+                    se = new Tunnel(getDir(e, "dir-visible"));
+                    break;
+                default:
+                    se = null;
+            }
+            allStatics.put(id, se);
+        }
+
+        for (int i = 0; i < entities.getLength(); i++) {
+            if (entities.item(i).getNodeType() != Node.ELEMENT_NODE) continue;
+
+            Element e = (Element) entities.item(i);
+            int id = Integer.parseInt(e.getAttribute("id"));
+            StaticEntity se = allStatics.get(id);
+            switch (e.getNodeName()) {
+                case "rail":
+                    connect(allStatics, e, se, A);
+                    connect(allStatics, e, se, B);
+                    break;
+                case "cross":
+                    connect(allStatics, e, se, A);
+                    connect(allStatics, e, se, B);
+                    connect(allStatics, e, se, X);
+                    connect(allStatics, e, se, Y);
+                    break;
+                case "station":
+                    connect(allStatics, e, se, A);
+                    connect(allStatics, e, se, B);
+                    break;
+                case "switch":
+                    connect(allStatics, e, se, IN);
+                    connect(allStatics, e, se, A);
+                    connect(allStatics, e, se, B);
+                    break;
+                case "tunnel":
+                    connect(allStatics, e, se, VISIBLE);
+                    break;
+                default: break;
+            }
+        }
+
+        statics.addAll(allStatics.values());
+
+    }
+
+    private static Element byName(Element e, String name) {
+        return (Element)e.getElementsByTagName(name).item(0);
+    }
+
+    private static Direction getDir(Element e, String dirName) {
+        return Direction.valueOf(byName(e, dirName).getTextContent());
+    }
+
+    private void connect(Map<Integer, StaticEntity> map, Element e, StaticEntity se, StaticEntity.ConnectionType ct) {
+        Node n = e.getElementsByTagName(ct.name()).item(0);
+        if (n == null) return;
+
+        int id = Integer.parseInt(n.getTextContent());
+        if (id == 0) {
+            entryPoint.connectA(se);
+            se.connect(entryPoint, StaticEntity.ConnectionType.B);
+            return;
+        }
+
+        StaticEntity toConnect = map.get(id);
+        if (toConnect != null) {
+            se.connect(toConnect, ct);
+        }
     }
 
     /** Ends lost game */
