@@ -157,7 +157,7 @@ public class Proto {
             case CROSS:
                 return crosses.add(new CrossRail());
             case SWITCH:
-                return switches.add(new Switch(Direction.EAST, Direction.NORTH, Direction.SOUTH));
+                return switches.add(new Switch(Direction.EAST));
             case TUNNEL:
                 return tunnels.add(new Tunnel(Direction.WEST));
             default:

@@ -12,16 +12,37 @@ import static projlab.rail.ui.Direction.*;
 
 public class ResourceManager {
 
+    private static final BufferedImage[] MAPS = new BufferedImage[5];
+
     private static final BufferedImage RAIL_STRAIGHT_VERT;
     private static final BufferedImage RAIL_STRAIGHT_HORI;
     private static final BufferedImage[] RAIL_CURVES = new BufferedImage[4];
+    private static final BufferedImage CROSS_RAIL;
+    private static final BufferedImage[] SWITCH_AS = new BufferedImage[4];
+    private static final BufferedImage[] SWITCH_BS = new BufferedImage[4];
 
     static {
+        for (int i = 0; i < 5; i++) {
+            MAPS[i] = read("/map/" + (i + 1) + ".png");
+        }
+
         RAIL_STRAIGHT_HORI = read("/rail_straight.png");
         RAIL_STRAIGHT_VERT = rotate(RAIL_STRAIGHT_HORI, 1);
+
         RAIL_CURVES[0] = read("/rail_curve.png");
         for (int i = 1; i < 4; i++) {
             RAIL_CURVES[i] = rotate(RAIL_CURVES[0], i);
+        }
+        CROSS_RAIL = read("/crossrail.png");
+
+        SWITCH_AS[0] = read("/switch_a.png");
+        for (int i = 1; i < 4; i++) {
+            SWITCH_AS[i] = rotate(SWITCH_AS[0], i);
+        }
+
+        SWITCH_BS[0] = read("/switch_b.png");
+        for (int i = 1; i < 4; i++) {
+            SWITCH_BS[i] = rotate(SWITCH_BS[0], i);
         }
     }
 
@@ -52,6 +73,10 @@ public class ResourceManager {
         return newImage;
     }
 
+    public static BufferedImage getMap(int map) {
+        return MAPS[map];
+    }
+
     public static BufferedImage getRail(Direction aDir, Direction bDir) {
         if (aDir.value > bDir.value) {
             Direction temp = aDir;
@@ -68,8 +93,13 @@ public class ResourceManager {
         }
     }
 
-    public static BufferedImage getSwitch(Direction inDir, Direction aDir, Direction bDir, boolean isAActive) {
-        return null;
+    public static BufferedImage getCrossRail() {
+        return CROSS_RAIL;
+    }
+
+    public static BufferedImage getSwitch(Direction inDir, boolean isAActive) {
+        int val = inDir.value;
+        return isAActive ? SWITCH_AS[val] : SWITCH_BS[val];
     }
 
     public static BufferedImage getStation(Direction aDir, Direction bDir, Color color) {
