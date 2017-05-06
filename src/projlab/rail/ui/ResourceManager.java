@@ -114,6 +114,8 @@ public class ResourceManager {
             return RAIL_STRAIGHT_HORI;
         } else if (aDir == NORTH && bDir == SOUTH) {
             return RAIL_STRAIGHT_VERT;
+        } else if (aDir == WEST && bDir == SOUTH) {
+            return RAIL_CURVES[3];
         } else {
             return RAIL_CURVES[aDir.value];
         }
