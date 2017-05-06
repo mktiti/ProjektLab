@@ -2,7 +2,9 @@ package projlab.rail.logic;
 
 import projlab.rail.exception.IllegalMoveException;
 import projlab.rail.exception.InactiveTunnelException;
+import projlab.rail.ui.Direction;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,11 @@ public class Tunnel extends StaticEntity {
     /** A list of all connections */
     private final ArrayList<StaticEntity> conns = new ArrayList<>(3);
 
-    public Tunnel() {
+    public final Direction visDir;
+
+    public Tunnel(Direction visDire) {
+        this.visDir = visDire;
+
         for (int i = 0; i < 2; i++) {
             conns.add(null);
         }
@@ -66,5 +72,10 @@ public class Tunnel extends StaticEntity {
             default:
                 throw new IllegalArgumentException("Illegal connection type");
         }
+    }
+
+    @Override
+    public BufferedImage image() {
+        return null;
     }
 }

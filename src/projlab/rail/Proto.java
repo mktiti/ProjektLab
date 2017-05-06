@@ -2,6 +2,7 @@ package projlab.rail;
 
 import projlab.rail.exception.TrainException;
 import projlab.rail.logic.*;
+import projlab.rail.ui.Direction;
 
 import java.util.*;
 
@@ -156,16 +157,16 @@ public class Proto {
             case CROSS:
                 return crosses.add(new CrossRail());
             case SWITCH:
-                return switches.add(new Switch());
+                return switches.add(new Switch(Direction.EAST, Direction.NORTH, Direction.SOUTH));
             case TUNNEL:
-                return tunnels.add(new Tunnel());
+                return tunnels.add(new Tunnel(Direction.WEST));
             default:
-                return rails.add(new Rail(aDir, bDir));
+                return rails.add(new Rail(Direction.EAST, Direction.WEST));
         }
     }
 
     public int createStation(Color color) throws IllegalArgumentException {
-        return stations.add(new Station(color));
+        return stations.add(new Station(Direction.EAST, Direction.WEST, color));
     }
 
     public int createCar(Color color) {

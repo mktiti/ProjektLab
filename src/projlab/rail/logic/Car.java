@@ -1,5 +1,7 @@
 package projlab.rail.logic;
 
+import java.awt.image.BufferedImage;
+
 public class Car extends MovingEntity {
     /** Whether the car carries people or not */
     public boolean hasPassengers;
@@ -29,5 +31,10 @@ public class Car extends MovingEntity {
      */
     public void unboard() {
         hasPassengers = false;
+    }
+
+    @Override
+    public BufferedImage image() {
+        return null;
     }
 }

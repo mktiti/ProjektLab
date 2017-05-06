@@ -4,10 +4,11 @@ import projlab.rail.exception.IllegalMoveException;
 import projlab.rail.exception.IllegalSwitchStateException;
 import projlab.rail.ui.Direction;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Switch extends StaticEntity{
+public class Switch extends StaticEntity {
     /** Input, connected to either A or B */
     public StaticEntity input;
     /** A connection */
@@ -89,6 +90,11 @@ public class Switch extends StaticEntity{
             default:
                 throw new IllegalArgumentException("Illegal connection type");
         }
+    }
+
+    @Override
+    public BufferedImage image() {
+        return null;
     }
 
     /**

@@ -3,6 +3,7 @@ package projlab.rail.logic;
 import projlab.rail.exception.TrainException;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /** Represents a vehicle (Car or Locomotive) */
 public abstract class MovingEntity {
@@ -59,6 +60,6 @@ public abstract class MovingEntity {
         this.lastPosition = previous;
     }
 
-    public abstract Image image();
+    public abstract BufferedImage image();
 
 }

@@ -5,6 +5,7 @@ import projlab.rail.ui.EntityPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 /** Represents an elem of the level such as a rail, a switch, a crossing, etc */
@@ -71,6 +72,6 @@ public abstract class StaticEntity {
      */
     public abstract void connect(StaticEntity entity, ConnectionType connectionType) throws IllegalArgumentException;
 
-    public abstract Image image();
+    public abstract BufferedImage image();
 
 }

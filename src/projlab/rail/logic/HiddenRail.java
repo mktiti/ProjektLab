@@ -1,9 +1,11 @@
 package projlab.rail.logic;
 
+import projlab.rail.ui.Direction;
+
 public class HiddenRail extends Rail {
 
     public HiddenRail() {
-        super(aDir, bDir);
+        super(Direction.EAST, Direction.WEST);
     }
 
     /** Should not be drawn */

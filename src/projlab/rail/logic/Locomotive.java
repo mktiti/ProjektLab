@@ -2,6 +2,7 @@ package projlab.rail.logic;
 
 import projlab.rail.exception.TrainException;
 
+import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
 public class Locomotive extends MovingEntity {
@@ -58,6 +59,11 @@ public class Locomotive extends MovingEntity {
             temp = temp.next;
         }
         return false;
+    }
+
+    @Override
+    public BufferedImage image() {
+        return null;
     }
 
     /**
