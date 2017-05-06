@@ -1,15 +1,17 @@
 package projlab.rail.ui;
 
+import projlab.rail.GameEngine;
 import projlab.rail.logic.Switch;
 
+import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class SwitchPanel extends EntityPanel implements MouseListener {
 
-    public SwitchPanel(Switch entity) {
-        super(entity);
-        addMouseListener(this);
+    public SwitchPanel(Switch entity, GameEngine engine, int x, int y, JPanel mainPanel) {
+        super(entity, engine,x,y,mainPanel);
+
     }
 
     void click() {

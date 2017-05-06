@@ -1,9 +1,11 @@
 package projlab.rail.logic;
 
+import javafx.util.Pair;
 import projlab.rail.exception.IllegalMoveException;
 import projlab.rail.exception.InactiveTunnelException;
 import projlab.rail.ui.Direction;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +19,7 @@ public class Tunnel extends StaticEntity {
     /** Whether the tunnel is activated or not */
     public boolean isActive;
     /** A list of all connections */
-    private final ArrayList<StaticEntity> conns = new ArrayList<>(3);
+    private final ArrayList<Pair<StaticEntity,Direction>> conns = new ArrayList<>(3);
 
     public final Direction visDir;
 
@@ -31,17 +33,17 @@ public class Tunnel extends StaticEntity {
 
     /** connects visible connection */
     public void connectVisible(StaticEntity visible) {
-        conns.set(0, visible);
+        conns.set(0, new Pair<>(visible, visDir));
         visibleConnection = visible;
     }
     /** connects hidden connection */
     public void connectHidden(StaticEntity hidden) {
-        conns.set(1, hidden);
+        conns.set(1, new Pair<>(hidden, null));
         hiddenConnection = hidden;
     }
 
     @Override
-    public List<StaticEntity> getConnections() {
+    public List<Pair<StaticEntity, Direction>> getConnections() {
         return conns;
     }
 

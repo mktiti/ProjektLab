@@ -1,15 +1,16 @@
 package projlab.rail.ui;
 
+import projlab.rail.GameEngine;
 import projlab.rail.logic.Tunnel;
 
+import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class TunnelPanel extends EntityPanel implements MouseListener {
 
-    public TunnelPanel(Tunnel entity) {
-        super(entity);
-        addMouseListener(this);
+    public TunnelPanel(Tunnel entity, GameEngine engine, int x, int y, JPanel mainPanel) {
+        super(entity, engine,x,y,mainPanel);
     }
 
     void click() {
