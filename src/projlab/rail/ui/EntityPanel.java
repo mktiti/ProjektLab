@@ -16,8 +16,8 @@ public class EntityPanel extends JPanel {
 
     public EntityPanel(StaticEntity entity) {
         this.entity = entity;
-        setSize(200, 200);
-        setPreferredSize(new Dimension(50, 50));
+        setSize(PANEL_SIZE, PANEL_SIZE);
+        setPreferredSize(new Dimension(PANEL_SIZE, PANEL_SIZE));
     }
 
     public void update() {
@@ -26,7 +26,6 @@ public class EntityPanel extends JPanel {
 
     @Override
     protected void paintComponent(Graphics graphics) {
-        super.paintComponent(graphics);
         if (image != null) {
             graphics.drawImage(image.getScaledInstance(PANEL_SIZE, PANEL_SIZE, 0), 0, 0, this);
         }

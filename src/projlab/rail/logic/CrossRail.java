@@ -1,6 +1,7 @@
 package projlab.rail.logic;
 
 import projlab.rail.exception.IllegalMoveException;
+import projlab.rail.ui.ResourceManager;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -87,6 +88,6 @@ public class CrossRail extends StaticEntity {
 
     @Override
     public BufferedImage image() {
-        return null;
+        return ResourceManager.getCrossRail();
     }
 }
