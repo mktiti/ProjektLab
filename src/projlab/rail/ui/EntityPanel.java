@@ -1,5 +1,6 @@
 package projlab.rail.ui;
 
+import projlab.rail.GameEngine;
 import projlab.rail.logic.StaticEntity;
 
 import javax.swing.*;
@@ -11,11 +12,13 @@ public class EntityPanel extends JPanel {
     private static final int PANEL_SIZE = 200;
 
     final StaticEntity entity;
+    final GameEngine engine;
 
     private BufferedImage image = null;
 
-    public EntityPanel(StaticEntity entity) {
+    public EntityPanel(StaticEntity entity, GameEngine gameEngine) {
         this.entity = entity;
+        this.engine = gameEngine;
         setSize(PANEL_SIZE, PANEL_SIZE);
         setPreferredSize(new Dimension(PANEL_SIZE, PANEL_SIZE));
     }

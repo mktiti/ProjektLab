@@ -2,6 +2,7 @@ package projlab.rail.ui;
 
 import javafx.util.Pair;
 import projlab.rail.GameEngine;
+import projlab.rail.GameState;
 import projlab.rail.exception.IllegalMoveException;
 import projlab.rail.logic.*;
 
@@ -14,15 +15,17 @@ public class GraphicsEngine {
     private EntityPanel[][] entities;
     private GameEngine engine;
 
+
+
     private void initPanel(int i, int j, ArrayList<StaticEntity> processedElements, StaticEntity active){
         processedElements.add(active);
 
         if(active.getClass() == Tunnel.class)
-            entities[i][j] = new TunnelPanel((Tunnel)active);
+            entities[i][j] = new TunnelPanel((Tunnel)active, engine);
         else if(active.getClass() == Switch.class)
-            entities[i][j] = new SwitchPanel((Switch)active);
+            entities[i][j] = new SwitchPanel((Switch)active,engine);
         else
-            entities[i][j] = new EntityPanel(active);
+            entities[i][j] = new EntityPanel(active, engine);
 
         for(Pair<StaticEntity,Direction> pair: active.getConnections()){
             if(pair.getKey() == null || pair.getValue() == null)
@@ -33,7 +36,8 @@ public class GraphicsEngine {
         }
     }
 
-    public void init(HiddenRail entry, List<Tunnel> tunnels, int startX, int startY){
+    public void init(HiddenRail entry, List<Tunnel> tunnels, int startX, int startY, GameEngine engine){
+        this.engine = engine;
         entities = new EntityPanel[SIZE][];
         for(int i = 0; i < SIZE; i++)
             entities[i] = new EntityPanel[SIZE];

@@ -1,5 +1,6 @@
 package projlab.rail.ui;
 
+import projlab.rail.GameEngine;
 import projlab.rail.logic.Tunnel;
 
 import java.awt.event.MouseEvent;
@@ -7,8 +8,8 @@ import java.awt.event.MouseListener;
 
 public class TunnelPanel extends EntityPanel implements MouseListener {
 
-    public TunnelPanel(Tunnel entity) {
-        super(entity);
+    public TunnelPanel(Tunnel entity, GameEngine engine) {
+        super(entity, engine);
         addMouseListener(this);
     }
 
