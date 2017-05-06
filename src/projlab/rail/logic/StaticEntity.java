@@ -4,6 +4,7 @@ import projlab.rail.exception.TrainException;
 import projlab.rail.ui.EntityPanel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 
 /** Represents an elem of the level such as a rail, a switch, a crossing, etc */
@@ -70,7 +71,6 @@ public abstract class StaticEntity {
      */
     public abstract void connect(StaticEntity entity, ConnectionType connectionType) throws IllegalArgumentException;
 
-    // TODO
-    public abstract void draw(EntityPanel panel);
+    public abstract Image image();
 
 }

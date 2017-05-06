@@ -2,6 +2,8 @@ package projlab.rail.logic;
 
 import projlab.rail.exception.TrainException;
 
+import java.awt.*;
+
 /** Represents a vehicle (Car or Locomotive) */
 public abstract class MovingEntity {
 
@@ -56,5 +58,7 @@ public abstract class MovingEntity {
         currentPosition.vehicle = this;
         this.lastPosition = previous;
     }
+
+    public abstract Image image();
 
 }
