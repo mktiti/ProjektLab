@@ -59,7 +59,7 @@ public class MainWindow extends JFrame {
         }
 
         pack();
-        graphicsEngine.init(gameEngine.entryPoint,null,10,10,gameEngine,0);
+        graphicsEngine.init(gameEngine.entryPoint,null, 0, 0,gameEngine,0);
         setContentPane(graphicsEngine);
         setVisible(true);
         repaint();

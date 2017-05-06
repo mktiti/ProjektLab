@@ -47,6 +47,8 @@ public class GraphicsEngine extends JPanel {
     }
 
     private void initPanel(int i, int j, ArrayList<StaticEntity> processedElements, StaticEntity active){
+        if (active.isHidden()) return;
+
         processedElements.add(active);
         if(active.getClass()  == Tunnel.class)
             entities[i][j] = new TunnelPanel((Tunnel)active, engine,i,j,this);
