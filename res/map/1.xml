@@ -15,126 +15,79 @@
 
         <rail id="1">
             <dir-b>WEST</dir-b>
-            <dir-a>EAST</dir-a>
+            <dir-a>SOUTH</dir-a>
             <A>2</A>
             <B>0</B>
         </rail>
-        <station id="2" color="RED">
-            <dir-b>WEST</dir-b>
-            <dir-a>EAST</dir-a>
+        <rail id="2">
+            <dir-b>NORTH</dir-b>
+            <dir-a>SOUTH</dir-a>
             <A>3</A>
             <B>1</B>
-        </station>
-        <rail id="3">
-            <dir-b>WEST</dir-b>
-            <dir-a>EAST</dir-a>
+        </rail>
+        <switch id="3">
+            <dir-in>EAST</dir-in>
+            <IN>12</IN>
             <A>4</A>
             <B>2</B>
-        </rail>
-            <tunnel id="4" x="3" y="0" >
-            <dir-visible>WEST</dir-visible>
-            <VISIBLE>3</VISIBLE>
-        </tunnel>
-
-
-        <tunnel id="5" x="6" y="0" >
-            <dir-visible>EAST</dir-visible>
-            <VISIBLE>6</VISIBLE>
-        </tunnel>
-        <rail id="6">
-            <dir-b>WEST</dir-b>
-            <dir-a>EAST</dir-a>
-            <A>7</A>
-            <B>5</B>
-        </rail>
-        <station id="7" color="GREEN">
-            <dir-b>WEST</dir-b>
-            <dir-a>EAST</dir-a>
-            <A>8</A>
-            <B>6</B>
-        </station>
-        <rail id="8">
-            <dir-b>WEST</dir-b>
-            <dir-a>EAST</dir-a>
-            <B>7</B>
-        </rail>
-        <!--
-        <rail id="1">
-            <dir-b>WEST</dir-b>
-            <dir-a>EAST</dir-a>
-            <A>2</A>
-            <B>0</B>
-        </rail>
-        <station id="2" color="RED">
-            <dir-b>WEST</dir-b>
-            <dir-a>EAST</dir-a>
-            <A>3</A>
-            <B>1</B>
-        </station>
-        <rail id="3">
-            <dir-b>WEST</dir-b>
-            <dir-a>EAST</dir-a>
-            <A>4</A>
-            <B>2</B>
-        </rail>
+        </switch>
         <rail id="4">
-            <dir-b>WEST</dir-b>
+            <dir-b>NORTH</dir-b>
             <dir-a>SOUTH</dir-a>
             <A>5</A>
             <B>3</B>
         </rail>
         <rail id="5">
             <dir-b>NORTH</dir-b>
-            <dir-a>WEST</dir-a>
+            <dir-a>EAST</dir-a>
             <A>6</A>
             <B>4</B>
         </rail>
-        <station id="6" color="BLUE">
-            <dir-b>EAST</dir-b>
-            <dir-a>WEST</dir-a>
+        <rail id="6">
+            <dir-b>WEST</dir-b>
+            <dir-a>EAST</dir-a>
             <A>7</A>
             <B>5</B>
-        </station>
-        <cross id="7">
+        </rail>
+        <rail id="7">
+            <dir-b>WEST</dir-b>
+            <dir-a>EAST</dir-a>
+            <A>8</A>
             <B>6</B>
-            <A>10</A>
-            <Y>8</Y>
-        </cross>
-        <station id="8" color="YELLOW">
-            <dir-b>NORTH</dir-b>
-            <dir-a>SOUTH</dir-a>
+        </rail>
+        <switch id="8">
+            <dir-in>NORTH</dir-in>
+            <IN>10</IN>
             <A>9</A>
             <B>7</B>
-        </station>
-        <switch id="9">
-            <dir-in>NORTH</dir-in>
-            <IN>8</IN>
-            <A>13</A>
-            <B>12</B>
         </switch>
-        <tunnel id="13">
+        <tunnel id="9" x="4" y="4" >
             <dir-visible>WEST</dir-visible>
-            <VISIBLE>9</VISIBLE>
+            <VISIBLE>8</VISIBLE>
         </tunnel>
-
         <rail id="10">
-            <dir-b>EAST</dir-b>
+            <dir-b>NORTH</dir-b>
             <dir-a>SOUTH</dir-a>
             <A>11</A>
-            <B>7</B>
+            <B>8</B>
         </rail>
-        <station id="11" color="GREEN">
-            <dir-b>NORTH</dir-b>
-            <dir-a>SOUTH</dir-a>
-            <A>12</A>
-            <B>10</B>
-        </station>
         <rail id="12">
-            <dir-b>NORTH</dir-b>
+            <dir-b>WEST</dir-b>
             <dir-a>EAST</dir-a>
-            <A>9</A>
-            <B>11</B>
+            <A>13</A>
+            <B>3</B>
         </rail>
-        -->
+        <rail id="13">
+            <dir-b>WEST</dir-b>
+            <dir-a>EAST</dir-a>
+            <A>11</A>
+            <B>12</B>
+        </rail>
+        <cross id="11">
+            <A>13</A>
+            <B>14</B>
+            <X>31</X>
+            <Y>10</Y>
+        </cross>
     </entities>
 </map>
