@@ -18,12 +18,12 @@
             <A>2</A>
             <B>0</B>
         </rail>
-        <rail id="2">
-            <dir-b>WEST</dir-b>
-            <dir-a>SOUTH</dir-a>
-            <A>3</A>
-            <B>1</B>
-        </rail>
+        <switch id="2">
+            <dir-in>SOUTH</dir-in>
+            <IN>3</IN>
+            <A>1</A>
+            <B>30</B>
+        </switch>
         <cross id="3">
 			<A>13</A>
 			<B>29</B>
@@ -174,7 +174,12 @@
 
         <tunnel id="29" x="2" y="1" >
             <dir-visible>WEST</dir-visible>
-            <VISIBLE>13</VISIBLE>
+            <VISIBLE>3</VISIBLE>
+        </tunnel>
+
+        <tunnel id="30" x="2" y="0" >
+            <dir-visible>WEST</dir-visible>
+            <VISIBLE>2</VISIBLE>
         </tunnel>
 
     </entities>
