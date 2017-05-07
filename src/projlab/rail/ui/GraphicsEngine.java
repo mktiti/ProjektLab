@@ -228,17 +228,17 @@ public class GraphicsEngine extends JPanel implements MouseListener {
      */
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent mouseEvent) {
         int x = mouseEvent.getX() / EntityPanel.PANEL_SIZE;
         int y = mouseEvent.getY() / EntityPanel.PANEL_SIZE;
 
         if (entities[x][y] != null) {
             entities[x][y].click();
         }
-    }
-
-    @Override
-    public void mousePressed(MouseEvent mouseEvent) {
-
     }
 
     @Override
