@@ -71,6 +71,10 @@ public class Rail extends StaticEntity {
         }
     }
 
+    /**
+     * Returns the base image of the rail onto which a vehicle may be placed
+     * @return the image of the rail
+     */
     protected BufferedImage getBaseImage() {
         return ResourceManager.getRail(aDir, bDir);
     }

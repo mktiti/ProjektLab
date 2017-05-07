@@ -23,20 +23,24 @@ import static projlab.rail.logic.StaticEntity.ConnectionType.*;
 /** Controls the logic of the game */
 public class GameEngine {
 
+    /** The number of maps */
     public static final int MAP_COUNT = 3;
 
+    /** Random generator */
     private final Random random = new Random();
 
     /** List of all static entities */
     List<StaticEntity> statics = new LinkedList<>();
     /** List of all locomotives */
     List<Locomotive> locos = new LinkedList<>();
-    /** Active tunnel connections */
-
+    /** Switches */
     private final List<Switch> switches = new LinkedList<>();
-    private final List<Station> stations = new LinkedList<>();
+    /** Tunnels */
     public final Map<Tunnel, Point> tunnels = new HashMap<>();
+    /** Stations */
+    private final List<Station> stations = new LinkedList<>();
 
+    /** Active tunnel connections */
     public Tunnel activeTunnelA;
     public Tunnel activeTunnelB;
     /** Entry point of the level */
@@ -46,12 +50,18 @@ public class GameEngine {
     /** State of the game*/
     public GameState state;
 
+    /** graphic engine to trigger repaints */
     private final GraphicsEngine graphicsEngine;
 
+    /** entry point coordinate of the map */
     public Point entryCoords;
+    /** Id of the map */
     public int map;
+    /** Step counter */
     private volatile int iteration = 0;
+    /** Microseconds to wait between steps */
     private int stepTime = 1000;
+    /** Relative frequency of random passengers appearing */
     private int newPassengerFreq = 1;
 
     public GameEngine(GraphicsEngine graphicsEngine) {
@@ -69,6 +79,7 @@ public class GameEngine {
         state = GameState.INGAME;
     }
 
+    /** Starts the game */
     public void start() throws TrainException {
         iteration = 0;
 
@@ -104,6 +115,7 @@ public class GameEngine {
         }).start();
     }
 
+    /** Launches a train */
     public void startTrain(Locomotive train) {
         try {
             train.setPosition(entryPoint, entrySecond);
@@ -246,18 +258,22 @@ public class GameEngine {
         statics.addAll(allStatics.values());
     }
 
+    /** Utility method to read x-y attributes */
     private static Point getXY(Element e) {
         return new Point(Integer.parseInt(e.getAttribute("x")), Integer.parseInt(e.getAttribute("y")));
     }
 
+    /** Utility method to get child element by name */
     private static Element byName(Element e, String name) {
         return (Element)e.getElementsByTagName(name).item(0);
     }
 
+    /** Utility method to get direction from node */
     private static Direction getDir(Element e, String dirName) {
         return Direction.valueOf(byName(e, dirName).getTextContent());
     }
 
+    /** Utility method to connect entities based on connections */
     private void connect(Map<Integer, StaticEntity> map, Element e, StaticEntity se, StaticEntity.ConnectionType ct) {
         Node n = e.getElementsByTagName(ct.name()).item(0);
         if (n == null) return;
@@ -275,6 +291,7 @@ public class GameEngine {
         }
     }
 
+    /** Randomly adds people with random colo to random stations */
     private void addNewPeople() {
         int rand = random.nextInt((int)(40f / ((10 + newPassengerFreq) * 0.1f)));
         if (rand == 0) {
@@ -300,6 +317,7 @@ public class GameEngine {
         System.out.println("Game Won");
     }
 
+    /** Ramoves finished train from the map */
     public void removeTrain(Locomotive l) {
         for(MovingEntity current = l; current != null; current = current.next){
             current.currentPosition.vehicle = null;
@@ -346,7 +364,7 @@ public class GameEngine {
             gameOver();
             return Result.CRASH;
         }
-        if (locos.isEmpty()) {
+        if (locos.stream().filter(l -> l.startTime > iteration).count() == 0) {
             gameWon();
             return map == MAP_COUNT ? Result.GAME_WIN : Result.MAP_WIN;
         }
