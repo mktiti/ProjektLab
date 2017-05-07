@@ -364,7 +364,7 @@ public class GameEngine {
             gameOver();
             return Result.CRASH;
         }
-        if (iteration != 0 && locos.stream().filter(l -> l.startTime > iteration).count() == 0) {
+        if (iteration != 0 && locos.stream().filter(l -> l.startTime > iteration).count() == 0 && locos.isEmpty()) {
             gameWon();
             return map == MAP_COUNT ? Result.GAME_WIN : Result.MAP_WIN;
         }
