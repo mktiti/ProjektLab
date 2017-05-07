@@ -1,7 +1,9 @@
 package projlab.rail.logic;
 
 import projlab.rail.ui.Direction;
+import projlab.rail.ui.ResourceManager;
 
+import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,8 +34,12 @@ public class Station extends Rail{
     }
 
     @Override
-    public Color getColor(){
+    public Color getColor() {
         return color;
     }
 
+    @Override
+    protected BufferedImage getBaseImage() {
+        return ResourceManager.getStation(aDir, bDir, color);
+    }
 }

@@ -1,6 +1,8 @@
 package projlab.rail.logic;
 
+import projlab.rail.exception.IllegalMoveException;
 import projlab.rail.exception.TrainException;
+import projlab.rail.ui.Direction;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -34,7 +36,7 @@ public abstract class MovingEntity {
         StaticEntity temp = currentPosition;
         currentPosition = currentPosition.next(lastPosition);
         if (currentPosition == null) {
-            throw new NullPointerException("Rail line ended unexpectedly!");
+            throw new TrainException("Rail line ended unexpectedly!");
         }
 
         currentPosition.vehicle = this;
@@ -60,6 +62,6 @@ public abstract class MovingEntity {
         this.lastPosition = previous;
     }
 
-    public abstract BufferedImage image();
+    public abstract BufferedImage image(Direction from, Direction to);
 
 }

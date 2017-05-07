@@ -21,6 +21,8 @@ import static projlab.rail.logic.StaticEntity.ConnectionType.*;
 /** Controls the logic of the game */
 public class GameEngine {
 
+    private static final int MAP_COUNT = 5;
+
     /** List of all static entities */
     List<StaticEntity> statics = new LinkedList<>();
     /** List of all locomotives */
@@ -35,9 +37,11 @@ public class GameEngine {
     /** State of the game*/
     public GameState state;
 
+    private int map;
+
     public GameEngine() {
         HiddenRail prev = new HiddenRail();
-        for (Color c : Color.values()) {
+        for (int i = 0; i <= Color.values().length; i++) {
             HiddenRail current = new HiddenRail();
             prev.connectA(current);
             current.connectB(prev);
@@ -48,7 +52,28 @@ public class GameEngine {
         state = GameState.INGAME;
     }
 
-    public void start() {
+    public void start() throws TrainException {
+        Locomotive loco = new Locomotive();
+        locos.add(loco);
+
+        MovingEntity temp = loco;
+        for (Color c : Color.values()) {
+            Car car = new Car(c);
+            temp.next = car;
+            temp = car;
+        }
+
+        loco.setPosition(entryPoint, entrySecond);
+        StaticEntity pos = entrySecond;
+        StaticEntity posPrev = entryPoint;
+
+        for (Car car = loco.next; car != null; car = car.next) {
+            car.setPosition(pos, pos.next(posPrev));
+            StaticEntity tmp = pos;
+            pos = pos.next(posPrev);
+            posPrev = tmp;
+        }
+
         new Thread(() -> {
 
 
@@ -58,6 +83,8 @@ public class GameEngine {
 
     /** Loads the needed level */
     public void load(int mapId) throws ParserConfigurationException, IOException, SAXException {
+        map = mapId;
+
         String path = "/map/" + (mapId + 1) + ".xml";
         Map<Integer, StaticEntity> allStatics = new HashMap<>();
 
@@ -131,7 +158,6 @@ public class GameEngine {
         }
 
         statics.addAll(allStatics.values());
-
     }
 
     private static Element byName(Element e, String name) {
@@ -160,18 +186,18 @@ public class GameEngine {
     }
 
     /** Ends lost game */
-    public void gameOver(){
+    public void gameOver() {
         state = GameState.DEFEAT;
         System.out.println("Game over");
     }
 
     /** Ends won game */
-    public void gameWon(){
+    public void gameWon() {
         state = GameState.VICTORY;
         System.out.println("Game Won");
     }
 
-    public void removeTrain(Locomotive l){
+    public void removeTrain(Locomotive l) {
         for(MovingEntity current = l; current != null; current = current.next){
             current.currentPosition.vehicle = null;
             current.currentPosition = null;
@@ -180,7 +206,7 @@ public class GameEngine {
     }
 
     /** iterates one on the whole level */
-    public void step() throws TrainException {
+    public Result step() {
         try {
             Set<StaticEntity> occupied = new HashSet<>();
             int occupiedCount = 0;
@@ -209,19 +235,16 @@ public class GameEngine {
                 }
             }
 
-            /*for (Locomotive l : locos) {
-                if (l.currentPosition == null)
-                    continue;
-                if(l.move()){
-
-                }
-            }*/
         } catch (TrainException te){
             gameOver();
-            throw te;
+            return Result.CRASH;
         }
-        if(locos.isEmpty())
+        if (locos.isEmpty()) {
             gameWon();
+            return map == MAP_COUNT ? Result.GAME_WIN : Result.MAP_WIN;
+        }
+
+        return Result.NOTHING;
     }
 
     /**

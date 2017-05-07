@@ -14,8 +14,10 @@ public class SwitchPanel extends EntityPanel implements MouseListener {
 
     }
 
+    @Override
     void click() {
-
+        ((Switch)entity).toggle();
+        update();
     }
 
     @Override
