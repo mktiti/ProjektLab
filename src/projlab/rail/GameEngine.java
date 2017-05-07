@@ -74,9 +74,23 @@ public class GameEngine {
 
             synchronized (this) {
                 try {
-                    while (true) {
+                    loop: while (true) {
                         Thread.sleep(1000);
-                        step();
+                        Result result = step();
+                        if (graphicsEngine != null) {
+                            graphicsEngine.update();
+                        }
+
+                        switch (result) {
+                            case CRASH:
+                                graphicsEngine.showCrash();
+                                break loop;
+                            case GAME_WIN:
+                                break loop;
+                            case MAP_WIN:
+                                break loop;
+                            default: break;
+                        }
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
