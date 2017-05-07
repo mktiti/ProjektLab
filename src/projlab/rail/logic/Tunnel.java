@@ -21,7 +21,7 @@ public class Tunnel extends StaticEntity {
     public boolean isActive;
     /** A list of all connections */
     private final ArrayList<Pair<StaticEntity,Direction>> conns = new ArrayList<>(3);
-
+    /** The visible direction of the tunnel */
     public final Direction visDir;
 
     public Tunnel(Direction visDire) {

@@ -74,6 +74,11 @@ public abstract class StaticEntity {
      */
     public abstract void connect(StaticEntity entity, ConnectionType connectionType) throws IllegalArgumentException;
 
+    /**
+     * Returns the image of the static entity
+     * complete with any additional vehicles.
+     * @return
+     */
     public abstract BufferedImage image();
 
 }

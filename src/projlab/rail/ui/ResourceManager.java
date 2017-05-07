@@ -1,6 +1,5 @@
 package projlab.rail.ui;
 
-import com.sun.corba.se.spi.ior.Writeable;
 import projlab.rail.GameEngine;
 import projlab.rail.logic.Color;
 
@@ -8,8 +7,6 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.awt.image.WritableRaster;
 import java.io.IOException;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -17,22 +14,38 @@ import java.util.Map;
 
 import static projlab.rail.ui.Direction.*;
 
+/**
+ * A static class that manages image based resources for entities.
+ * Also provides some utility methods for image manipulation.
+ */
 public class ResourceManager {
 
+    /** Images of maps **/
     private static final BufferedImage[] MAPS = new BufferedImage[GameEngine.MAP_COUNT];
 
+    /** Vertical rail image **/
     private static final BufferedImage RAIL_STRAIGHT_VERT;
+    /** Horizontal rail image **/
     private static final BufferedImage RAIL_STRAIGHT_HORI;
+    /** Turning rail image **/
     private static final BufferedImage[] RAIL_CURVES = new BufferedImage[4];
+    /** Cross rail image **/
     private static final BufferedImage CROSS_RAIL;
+    /** Images of switch on state A **/
     private static final BufferedImage[] SWITCH_AS = new BufferedImage[4];
+    /** Images of switch on state B **/
     private static final BufferedImage[] SWITCH_BS = new BufferedImage[4];
+    /** Images of open tunnels **/
     private static final BufferedImage[] OPEN_TUNNELS = new BufferedImage[4];
+    /** Images of closed tunnels **/
     private static final BufferedImage[] CLOSED_TUNNELS = new BufferedImage[4];
 
+    /** Images of cars by color **/
     private static final Map<Color, BufferedImage[]> CARS = new HashMap<>();
+    /** Images of locomotives **/
     private static final BufferedImage[] LOCOMOTIVES = new BufferedImage[8];
 
+    /* Load all image resources */
     static {
         for (int i = 0; i < GameEngine.MAP_COUNT; i++) {
             MAPS[i] = read("/map/" + (i + 1) + ".png");
@@ -63,6 +76,12 @@ public class ResourceManager {
     /** force load static initializer **/
     public static void init() {}
 
+    /**
+     * Loads a resource (eg. entity), than rotates the image by quarters or eighths
+     * @param array the array to place the resources into
+     * @param path the path of the resource
+     * @param quarters whether the resource has to be rotated by quarters (opposed to eighths)
+     */
     private static void readRotated(BufferedImage[] array, String path, boolean quarters) {
         array[0] = read(path);
         for (int i = 1; i < (quarters ? 4 : 8); i++) {
@@ -70,6 +89,11 @@ public class ResourceManager {
         }
     }
 
+    /**
+     * Loads image resource
+     * @param path the path of the resource
+     * @return the resource image
+     */
     private static BufferedImage read(String path) {
         try {
             return ImageIO.read(ResourceManager.class.getResource(path));
@@ -79,6 +103,12 @@ public class ResourceManager {
         return null;
     }
 
+    /**
+     * Creates a new image composed of its parameters with the second one on top
+     * @param a the underlying image
+     * @param b the overlying image
+     * @return the composite image
+     */
     public static BufferedImage mergeImages(BufferedImage a, BufferedImage b) {
         BufferedImage combined = new BufferedImage(a.getWidth(), a.getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics g = combined.getGraphics();
@@ -87,15 +117,30 @@ public class ResourceManager {
         return combined;
     }
 
+    /**
+     * ResourceManager should not be instantiated
+     */
     private ResourceManager() {
         throw new AssertionError("Static class!");
     }
 
+    /**
+     * Creates a new image which is a rotated version of its parameter
+     * @param image the image to be rotated
+     * @param eighth the numbers of eighth of a circle to rotate with
+     * @return the rotated image
+     */
     private static BufferedImage rotate(BufferedImage image, int eighth) {
         AffineTransform at = AffineTransform.getRotateInstance(eighth * Math.PI / 4.0, image.getWidth() / 2.0, image.getHeight() / 2.0);
         return transform(image, at);
     }
 
+    /**
+     * transforms an image with a transformation
+     * @param image the image to be transformed
+     * @param at the transformation
+     * @return the transformed image
+     */
     private static BufferedImage transform(BufferedImage image, AffineTransform at) {
         BufferedImage newImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = newImage.createGraphics();
@@ -105,6 +150,13 @@ public class ResourceManager {
         return newImage;
     }
 
+    /**
+     * Shifts a moving entity's image when needed
+     * @param original the image of the entity (should be rotated appropriately)
+     * @param from the direction the entity is coming from
+     * @param to the direction the entity is heading toward
+     * @return the shifted image
+     */
     private static BufferedImage shiftMoving(BufferedImage original, Direction from, Direction to) {
         int shiftX = original.getWidth() / 8;
         int shiftY = shiftX;
@@ -122,6 +174,12 @@ public class ResourceManager {
         return shifted;
     }
 
+    /**
+     * Draws passengers onto cars if they are present
+     * @param original the car's image
+     * @param hasPassenger whether the car has passengers
+     * @return the combined image
+     */
     private static BufferedImage addPassenger(BufferedImage original, boolean hasPassenger) {
         if (!hasPassenger) return original;
 
@@ -134,10 +192,21 @@ public class ResourceManager {
         return ret;
     }
 
+    /**
+     * Returns the background image of a map
+     * @param map the map's id
+     * @return the background
+     */
     public static BufferedImage getMap(int map) {
         return MAPS[map];
     }
 
+    /**
+     * Returns the background image of a rail
+     * @param aDir the direction of connection A
+     * @param bDir the direction of connection B
+     * @return the image of the rail
+     */
     public static BufferedImage getRail(Direction aDir, Direction bDir) {
         if (aDir.value > bDir.value) {
             Direction temp = aDir;
@@ -156,15 +225,33 @@ public class ResourceManager {
         }
     }
 
+    /**
+     * Returns the background image of a cross rail
+     * @return the image of the cross rail
+     */
     public static BufferedImage getCrossRail() {
         return CROSS_RAIL;
     }
 
+    /**
+     * Returns the background image of a switch
+     * @param inDir the in direction of the switch
+     * @param isAActive whether output A is active
+     * @return the image of the switch
+     */
     public static BufferedImage getSwitch(Direction inDir, boolean isAActive) {
         int val = inDir.value;
         return isAActive ? SWITCH_AS[val] : SWITCH_BS[val];
     }
 
+    /**
+     * Returns the background image of a station
+     * @param aDir the direction of connection A
+     * @param bDir the direction of connection B
+     * @param color the color of the station
+     * @param passengers the passengers of the station
+     * @return the image of the station
+     */
     public static BufferedImage getStation(Direction aDir, Direction bDir, Color color, EnumSet<Color> passengers) {
         BufferedImage rail = getRail(aDir, bDir);
         BufferedImage ret = new BufferedImage(rail.getWidth(), rail.getHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -204,11 +291,25 @@ public class ResourceManager {
         return ret;
     }
 
+    /**
+     * Returns the background image of a tunnel opening
+     * @param visibleDir the direction of the visible connection of the tunnel
+     * @param isActive whether the tunnel is activated or not
+     * @return the image of the tunnel
+     */
     public static BufferedImage getTunnel(Direction visibleDir, boolean isActive) {
         BufferedImage[] array = isActive ? OPEN_TUNNELS : CLOSED_TUNNELS;
         return array[visibleDir.value];
     }
 
+    /**
+     * Returns the image of a moving entity
+     * @param array the array of which to choose the images from (LOCOMOTIVES or CARS)
+     * @param fromDir the direction the entity is coming from
+     * @param toDir the direction the entity is headed towards
+     * @param hasPassengers whether the entity has passengers (only for cars)
+     * @return the image of the entity
+     */
     public static BufferedImage getMoving(BufferedImage[] array, Direction fromDir, Direction toDir, boolean hasPassengers) {
         if (fromDir == toDir.invert()) {
             return addPassenger(array[fromDir.value * 2], hasPassengers);
@@ -224,10 +325,24 @@ public class ResourceManager {
 
     }
 
+    /**
+     * Returns the image of a locomotive
+     * @param fromDir the direction the locomotive is coming from
+     * @param toDir the direction the locomotive is headed towards
+     * @return the image of the locomotive
+     */
     public static BufferedImage getLocomotive(Direction fromDir, Direction toDir) {
         return getMoving(LOCOMOTIVES, fromDir, toDir, false);
     }
 
+    /**
+     * Returns the image of a car
+     * @param fromDir the direction the car is coming from
+     * @param toDir the direction the car is headed towards
+     * @param color the color of the car
+     * @param hasPassengers whether the car has any passengers
+     * @return the image of the car
+     */
     public static BufferedImage getCar(Direction fromDir, Direction toDir, Color color, boolean hasPassengers) {
         return getMoving(CARS.get(color), fromDir, toDir, hasPassengers);
     }
