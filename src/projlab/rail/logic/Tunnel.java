@@ -83,7 +83,8 @@ public class Tunnel extends StaticEntity {
         if (vehicle == null) {
             return base;
         } else {
-            return ResourceManager.mergeImages(base, vehicle.image(visDir, visDir.invert()));
+            Direction from = vehicle.lastPosition == visibleConnection ? visDir : visDir.invert();
+            return ResourceManager.mergeImages(base, vehicle.image(from, from.invert()));
         }
     }
 }

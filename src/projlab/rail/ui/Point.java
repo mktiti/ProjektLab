@@ -31,7 +31,6 @@ public class Point {
     }
 
     public int getDist(Point p) {
-        System.out.print(this + " - " + p);
         return Math.max(1, (int)Math.sqrt((x - p.x) * (x - p.x) + (y - p.y) * (y - p.y)));
     }
 
