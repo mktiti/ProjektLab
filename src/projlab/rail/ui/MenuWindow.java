@@ -25,6 +25,7 @@ public class MenuWindow extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == ngame) {
+                ProgressManager.saveProgress(0);
                 new MainWindow(0);
             } else if (e.getSource() == cont) {
                 new MainWindow(ProgressManager.getProgress());
