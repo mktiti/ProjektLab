@@ -3,19 +3,13 @@ package projlab.rail.ui;
 import javafx.util.Pair;
 import org.xml.sax.SAXException;
 import projlab.rail.GameEngine;
-import projlab.rail.Result;
 import projlab.rail.exception.IllegalMoveException;
 import projlab.rail.exception.TrainException;
 import projlab.rail.logic.*;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -32,6 +26,8 @@ public class GraphicsEngine extends JPanel implements MouseListener {
     private GameEngine engine;
     private MainWindow parent;
     private BufferedImage backgroundImage;
+
+    static boolean running = false;
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -181,20 +177,6 @@ public class GraphicsEngine extends JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent event) {
-        if (SwingUtilities.isRightMouseButton(event)) {
-                new Thread(() -> {
-                    try {
-                        Clip clip = AudioSystem.getClip();
-                        AudioInputStream inputStream = AudioSystem.getAudioInputStream(GraphicsEngine.class.getResourceAsStream("/music.wav"));
-                        clip.open(inputStream);
-                        clip.start();
-                    } catch (Exception e) {
-                        System.err.println(e.getMessage());
-                    }
-                }).start();
-                return;
-        }
-
         int x = event.getX() / EntityPanel.PANEL_SIZE;
         int y = event.getY() / EntityPanel.PANEL_SIZE;
 
