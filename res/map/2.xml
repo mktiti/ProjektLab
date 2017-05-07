@@ -75,11 +75,13 @@
 		<switch id="11">
             <dir-in>SOUTH</dir-in>
             <IN>10</IN>
+            <A>28</A>
             <B>21</B>
         </switch>
 		<rail id="12">
             <dir-b>WEST</dir-b>
             <dir-a>EAST</dir-a>
+            <A>29</A>
             <B>3</B>
         </rail>
 		<rail id="13">
@@ -88,12 +90,12 @@
             <A>14</A>
             <B>3</B>
         </rail>
-		<rail id="14">
+        <station id="14" color="GREEN">
             <dir-b>NORTH</dir-b>
             <dir-a>SOUTH</dir-a>
             <A>15</A>
             <B>13</B>
-        </rail>
+        </station>
 		<rail id="15">
             <dir-b>NORTH</dir-b>
             <dir-a>SOUTH</dir-a>
@@ -170,5 +172,16 @@
             <B>26</B>
             <A>20</A>
         </rail>
+
+        <tunnel id="28" x="4" y="1" >
+            <dir-visible>EAST</dir-visible>
+            <VISIBLE>11</VISIBLE>
+        </tunnel>
+
+        <tunnel id="29" x="2" y="1" >
+            <dir-visible>WEST</dir-visible>
+            <VISIBLE>12</VISIBLE>
+        </tunnel>
+
     </entities>
 </map>
