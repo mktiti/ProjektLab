@@ -39,7 +39,7 @@ public class MainWindow extends JFrame {
 
 
     private MainWindow() {
-        init(0);
+        init(1);
     }
 
     private void init(int map) {
@@ -53,13 +53,13 @@ public class MainWindow extends JFrame {
         setResizable(false);
 
         try {
-            gameEngine.load(0);
+            gameEngine.load(1);
         } catch (ParserConfigurationException | IOException | org.xml.sax.SAXException e) {
             e.printStackTrace();
         }
 
         pack();
-        graphicsEngine.init(gameEngine.entryPoint,null, 0, 0,gameEngine,0);
+        graphicsEngine.init(gameEngine.entryPoint,null, 0, 0,gameEngine,map);
         setContentPane(graphicsEngine);
         setVisible(true);
         repaint();
