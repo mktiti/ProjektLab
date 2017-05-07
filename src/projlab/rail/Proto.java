@@ -2,7 +2,6 @@ package projlab.rail;
 
 import projlab.rail.exception.TrainException;
 import projlab.rail.logic.*;
-import projlab.rail.ui.Direction;
 
 import java.util.*;
 
@@ -119,7 +118,7 @@ public class Proto {
     public final StaticStore<Station> stations = new StaticStore<>();
     public final StaticStore<Tunnel> tunnels = new StaticStore<>();
 
-    public final GameEngine engine = new GameEngine();
+    public final GameEngine engine = new GameEngine(graphicsEngine);
 
     public void step() throws TrainException {
         engine.step();
