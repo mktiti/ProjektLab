@@ -37,9 +37,6 @@ public class MainWindow extends JFrame {
     }
 
     private void init(int map) {
-
-
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(WINDOW_SIZE, WINDOW_SIZE);
         setPreferredSize(new Dimension(WINDOW_SIZE, WINDOW_SIZE+28));
         setLocationRelativeTo(null);
