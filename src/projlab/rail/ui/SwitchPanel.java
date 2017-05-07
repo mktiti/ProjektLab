@@ -14,6 +14,9 @@ public class SwitchPanel extends EntityPanel implements MouseListener {
 
     }
 
+    /**
+     * On click, switches the switch's output
+     */
     @Override
     void click() {
         Switch s = (Switch)entity;

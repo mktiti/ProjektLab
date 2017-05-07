@@ -35,6 +35,9 @@ public class MenuWindow extends JFrame{
         }
     }
 
+    /**
+     * Initializes the Windows
+     */
     private void init(){
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -74,10 +77,17 @@ public class MenuWindow extends JFrame{
         setVisible(true);
     }
 
+    /**
+     * Creates and initializes a MenuWindow
+     */
     MenuWindow() {
         init();
     }
 
+    /**
+     * Program entry point
+     * @param args Arguments
+     */
     public static void main(String[] args){
         // Kis gyorsító mágia
         new Thread(ResourceManager::init).start();
