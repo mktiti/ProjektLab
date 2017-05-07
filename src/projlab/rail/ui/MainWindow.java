@@ -17,7 +17,7 @@ public class MainWindow extends JFrame {
     private GameEngine gameEngine = new GameEngine();
 
     MainWindow() {
-        init(0);
+        init(1);
     }
 
     private void init(int map) {
