@@ -1,16 +1,10 @@
 package projlab.rail.ui;
 
-import jdk.internal.org.xml.sax.SAXException;
 import projlab.rail.GameEngine;
-import projlab.rail.logic.CrossRail;
-import projlab.rail.logic.Rail;
-import projlab.rail.logic.Switch;
 
 import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -38,7 +32,7 @@ public class MainWindow extends JFrame {
     }
 
 
-    private MainWindow() {
+    MainWindow() {
         init(0);
     }
 
@@ -63,11 +57,6 @@ public class MainWindow extends JFrame {
         setContentPane(graphicsEngine);
         setVisible(true);
         repaint();
-    }
-
-
-    public static void main(String[] args) {
-        new MainWindow();
     }
 
 }
