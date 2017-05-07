@@ -1,0 +1,190 @@
+<map>
+    <entry x="0" y="0" />
+
+    <trains>
+        <train start="5"> <!-- Launches at fifth iteration -->
+            <car color="RED" pass="true" />
+            <car color="YELLOW" pass="false" />
+            <car color="BLUE" /> <!-- No passengers by default -->
+            <car /> <!-- Coal car -->
+            <car color="GREEN" pass="true" />
+        </train>
+    </trains>
+
+    <entities>
+        <rail id="1">
+            <dir-b>WEST</dir-b>
+            <dir-a>EAST</dir-a>
+            <A>2</A>
+            <B>0</B>
+        </rail>
+        <rail id="2">
+            <dir-b>WEST</dir-b>
+            <dir-a>SOUTH</dir-a>
+            <A>3</A>
+            <B>1</B>
+        </rail>
+        <switch id="3">
+            <dir-in>WEST</dir-in>
+            <IN>4</IN>
+            <A>2</A>
+            <B>9</B>
+        </switch>
+        <rail id="4">
+            <dir-b>EAST</dir-b>
+            <dir-a>SOUTH</dir-a>
+            <A>5</A>
+            <B>3</B>
+        </rail>
+        <rail id="5">
+            <dir-b>NORTH</dir-b>
+            <dir-a>SOUTH</dir-a>
+            <A>6</A>
+            <B>4</B>
+        </rail>
+        <station id="6" color="YELLOW">
+            <dir-b>NORTH</dir-b>
+            <dir-a>SOUTH</dir-a>
+            <A>7</A>
+            <B>5</B>
+        </station>
+        <rail id="7">
+            <dir-b>NORTH</dir-b>
+            <dir-a>EAST</dir-a>
+            <A>8</A>
+            <B>6</B>
+        </rail>
+        <tunnel id="8" x="1" y="4" >
+            <dir-visible>WEST</dir-visible>
+            <VISIBLE>7</VISIBLE>
+        </tunnel>
+        <rail id="9">
+            <dir-b>NORTH</dir-b>
+            <dir-a>EAST</dir-a>
+            <A>10</A>
+            <B>3</B>
+        </rail>
+        <rail id="10">
+            <dir-b>WEST</dir-b>
+            <dir-a>EAST</dir-a>
+            <A>11</A>
+            <B>9</B>
+        </rail>
+        <rail id="11">
+            <dir-b>WEST</dir-b>
+            <dir-a>EAST</dir-a>
+            <A>12</A>
+            <B>10</B>
+        </rail>
+        <rail id="12">
+            <dir-b>WEST</dir-b>
+            <dir-a>EAST</dir-a>
+            <A>13</A>
+            <B>11</B>
+        </rail>
+        <rail id="13">
+            <dir-b>WEST</dir-b>
+            <dir-a>EAST</dir-a>
+            <A>14</A>
+            <B>12</B>
+        </rail>
+        <cross id="14">
+            <A>13</A>
+            <B>15</B>
+            <X>27</X>
+            <Y>28</Y>
+        </cross>
+        <rail id="15">
+            <dir-b>WEST</dir-b>
+            <dir-a>SOUTH</dir-a>
+            <A>16</A>
+            <B>14</B>
+        </rail>
+        <rail id="16">
+            <dir-b>NORTH</dir-b>
+            <dir-a>SOUTH</dir-a>
+            <A>17</A>
+            <B>15</B>
+        </rail>
+        <switch id="17">
+            <dir-in>NORTH</dir-in>
+            <IN>16</IN>
+            <A>18</A>
+            <B>29</B>
+        </switch>
+        <rail id="18">
+            <dir-b>WEST</dir-b>
+            <dir-a>NORTH</dir-a>
+            <A>19</A>
+            <B>17</B>
+        </rail>
+        <rail id="19">
+            <dir-b>SOUTH</dir-b>
+            <dir-a>NORTH</dir-a>
+            <A>20</A>
+            <B>18</B>
+        </rail>
+        <rail id="20">
+            <dir-b>SOUTH</dir-b>
+            <dir-a>NORTH</dir-a>
+            <A>21</A>
+            <B>19</B>
+        </rail>
+        <station id="21" color = "RED">
+            <dir-b>SOUTH</dir-b>
+            <dir-a>NORTH</dir-a>
+            <A>22</A>
+            <B>20</B>
+        </station>
+        <rail id="22">
+            <dir-b>SOUTH</dir-b>
+            <dir-a>WEST</dir-a>
+            <A>23</A>
+            <B>21</B>
+        </rail>
+        <switch id="23">
+            <dir-in>SOUTH</dir-in>
+            <IN>26</IN>
+            <A>24</A>
+            <B>22</B>
+        </switch>
+        <station id="24" color="BLUE">
+            <dir-b>EAST</dir-b>
+            <dir-a>WEST</dir-a>
+            <A>25</A>
+            <B>23</B>
+        </station>
+        <tunnel id="25" x="5" y="0" >
+            <dir-visible>EAST</dir-visible>
+            <VISIBLE>24</VISIBLE>
+        </tunnel>
+        <rail id="26">
+            <dir-b>NORTH</dir-b>
+            <dir-a>WEST</dir-a>
+            <A>27</A>
+            <B>23</B>
+        </rail>
+        <rail id="27">
+            <dir-b>EAST</dir-b>
+            <dir-a>SOUTH</dir-a>
+            <A>14</A>
+            <B>26</B>
+        </rail>
+        <station id="28" color="GREEN">
+            <dir-b>NORTH</dir-b>
+            <dir-a>SOUTH</dir-a>
+            <A>29</A>
+            <B>14</B>
+        </station>
+        <switch id="29">
+            <dir-in>NORTH</dir-in>
+            <IN>28</IN>
+            <A>17</A>
+            <B>30</B>
+        </switch>
+        <tunnel id="30" x="5" y="4" >
+            <dir-visible>EAST</dir-visible>
+            <VISIBLE>29</VISIBLE>
+        </tunnel>
+    </entities>
+</map>
