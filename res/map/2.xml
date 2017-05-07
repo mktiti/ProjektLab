@@ -1,7 +1,16 @@
 <map>
     <trains>
+        <train start="5"> <!-- Launches at fifth iteration -->
+            <car color="RED" pass="true" />
+            <car color="YELLOW" pass="false" />
+            <car color="BLUE" /> <!-- No passengers by default -->
+            <car /> <!-- Coal car -->
+            <car color="GREEN" pass="true" />
+        </train>
+    </trains>
+
     <entry x="0" y="0" />
-    <trains />
+
     <entities>
         <rail id="1">
             <dir-b>WEST</dir-b>
@@ -51,5 +60,4 @@
             <B>7</B>
         </rail>
     </entities>
-    </trains>
 </map>
