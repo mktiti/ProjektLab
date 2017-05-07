@@ -2,7 +2,7 @@
     <entry x="0" y="0" />
 
     <trains>
-        <train start="5"> <!-- Launches at fifth iteration -->
+        <train start="2"> <!-- Launches at fifth iteration -->
             <car color="RED" pass="true" />
             <car color="YELLOW" pass="false" />
             <car color="BLUE" /> <!-- No passengers by default -->
@@ -75,7 +75,6 @@
 		<rail id="11">
             <dir-b>SOUTH</dir-b>
             <dir-a>WEST</dir-a>
-            <A>12</A>
             <B>10</B>
         </rail>
 		<rail id="12">
