@@ -1,4 +1,4 @@
-<map>
+<map step-time="500" new-people-freq="10" >
     <entry x="0" y="0" />
 
     <trains>
@@ -26,7 +26,7 @@
         </rail>
         <cross id="3">
 			<A>13</A>
-			<B>12</B>
+			<B>29</B>
             <X>2</X>
             <Y>4</Y>
         </cross>
@@ -72,28 +72,24 @@
             <A>11</A>
             <B>9</B>
         </rail>
-		<switch id="11">
+        <switch id="11">
             <dir-in>SOUTH</dir-in>
             <IN>10</IN>
+            <A>28</A>
             <B>21</B>
         </switch>
-		<rail id="12">
-            <dir-b>WEST</dir-b>
-            <dir-a>EAST</dir-a>
-            <B>3</B>
-        </rail>
 		<rail id="13">
             <dir-b>EAST</dir-b>
             <dir-a>SOUTH</dir-a>
             <A>14</A>
             <B>3</B>
         </rail>
-		<rail id="14">
+        <station id="14" color="GREEN">
             <dir-b>NORTH</dir-b>
             <dir-a>SOUTH</dir-a>
             <A>15</A>
             <B>13</B>
-        </rail>
+        </station>
 		<rail id="15">
             <dir-b>NORTH</dir-b>
             <dir-a>SOUTH</dir-a>
@@ -170,5 +166,16 @@
             <B>26</B>
             <A>20</A>
         </rail>
+
+        <tunnel id="28" x="4" y="1" >
+            <dir-visible>EAST</dir-visible>
+            <VISIBLE>11</VISIBLE>
+        </tunnel>
+
+        <tunnel id="29" x="2" y="1" >
+            <dir-visible>WEST</dir-visible>
+            <VISIBLE>13</VISIBLE>
+        </tunnel>
+
     </entities>
 </map>

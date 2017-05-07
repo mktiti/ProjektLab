@@ -1,4 +1,4 @@
-<map new-people-freq="1" train-speed="1000" > <!-- new peple frequency is relative, speed is in ms -->
+<map new-people-freq="5" step-time="1000" > <!-- new peple frequency is relative, step time is in ms -->
     <entry x="0" y="0" />
 
     <trains>
