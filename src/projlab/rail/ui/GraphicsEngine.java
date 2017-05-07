@@ -7,6 +7,10 @@ import projlab.rail.Result;
 import projlab.rail.exception.IllegalMoveException;
 import projlab.rail.exception.TrainException;
 import projlab.rail.logic.*;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
@@ -176,9 +180,23 @@ public class GraphicsEngine extends JPanel implements MouseListener {
     }
 
     @Override
-    public void mouseClicked(MouseEvent mouseEvent) {
-        int x = mouseEvent.getX() / EntityPanel.PANEL_SIZE;
-        int y = mouseEvent.getY() / EntityPanel.PANEL_SIZE;
+    public void mouseClicked(MouseEvent event) {
+        if (SwingUtilities.isRightMouseButton(event)) {
+                new Thread(() -> {
+                    try {
+                        Clip clip = AudioSystem.getClip();
+                        AudioInputStream inputStream = AudioSystem.getAudioInputStream(GraphicsEngine.class.getResourceAsStream("/music.wav"));
+                        clip.open(inputStream);
+                        clip.start();
+                    } catch (Exception e) {
+                        System.err.println(e.getMessage());
+                    }
+                }).start();
+                return;
+        }
+
+        int x = event.getX() / EntityPanel.PANEL_SIZE;
+        int y = event.getY() / EntityPanel.PANEL_SIZE;
 
         if (entities[x][y] != null) {
             entities[x][y].click();
