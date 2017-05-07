@@ -10,7 +10,8 @@ import java.io.IOException;
 
 public class MainWindow extends JFrame {
 
-    public static final int WINDOW_SIZE = 1000;
+    public static final int WINDOW_WIDTH = 1800;
+    private static final int WINDOW_HEIGHT = 1000;
 
     private final GraphicsEngine graphicsEngine = new GraphicsEngine(this);
     private GameEngine gameEngine = new GameEngine();
@@ -20,8 +21,8 @@ public class MainWindow extends JFrame {
 
         private BackgroundPanel(BufferedImage backgroundImage) {
             this.backgroundImage = backgroundImage;
-            setPreferredSize(new Dimension(MainWindow.WINDOW_SIZE, MainWindow.WINDOW_SIZE));
-            setSize(MainWindow.WINDOW_SIZE, MainWindow.WINDOW_SIZE);
+            setPreferredSize(new Dimension(MainWindow.WINDOW_WIDTH, MainWindow.WINDOW_HEIGHT));
+            setSize(MainWindow.WINDOW_WIDTH, MainWindow.WINDOW_HEIGHT);
             setLayout(null);
         }
 
@@ -37,11 +38,8 @@ public class MainWindow extends JFrame {
     }
 
     private void init(int map) {
-
-
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(WINDOW_SIZE, WINDOW_SIZE);
-        setPreferredSize(new Dimension(WINDOW_SIZE, WINDOW_SIZE+28));
+        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT+28));
         setLocationRelativeTo(null);
         setLayout(null);
         setResizable(false);

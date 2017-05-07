@@ -7,10 +7,10 @@ import java.awt.event.ActionListener;
 
 public class MenuWindow extends JFrame{
 
-    private final int WIDTH = 300;
-    private final int HEIGHT = 400;
+    private final int WINDOW_WIDTH = 300;
+    private final int WINDOW_HEIGHT = 400;
 
-    private final Dimension FILL = new Dimension(WIDTH/6, HEIGHT/6);
+    private final Dimension FILL = new Dimension(WINDOW_WIDTH/6, WINDOW_HEIGHT/6);
 
     JButton ngame, cont, quit;
 
@@ -32,17 +32,24 @@ public class MenuWindow extends JFrame{
 
     private void init(){
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(WIDTH, HEIGHT);
+        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setLocationRelativeTo(null);
         ButtonListener listener = new ButtonListener();
+        getContentPane().setBackground(Color.lightGray);
 
         setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 
         ngame = new JButton("New Game");
+        ngame.setBackground(Color.darkGray);
+        ngame.setForeground(Color.white);
 
         cont = new JButton("Continue");
+        cont.setBackground(Color.darkGray);
+        cont.setForeground(Color.white);
 
         quit = new JButton("Quit");
+        quit.setBackground(Color.darkGray);
+        quit.setForeground(Color.white);
 
         ngame.setAlignmentX(Component.CENTER_ALIGNMENT);
         cont.setAlignmentX(Component.CENTER_ALIGNMENT);
