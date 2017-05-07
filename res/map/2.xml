@@ -131,7 +131,43 @@
         <rail id="21">
             <dir-b>WEST</dir-b>
             <dir-a>EAST</dir-a>
+            <A>22</A>
             <B>11</B>
         </rail>
+        <rail id="22">
+            <dir-b>WEST</dir-b>
+            <dir-a>SOUTH</dir-a>
+            <A>23</A>
+            <B>21</B>
+        </rail>
+        <station id="23" color="BLUE">
+            <dir-b>NORTH</dir-b>
+            <dir-a>SOUTH</dir-a>
+            <A>24</A>
+            <B>22</B>
+        </station>
+        <rail id="24">
+            <dir-b>NORTH</dir-b>
+            <dir-a>SOUTH</dir-a>
+            <A>25</A>
+            <B>23</B>
+        </rail>
+        <switch id="25">
+            <dir-in>NORTH</dir-in>
+            <IN>24</IN>
+            <B>26</B>
+        </switch>
+        <rail id="26">
+            <dir-b>EAST</dir-b>
+            <dir-a>WEST</dir-a>
+            <A>25</A>
+            <B>23</B>
+        </rail>
+        <rail id="27">
+            <dir-b>EAST</dir-b>
+            <dir-a>WEST</dir-a>
+            <B>26</B>
+        </rail>
+
     </entities>
 </map>
