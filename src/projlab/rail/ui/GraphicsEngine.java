@@ -29,7 +29,7 @@ public class GraphicsEngine extends JPanel implements MouseListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(backgroundImage,0,0,this);
+        g.drawImage(backgroundImage, 0, 0, this);
         draw(g);
     }
 

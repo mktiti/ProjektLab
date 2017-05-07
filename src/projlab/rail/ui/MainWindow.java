@@ -47,16 +47,20 @@ public class MainWindow extends JFrame {
         setResizable(false);
 
         try {
-            gameEngine.load(0);
+            gameEngine.load(map);
         } catch (ParserConfigurationException | IOException | org.xml.sax.SAXException e) {
             e.printStackTrace();
         }
 
         pack();
-        graphicsEngine.init(gameEngine.entryPoint,null, 0, 0,gameEngine,0);
+        graphicsEngine.init(gameEngine.entryPoint, null, 0, 0, gameEngine, map);
         setContentPane(graphicsEngine);
         setVisible(true);
         repaint();
+    }
+
+    public static void main(String[] args) {
+        new MainWindow();
     }
 
 }
