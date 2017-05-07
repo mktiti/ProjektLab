@@ -5,7 +5,6 @@ import projlab.rail.GameEngine;
 import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class MainWindow extends JFrame {
@@ -21,8 +20,11 @@ public class MainWindow extends JFrame {
     }
 
     private void init(int map) {
-        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT + 28));
+        //setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        int increment = 0;
+        if(System.getProperty("os.name").toUpperCase().contains("WINDOWS"));
+            increment = 28;
+        setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT + increment));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
@@ -36,8 +38,8 @@ public class MainWindow extends JFrame {
 
         graphicsEngine.init(gameEngine, map);
         setContentPane(graphicsEngine);
-        pack();
         setVisible(true);
+        pack();
     }
 
     public static void main(String[] args) {

@@ -47,7 +47,7 @@ public class GameEngine {
     private final GraphicsEngine graphicsEngine;
 
     public Point entryCoords;
-    private int map;
+    public int map;
     private volatile int iteration = 0;
 
     public GameEngine(GraphicsEngine graphicsEngine) {
