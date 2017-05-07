@@ -63,6 +63,8 @@ public class GameEngine {
     private int stepTime = 1000;
     /** Relative frequency of random passengers appearing */
     private int newPassengerFreq = 1;
+    /** Whether the map can be won */
+    private boolean canBeFinished = false;
 
     public GameEngine(GraphicsEngine graphicsEngine) {
         this.graphicsEngine = graphicsEngine;
@@ -128,6 +130,7 @@ public class GameEngine {
                 pos = pos.next(posPrev);
                 posPrev = tmp;
             }
+            canBeFinished = true;
         } catch (TrainException te) {
             te.printStackTrace();
         }
@@ -364,7 +367,7 @@ public class GameEngine {
             gameOver();
             return Result.CRASH;
         }
-        if (iteration != 0 && locos.stream().filter(l -> l.startTime > iteration).count() == 0 && locos.isEmpty()) {
+        if (canBeFinished && locos.stream().filter(l -> l.startTime < iteration).count() == 0) {
             gameWon();
             return map == MAP_COUNT ? Result.GAME_WIN : Result.MAP_WIN;
         }
