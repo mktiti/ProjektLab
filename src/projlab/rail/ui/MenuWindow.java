@@ -65,4 +65,8 @@ public class MenuWindow extends JFrame{
     MenuWindow() {
         init();
     }
+
+    public static void main(String[] args){
+        new MenuWindow();
+    }
 }
