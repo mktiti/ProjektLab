@@ -83,11 +83,5 @@
             <A>11</A>
             <B>12</B>
         </rail>
-        <cross id="11">
-            <A>13</A>
-            <B>14</B>
-            <X>31</X>
-            <Y>10</Y>
-        </cross>
     </entities>
 </map>
