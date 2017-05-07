@@ -9,6 +9,7 @@ import projlab.rail.exception.CrashException;
 import projlab.rail.exception.TrainException;
 import projlab.rail.logic.*;
 import projlab.rail.ui.Direction;
+import projlab.rail.ui.GraphicsEngine;
 import projlab.rail.ui.Point;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -43,11 +44,15 @@ public class GameEngine {
     /** State of the game*/
     public GameState state;
 
+    private final GraphicsEngine graphicsEngine;
+
     public Point entryCoords;
     private int map;
     private volatile int iteration = 0;
 
-    public GameEngine() {
+    public GameEngine(GraphicsEngine graphicsEngine) {
+        this.graphicsEngine = graphicsEngine;
+
         HiddenRail prev = new HiddenRail();
         for (int i = 0; i <= Color.values().length; i++) {
             HiddenRail current = new HiddenRail();
@@ -67,7 +72,30 @@ public class GameEngine {
 
         new Thread(() -> {
 
+            synchronized (this) {
+                try {
+                    loop: while (true) {
+                        Thread.sleep(1000);
+                        Result result = step();
+                        if (graphicsEngine != null) {
+                            graphicsEngine.update();
 
+                            switch (result) {
+                                case CRASH:
+                                    graphicsEngine.showCrash();
+                                    break loop;
+                                case GAME_WIN:
+                                    break loop;
+                                case MAP_WIN:
+                                    break loop;
+                                default: break;
+                            }
+                        }
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
 
         }).start();
     }

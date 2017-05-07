@@ -51,40 +51,6 @@ public class GraphicsEngine extends JPanel implements MouseListener {
             }
         }
 
-        addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent keyEvent) {
-                if (engine != null) {
-                    Result result = engine.step();
-                    for(int i = 0; i < SIZE; i++) {
-                        for (int j = 0; j < SIZE; j++) {
-                            if (entities[i][j] != null) {
-                                entities[i][j].update();
-                            }
-                        }
-                    }
-
-                    switch (result) {
-                        case CRASH:
-                            showCrash();
-                            break;
-                        case GAME_WIN:
-                            break;
-                        case MAP_WIN:
-                            break;
-                        default: break;
-                    }
-                }
-            }
-
-            @Override
-            public void keyPressed(KeyEvent keyEvent) {}
-
-            @Override
-            public void keyReleased(KeyEvent keyEvent) {
-
-            }
-        });
         setFocusable(true);
 
         addMouseListener(this);
@@ -144,7 +110,18 @@ public class GraphicsEngine extends JPanel implements MouseListener {
         }
     }
 
-    private void showCrash() {
+    public void update() {
+        for(int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                if (entities[i][j] != null) {
+                    entities[i][j].update();
+                }
+            }
+        }
+        repaint();
+    }
+
+    public void showCrash() {
         switch (JOptionPane.showConfirmDialog(this, "Crash! Do you want to restart?", "Crash", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE)) {
             case JOptionPane.YES_OPTION:
                 engine.resetMap();
