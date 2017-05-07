@@ -1,11 +1,8 @@
-<map>
+<map new-people-freq="50" step-time="1000" > <!-- new peple frequency is relative, step time is in ms -->
     <entry x="0" y="0" />
 
-    <actions>
-    </actions>
-
     <trains>
-        <train start="5"> <!-- Launches at fifth iteration -->
+        <train start="0"> <!-- Launches at fifth iteration -->
             <car color="RED" pass="true" />
             <car color="YELLOW" pass="false" />
             <car color="BLUE" /> <!-- No passengers by default -->
@@ -50,19 +47,17 @@
             <A>7</A>
             <B>5</B>
         </rail>
-        <rail id="7">
+        <station id="7" color="GREEN">
             <dir-b>WEST</dir-b>
             <dir-a>EAST</dir-a>
             <A>8</A>
             <B>6</B>
-        </rail>
+        </station>
         <rail id="8">
             <dir-b>WEST</dir-b>
             <dir-a>EAST</dir-a>
-            <A>9</A>
             <B>7</B>
         </rail>
-
         <!--
         <rail id="1">
             <dir-b>WEST</dir-b>

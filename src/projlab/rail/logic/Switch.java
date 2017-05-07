@@ -100,7 +100,7 @@ public class Switch extends StaticEntity {
             } else if (vehicle.lastPosition == outputB) {
                 fromDir = inDir.rotateCCW();
             }
-            Direction toDir = isAActive ? inDir.rotateCCW() : inDir.rotateCW();
+            Direction toDir = isAActive ? inDir.rotateCW() : inDir.rotateCCW();
             if (vehicle.lastPosition == outputA || vehicle.lastPosition == outputB) {
                 toDir = inDir;
             }

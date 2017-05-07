@@ -1,20 +1,22 @@
 package projlab.rail.ui;
 
 import javafx.util.Pair;
+import org.xml.sax.SAXException;
 import projlab.rail.GameEngine;
 import projlab.rail.Result;
 import projlab.rail.exception.IllegalMoveException;
 import projlab.rail.exception.TrainException;
 import projlab.rail.logic.*;
 import javax.swing.*;
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 
@@ -100,10 +102,20 @@ public class GraphicsEngine extends JPanel implements MouseListener {
         }
     }
 
+    private void ResetPanels(){
+        entities = new EntityPanel[SIZE][];
+        for(int i = 0; i < SIZE; i++)
+            entities[i] = new EntityPanel[SIZE];
+    }
+
     public void draw(Graphics g){
-        for(int i = 0; i < SIZE; i++){
+        loop: for(int i = 0; i < SIZE; i++){
             for(int j = 0; j < SIZE; j++)
             {
+                if(entities == null)
+                    return;
+                if(entities[i] == null)
+                    return;
                 if(entities[i][j] != null)
                     entities[i][j].paintComponent(g);
             }
@@ -121,22 +133,46 @@ public class GraphicsEngine extends JPanel implements MouseListener {
         repaint();
     }
 
+    private void loadMapWithID(int mapid){
+        engine = new GameEngine(this);
+        ResetPanels();
+        ProgressManager.saveProgress(mapid);
+        try{
+            engine.load(mapid);
+            init(engine,mapid);
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public void showCrash() {
         switch (JOptionPane.showConfirmDialog(this, "Crash! Do you want to restart?", "Crash", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE)) {
             case JOptionPane.YES_OPTION:
-                engine.resetMap();
+                loadMapWithID(engine.map);
                 break;
             default:
                 System.exit(0);
         }
     }
 
-    private void showMapWin() {
-
+    public void showMapWin() {
+        switch (JOptionPane.showConfirmDialog(this, "Map won! Want to load next map?", "Map victory", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE)) {
+            case JOptionPane.YES_OPTION:
+                loadMapWithID(engine.map+1);
+                break;
+            default:
+                System.exit(0);
+        }
     }
 
-    private void showGameWin() {
-
+    public void showGameWin() {
+        JOptionPane.showMessageDialog(this,"You have won the game! Press OK to exit");
+        System.exit(0);
     }
 
     @Override
