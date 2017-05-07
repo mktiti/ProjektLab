@@ -1,5 +1,6 @@
 <map>
     <entry x="0" y="0" />
+    <trains />
     <entities>
         <rail id="1">
             <dir-b>WEST</dir-b>
