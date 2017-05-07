@@ -79,17 +79,17 @@ public class GameEngine {
                         Result result = step();
                         if (graphicsEngine != null) {
                             graphicsEngine.update();
-                        }
 
-                        switch (result) {
-                            case CRASH:
-                                graphicsEngine.showCrash();
-                                break loop;
-                            case GAME_WIN:
-                                break loop;
-                            case MAP_WIN:
-                                break loop;
-                            default: break;
+                            switch (result) {
+                                case CRASH:
+                                    graphicsEngine.showCrash();
+                                    break loop;
+                                case GAME_WIN:
+                                    break loop;
+                                case MAP_WIN:
+                                    break loop;
+                                default: break;
+                            }
                         }
                     }
                 } catch (InterruptedException e) {
