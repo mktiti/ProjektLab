@@ -78,8 +78,8 @@
             <B>21</B>
         </switch>
 		<rail id="12">
-            <dir-b>EAST</dir-b>
-            <dir-a>WEST</dir-a>
+            <dir-b>WEST</dir-b>
+            <dir-a>EAST</dir-a>
             <B>3</B>
         </rail>
 		<rail id="13">
@@ -127,6 +127,7 @@
             <dir-b>WEST</dir-b>
             <dir-a>EAST</dir-a>
             <B>19</B>
+            <A>27</A>
         </station>
         <rail id="21">
             <dir-b>WEST</dir-b>
@@ -160,14 +161,14 @@
         <rail id="26">
             <dir-b>EAST</dir-b>
             <dir-a>WEST</dir-a>
-            <A>25</A>
-            <B>23</B>
+            <A>27</A>
+            <B>25</B>
         </rail>
         <rail id="27">
             <dir-b>EAST</dir-b>
             <dir-a>WEST</dir-a>
             <B>26</B>
+            <A>20</A>
         </rail>
-
     </entities>
 </map>

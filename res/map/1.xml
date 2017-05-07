@@ -1,11 +1,8 @@
-<map>
+<map new-people-freq="1" train-speed="1000" > <!-- new peple frequency is relative, speed is in ms -->
     <entry x="0" y="0" />
 
-    <actions>
-    </actions>
-
     <trains>
-        <train start="5"> <!-- Launches at fifth iteration -->
+        <train start="0"> <!-- Launches at fifth iteration -->
             <car color="RED" pass="true" />
             <car color="YELLOW" pass="false" />
             <car color="BLUE" /> <!-- No passengers by default -->
