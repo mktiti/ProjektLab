@@ -15,8 +15,8 @@ public class MainWindow extends JFrame {
     private final GraphicsEngine graphicsEngine = new GraphicsEngine(this);
     private GameEngine gameEngine = new GameEngine(graphicsEngine);
 
-    MainWindow() {
-        init(1);
+    MainWindow(int map) {
+        init(map);
     }
 
     private void init(int map) {
@@ -40,10 +40,6 @@ public class MainWindow extends JFrame {
         setContentPane(graphicsEngine);
         setVisible(true);
         pack();
-    }
-
-    public static void main(String[] args) {
-        new MainWindow();
     }
 
 }
