@@ -14,7 +14,7 @@ public class MainWindow extends JFrame {
     private static final int WINDOW_HEIGHT = 1000;
 
     private final GraphicsEngine graphicsEngine = new GraphicsEngine(this);
-    private GameEngine gameEngine = new GameEngine();
+    private GameEngine gameEngine = new GameEngine(graphicsEngine);
 
     MainWindow() {
         init(1);
