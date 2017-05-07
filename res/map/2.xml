@@ -98,6 +98,7 @@
 		<rail id="17">
             <dir-b>EAST</dir-b>
             <dir-a>WEST</dir-a>
+            <A>18</A>
             <B>16</B>
         </rail>
     </entities>
