@@ -1,4 +1,4 @@
-<map step-time="500" new-people-freq="10" >
+<map step-time="500" new-people-freq="20" >
     <entry x="0" y="0" />
 
     <trains>
@@ -174,7 +174,7 @@
 
         <tunnel id="29" x="2" y="1" >
             <dir-visible>WEST</dir-visible>
-            <VISIBLE>13</VISIBLE>
+            <VISIBLE>3</VISIBLE>
         </tunnel>
 
     </entities>
