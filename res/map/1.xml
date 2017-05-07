@@ -50,16 +50,14 @@
         <station id="7" color="GREEN">
             <dir-b>WEST</dir-b>
             <dir-a>EAST</dir-a>
-            <A>3</A>
-            <B>1</B>
+            <A>8</A>
+            <B>6</B>
         </station>
         <rail id="8">
             <dir-b>WEST</dir-b>
             <dir-a>EAST</dir-a>
-            <A>9</A>
             <B>7</B>
         </rail>
-
         <!--
         <rail id="1">
             <dir-b>WEST</dir-b>
