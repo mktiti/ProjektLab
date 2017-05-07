@@ -62,6 +62,12 @@ public abstract class MovingEntity {
         this.lastPosition = previous;
     }
 
+    /**
+     * Returns the image of a moving entity
+     * @param from the direction it's coming from
+     * @param to the direction it's headed towards
+     * @return the image of the entity
+     */
     public abstract BufferedImage image(Direction from, Direction to);
 
 }

@@ -12,7 +12,6 @@ public class EntityPanel {
 
     public static final int PANEL_SIZE = 200;
 
-
     final StaticEntity entity;
     final GameEngine engine;
     final JPanel mainPanel;
