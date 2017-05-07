@@ -23,12 +23,17 @@ import java.util.Map;
 public class GraphicsEngine extends JPanel implements MouseListener {
     public static final boolean DEBUG = false;
 
+    /**Maximum size of the grid **/
     private static final int SIZE = 20;
     private EntityPanel[][] entities;
     private GameEngine engine;
     private MainWindow parent;
     private BufferedImage backgroundImage;
 
+    /**
+     * Paints the background image and then all entities on the panel.
+     * @param g Drawable graphics object
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -36,6 +41,10 @@ public class GraphicsEngine extends JPanel implements MouseListener {
         draw(g);
     }
 
+    /**
+     * Constructor with pre-initialization
+     * @param parent Parent window reference
+     */
     public GraphicsEngine(MainWindow parent){
         super();
         this.parent = parent;
@@ -52,12 +61,18 @@ public class GraphicsEngine extends JPanel implements MouseListener {
                 }
             }
         }
-
         setFocusable(true);
-
         addMouseListener(this);
     }
 
+    /**
+     * Recursive function which initializes it's corresponding EntityPanel
+     * @param i Array row coordinate
+     * @param j Array column coordinate
+     * @param processedElements List of the StaticEntities which has already been processed, therefore they can be
+     *                          skipped
+     * @param active Currently observed StaticEntity
+     */
     private void initPanel(int i, int j, ArrayList<StaticEntity> processedElements, StaticEntity active){
         if (active.isHidden()) return;
 
@@ -79,6 +94,11 @@ public class GraphicsEngine extends JPanel implements MouseListener {
         }
     }
 
+    /**
+     * Initializes the GraphicsEngine and loads the map with the given ID
+     * @param engine GameEngine reference
+     * @param map Map to load
+     */
     public void init(GameEngine engine, int map){
         this.engine = engine;
 
@@ -102,29 +122,43 @@ public class GraphicsEngine extends JPanel implements MouseListener {
         }
     }
 
+    /**
+     * Resets all the panels to null
+     */
     private void ResetPanels(){
         entities = new EntityPanel[SIZE][];
         for(int i = 0; i < SIZE; i++)
             entities[i] = new EntityPanel[SIZE];
     }
 
+    /**
+     * Requests all EntityPanels to draw on the screen
+     * @param g The graphics object to draw on
+     */
     public void draw(Graphics g){
         loop: for(int i = 0; i < SIZE; i++){
             for(int j = 0; j < SIZE; j++)
             {
                 if(entities == null)
-                    return;
+                    continue ;
                 if(entities[i] == null)
-                    return;
+                    continue ;
                 if(entities[i][j] != null)
                     entities[i][j].paintComponent(g);
             }
         }
     }
 
+    /**
+     * Invalidates the panels
+     */
     public void update() {
         for(int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
+                if(entities == null)
+                    continue;
+                if(entities[i] == null)
+                    continue;
                 if (entities[i][j] != null) {
                     entities[i][j].update();
                 }
@@ -133,6 +167,10 @@ public class GraphicsEngine extends JPanel implements MouseListener {
         repaint();
     }
 
+    /**
+     * Loads the map with the give ID to the screen
+     * @param mapid Map to load
+     */
     private void loadMapWithID(int mapid){
         engine = new GameEngine(this);
         ResetPanels();
@@ -150,6 +188,9 @@ public class GraphicsEngine extends JPanel implements MouseListener {
 
     }
 
+    /**
+     * Upon crash, shows a dialog asking the player whether to quit or restart the map
+     */
     public void showCrash() {
         switch (JOptionPane.showConfirmDialog(this, "Crash! Do you want to restart?", "Crash", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE)) {
             case JOptionPane.YES_OPTION:
@@ -160,6 +201,9 @@ public class GraphicsEngine extends JPanel implements MouseListener {
         }
     }
 
+    /**
+     * Upon winning the map, shows a dialog asking the player whether to quit or load the next map
+     */
     public void showMapWin() {
         switch (JOptionPane.showConfirmDialog(this, "Map won! Want to load next map?", "Map victory", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE)) {
             case JOptionPane.YES_OPTION:
@@ -170,24 +214,31 @@ public class GraphicsEngine extends JPanel implements MouseListener {
         }
     }
 
+    /**
+     * Upon victory, shows a Game Victory dialog
+     */
     public void showGameWin() {
         JOptionPane.showMessageDialog(this,"You have won the game! Press OK to exit");
         System.exit(0);
     }
 
+    /**
+     * Executes the corresponding panel's click action
+     * @param mouseEvent Generated mouse event
+     */
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent mouseEvent) {
         int x = mouseEvent.getX() / EntityPanel.PANEL_SIZE;
         int y = mouseEvent.getY() / EntityPanel.PANEL_SIZE;
 
         if (entities[x][y] != null) {
             entities[x][y].click();
         }
-    }
-
-    @Override
-    public void mousePressed(MouseEvent mouseEvent) {
-
     }
 
     @Override
