@@ -46,7 +46,27 @@
 		<rail id="8">
             <dir-b>WEST</dir-b>
             <dir-a>EAST</dir-a>
+            <A>9</A>
             <B>7</B>
         </rail>
+		<rail id="9">
+            <dir-b>WEST</dir-b>
+            <dir-a>NORTH</dir-a>
+            <A>10</A>
+            <B>8</B>
+        </rail>
+		<rail id="10">
+            <dir-b>SOUTH</dir-b>
+            <dir-a>NORTH</dir-a>
+            <A>11</A>
+            <B>9</B>
+        </rail>
+		<rail id="11">
+            <dir-b>SOUTH</dir-b>
+            <dir-a>WEST</dir-a>
+            <A>12</A>
+            <B>10</B>
+        </rail>
+		
     </entities>
 </map>
