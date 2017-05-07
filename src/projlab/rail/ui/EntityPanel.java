@@ -21,6 +21,14 @@ public class EntityPanel {
 
     int x, y;
 
+    /**
+     * Initializes the EntityPanel at the given X, Y coordinates
+     * @param entity Corresponding entity
+     * @param gameEngine Current game engine
+     * @param x X coordinate
+     * @param y Y coordinate
+     * @param mainPanel Parent panel
+     */
     public EntityPanel(StaticEntity entity, GameEngine gameEngine, int x, int y, JPanel mainPanel) {
         this.entity = entity;
         this.engine = gameEngine;
@@ -30,10 +38,17 @@ public class EntityPanel {
         update();
     }
 
+    /**
+     * Updates the image of the entity
+     */
     public void update() {
         image = entity.image();
     }
 
+    /**
+     * Paints the component on the given graphics object
+     * @param graphics Graphics object to draw on
+     */
     protected void paintComponent(Graphics graphics) {
         if (image != null) {
             graphics.drawImage(image.getScaledInstance(PANEL_SIZE, PANEL_SIZE, 0), x * PANEL_SIZE, y * PANEL_SIZE, mainPanel);
@@ -61,5 +76,8 @@ public class EntityPanel {
         }
     }
 
+    /**
+     * Does nothing when clicked on a non Tunnel or Switch entity
+     */
     void click() {}
 }

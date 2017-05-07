@@ -12,6 +12,10 @@ import java.nio.file.Paths;
  */
 public class ProgressManager {
 
+    /**
+     * Loads the last played map
+     * @return ID of the map
+     */
     public static int getProgress() {
 
         URL url = MenuWindow.class.getResource("/progress.txt");
@@ -40,6 +44,10 @@ public class ProgressManager {
         return 0;
     }
 
+    /**
+     * Saves the game progress
+     * @param mapid Map's ID
+     */
     public static void saveProgress(int mapid){
         URL url = MenuWindow.class.getResource("/progress.txt");
         try {

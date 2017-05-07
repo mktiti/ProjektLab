@@ -14,14 +14,21 @@ public class MainWindow extends JFrame {
 
     private final GraphicsEngine graphicsEngine = new GraphicsEngine(this);
 
+    /**
+     * Initializes a map
+     * @param map Map to initialize
+     */
     MainWindow(int map) {
         init(map);
     }
 
+    /**
+     * Initializes a map
+     * @param map Map to initialize
+     */
     private void init(int map) {
-        //setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         int increment = 0;
-        if(System.getProperty("os.name").toUpperCase().contains("WINDOWS"));
+        if(System.getProperty("os.name").toUpperCase().contains("WINDOWS"))
             increment = 28;
         setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT + increment));
         setDefaultCloseOperation(EXIT_ON_CLOSE);

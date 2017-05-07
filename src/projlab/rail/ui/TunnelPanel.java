@@ -13,6 +13,9 @@ public class TunnelPanel extends EntityPanel implements MouseListener {
         super(entity, engine, x, y, mainPanel);
     }
 
+    /**
+     * On click, activates the tunnel
+     */
     @Override
     void click() {
         Tunnel tunnel = (Tunnel)entity;
