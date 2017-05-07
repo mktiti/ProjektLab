@@ -4,6 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class MenuWindow extends JFrame{
 
@@ -18,16 +24,40 @@ public class MenuWindow extends JFrame{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getSource() == ngame){
-                new MainWindow();
-            }
-            else if(e.getSource() == cont){
-
-            }
-            else if(e.getSource() == quit){
+            if (e.getSource() == ngame) {
+                new MainWindow(0);
+            } else if (e.getSource() == cont) {
+                new MainWindow(getProgress());
+            } else if (e.getSource() == quit) {
                 System.exit(0);
             }
         }
+    }
+
+    private int getProgress() {
+
+        URL url = MenuWindow.class.getResource("/progress.txt");
+        try {
+            Path path = Paths.get(url.toURI());
+            if (!Files.exists(path)) {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(path.toFile()))) {
+                    bw.write("0");
+                    bw.flush();
+                }
+            }
+        } catch (URISyntaxException | IOException e) {
+            e.printStackTrace();
+        }
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(MenuWindow.class.getResourceAsStream("/progress.txt")))) {
+
+            return Integer.parseInt(br.readLine());
+
+        } catch (IOException e) {
+            System.out.println("Cannot read progress, possibly not exists");
+        }
+
+        return 0;
     }
 
     private void init(){
@@ -74,6 +104,8 @@ public class MenuWindow extends JFrame{
     }
 
     public static void main(String[] args){
+        // Kis gyorsító mágia
+        new Thread(ResourceManager::init).start();
         new MenuWindow();
     }
 }
