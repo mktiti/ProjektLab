@@ -7,12 +7,12 @@
             <A>2</A>
             <B>0</B>
         </rail>
-        <rail id="2">
+        <station id="2" color="RED">
             <dir-b>WEST</dir-b>
             <dir-a>EAST</dir-a>
             <A>3</A>
             <B>1</B>
-        </rail>
+        </station>
         <rail id="3">
             <dir-b>WEST</dir-b>
             <dir-a>EAST</dir-a>
@@ -31,23 +31,23 @@
             <A>6</A>
             <B>4</B>
         </rail>
-        <rail id="6">
+        <station id="6" color="BLUE">
             <dir-b>EAST</dir-b>
             <dir-a>WEST</dir-a>
             <A>7</A>
             <B>5</B>
-        </rail>
+        </station>
         <cross id="7">
             <B>6</B>
             <A>10</A>
             <Y>8</Y>
         </cross>
-        <rail id="8">
+        <station id="8" color="YELLOW">
             <dir-b>NORTH</dir-b>
             <dir-a>SOUTH</dir-a>
             <A>9</A>
             <B>7</B>
-        </rail>
+        </station>
         <switch id="9">
             <dir-in>NORTH</dir-in>
             <IN>8</IN>
@@ -60,12 +60,12 @@
             <A>11</A>
             <B>7</B>
         </rail>
-        <rail id="11">
+        <station id="11" color="GREEN">
             <dir-b>NORTH</dir-b>
             <dir-a>SOUTH</dir-a>
             <A>12</A>
             <B>10</B>
-        </rail>
+        </station>
         <rail id="12">
             <dir-b>NORTH</dir-b>
             <dir-a>EAST</dir-a>

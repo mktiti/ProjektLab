@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
 import java.io.IOException;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -127,6 +128,18 @@ public class ResourceManager {
         return shifted;
     }
 
+    private static BufferedImage addPassenger(BufferedImage original, boolean hasPassenger) {
+        if (!hasPassenger) return original;
+
+        BufferedImage ret = new BufferedImage(original.getWidth(), original.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        ret.getGraphics().drawImage(original, 0, 0, null);
+        ret.getGraphics().setColor(java.awt.Color.WHITE);
+        int rad = original.getWidth() / 10;
+        int pos = (original.getWidth() - rad) / 2;
+        ret.getGraphics().fillOval(pos, pos, rad, rad);
+        return ret;
+    }
+
     public static BufferedImage getMap(int map) {
         return MAPS[map];
     }
@@ -158,21 +171,40 @@ public class ResourceManager {
         return isAActive ? SWITCH_AS[val] : SWITCH_BS[val];
     }
 
-    public static BufferedImage getStation(Direction aDir, Direction bDir, Color color) {
+    public static BufferedImage getStation(Direction aDir, Direction bDir, Color color, EnumSet<Color> passengers) {
         BufferedImage rail = getRail(aDir, bDir);
         BufferedImage ret = new BufferedImage(rail.getWidth(), rail.getHeight(), BufferedImage.TYPE_INT_ARGB);
 
         Graphics graphics = ret.getGraphics();
         graphics.drawImage(rail, 0, 0, rail.getWidth(), rail.getHeight(), null);
         graphics.setColor(java.awt.Color.BLACK);
-        if (aDir == WEST || aDir == EAST) {
+
+        boolean horizontal = aDir == WEST || aDir == EAST;
+        if (horizontal) {
             graphics.fillRect(10, 10, rail.getWidth() - 10, 100);
             graphics.setColor(color.value);
             graphics.fillRect(20, 20, rail.getWidth() - 30, 80);
+
         } else {
             graphics.fillRect(10, 10, 100, rail.getHeight() - 10);
             graphics.setColor(color.value);
             graphics.fillRect(20, 20, 80, rail.getHeight() - 30);
+        }
+
+        if (passengers.size() > 0) {
+            int diam = ret.getWidth() / 10;
+            int spacing = ret.getWidth() / 10;
+            int movingAxisPos = (ret.getWidth() - passengers.size() * diam - (passengers.size() - 1) * spacing) / 2;
+            int staticPos = 10 + (100 - diam) / 2;
+
+            for (Color pc : passengers) {
+                int x = horizontal ? movingAxisPos : staticPos;
+                int y = !horizontal ? movingAxisPos : staticPos;
+                graphics.setColor(pc.value);
+                graphics.fillOval(x, y, diam, diam);
+                movingAxisPos += diam + spacing;
+            }
+
         }
 
         return ret;
@@ -182,27 +214,27 @@ public class ResourceManager {
         return null;
     }
 
-    public static BufferedImage getMoving(BufferedImage[] array, Direction fromDir, Direction toDir) {
+    public static BufferedImage getMoving(BufferedImage[] array, Direction fromDir, Direction toDir, boolean hasPassengers) {
         if (fromDir == toDir.invert()) {
-            return array[fromDir.value * 2];
-        }
-
-        BufferedImage rotated;
-        if (fromDir.value == toDir.value + 1 || (fromDir.value == 0 && toDir.value == 3)) {
-            rotated = array[fromDir.value * 2 + 1];
+            return addPassenger(array[fromDir.value * 2], hasPassengers);
         } else {
-            rotated = array[fromDir == WEST ? 7 : fromDir.value * 2 - 1];
+            BufferedImage rotated;
+            if (fromDir.value == toDir.value + 1 || (fromDir.value == 0 && toDir.value == 3)) {
+                rotated = array[fromDir.value * 2 + 1];
+            } else {
+                rotated = array[fromDir == WEST ? 7 : fromDir.value * 2 - 1];
+            }
+            return shiftMoving(addPassenger(rotated, hasPassengers), fromDir, toDir);
         }
 
-        return shiftMoving(rotated, fromDir, toDir);
     }
 
     public static BufferedImage getLocomotive(Direction fromDir, Direction toDir) {
-        return getMoving(LOCOMOTIVES, fromDir, toDir);
+        return getMoving(LOCOMOTIVES, fromDir, toDir, false);
     }
 
     public static BufferedImage getCar(Direction fromDir, Direction toDir, Color color, boolean hasPassengers) {
-        return getMoving(CARS.get(color), fromDir, toDir);
+        return getMoving(CARS.get(color), fromDir, toDir, hasPassengers);
     }
 
 }

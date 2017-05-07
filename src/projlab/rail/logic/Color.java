@@ -2,7 +2,7 @@ package projlab.rail.logic;
 
 public enum Color {
 
-    RED(java.awt.Color.RED), BLUE(java.awt.Color.BLUE), GREEN(java.awt.Color.GREEN), YELLOW(java.awt.Color.YELLOW);
+    RED(new java.awt.Color(237, 28, 36)), BLUE(new java.awt.Color(0, 162, 232)), GREEN(new java.awt.Color(34, 177, 76)), YELLOW(new java.awt.Color(255, 242, 0));
 
     public final java.awt.Color value;
 

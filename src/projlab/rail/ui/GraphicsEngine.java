@@ -29,7 +29,7 @@ public class GraphicsEngine extends JPanel implements MouseListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(backgroundImage,0,0,this);
+        g.drawImage(backgroundImage, 0, 0, this);
         draw(g);
     }
 
@@ -151,8 +151,7 @@ public class GraphicsEngine extends JPanel implements MouseListener {
     private void showCrash() {
         switch (JOptionPane.showConfirmDialog(this, "Crash! Do you want to restart?", "Crash", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE)) {
             case JOptionPane.YES_OPTION:
-
-
+                engine.resetMap();
                 break;
             default:
                 System.exit(0);

@@ -4,6 +4,7 @@ import projlab.rail.ui.Direction;
 import projlab.rail.ui.ResourceManager;
 
 import java.awt.image.BufferedImage;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,7 +14,7 @@ public class Station extends Rail{
     private final Color color;
 
     /** The people waiting at the station */
-    private final Set<Color> people = new HashSet<>(Color.values().length);
+    private final EnumSet<Color> people = EnumSet.noneOf(Color.class);
 
     public Station(Direction aDir, Direction bDir, Color color) {
         super(aDir, bDir);
@@ -25,7 +26,9 @@ public class Station extends Rail{
      * @param color the color of the car the person is waiting for
      */
     public void addPerson(Color color) {
-        people.add(color);
+        if (color != this.color) {
+            people.add(color);
+        }
     }
 
     @Override
@@ -40,6 +43,6 @@ public class Station extends Rail{
 
     @Override
     protected BufferedImage getBaseImage() {
-        return ResourceManager.getStation(aDir, bDir, color);
+        return ResourceManager.getStation(aDir, bDir, color, people);
     }
 }

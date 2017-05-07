@@ -28,6 +28,10 @@ public class GameEngine {
     /** List of all locomotives */
     List<Locomotive> locos = new LinkedList<>();
     /** Active tunnel connections */
+
+    private final List<Switch> switches = new LinkedList<>();
+    private final List<Station> stations = new LinkedList<>();
+
     public Tunnel activeTunnelA;
     public Tunnel activeTunnelB;
     /** Entry point of the level */
@@ -74,11 +78,35 @@ public class GameEngine {
             posPrev = tmp;
         }
 
+        state = GameState.INGAME;
+
         new Thread(() -> {
 
 
 
         }).start();
+    }
+
+    public void resetMap() {
+        destroyTunnel();
+        if (activeTunnelA != null) {
+            activeTunnelA.isActive = false;
+            activeTunnelA = null;
+        }
+        if (activeTunnelB != null) {
+            activeTunnelB.isActive = false;
+            activeTunnelB = null;
+        }
+
+        for (Switch s : switches) {
+            s.isAActive = true;
+        }
+
+        for (Locomotive loco : locos) {
+            removeTrain(loco);
+        }
+
+        state = GameState.INGAME;
     }
 
     /** Loads the needed level */
@@ -110,10 +138,14 @@ public class GameEngine {
                     se = new CrossRail();
                     break;
                 case "station":
-                    se = new Station(getDir(e, "dir-a"), getDir(e, "dir-b"), Color.valueOf(e.getAttribute("color")));
+                    Station st = new Station(getDir(e, "dir-a"), getDir(e, "dir-b"), Color.valueOf(e.getAttribute("color")));
+                    stations.add(st);
+                    se = st;
                     break;
                 case "switch":
-                    se = new Switch(getDir(e, "dir-in"));
+                    Switch sw = new Switch(getDir(e, "dir-in"));
+                    switches.add(sw);
+                    se = sw;
                     break;
                 case "tunnel":
                     se = new Tunnel(getDir(e, "dir-visible"));
