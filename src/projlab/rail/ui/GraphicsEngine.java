@@ -1,20 +1,22 @@
 package projlab.rail.ui;
 
 import javafx.util.Pair;
+import org.xml.sax.SAXException;
 import projlab.rail.GameEngine;
 import projlab.rail.Result;
 import projlab.rail.exception.IllegalMoveException;
 import projlab.rail.exception.TrainException;
 import projlab.rail.logic.*;
 import javax.swing.*;
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 
@@ -124,7 +126,18 @@ public class GraphicsEngine extends JPanel implements MouseListener {
     public void showCrash() {
         switch (JOptionPane.showConfirmDialog(this, "Crash! Do you want to restart?", "Crash", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE)) {
             case JOptionPane.YES_OPTION:
-                engine.resetMap();
+                int mapid = engine.map;
+                engine = new GameEngine(this);
+                try {
+                    engine.load(mapid);
+                    init(engine,mapid);
+                } catch (ParserConfigurationException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (SAXException e) {
+                    e.printStackTrace();
+                }
                 break;
             default:
                 System.exit(0);
