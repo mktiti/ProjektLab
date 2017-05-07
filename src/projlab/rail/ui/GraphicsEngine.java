@@ -125,7 +125,7 @@ public class GraphicsEngine extends JPanel implements MouseListener {
 
     private void loadMapWithID(int mapid){
         engine = new GameEngine(this);
-        ProgressManager.saveProgress(mapid);
+        //ProgressManager.saveProgress(mapid);
         try{
             engine.load(mapid);
             init(engine,mapid);

@@ -40,7 +40,7 @@ public class ProgressManager {
         return 0;
     }
 
-    public static void saveProgress(int mapid){
+  /*  public static void saveProgress(int mapid){
         URL url = MenuWindow.class.getResource("/progress.txt");
         try {
             Path path = Paths.get(url.toURI());
@@ -53,5 +53,5 @@ public class ProgressManager {
             e.printStackTrace();
         }
 
-    }
+    }*/
 }
