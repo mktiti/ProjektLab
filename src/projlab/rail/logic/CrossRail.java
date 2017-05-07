@@ -3,6 +3,7 @@ package projlab.rail.logic;
 import javafx.util.Pair;
 import projlab.rail.exception.IllegalMoveException;
 import projlab.rail.ui.Direction;
+import projlab.rail.ui.ResourceManager;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class CrossRail extends StaticEntity {
     /** Y connection, connected to X */
     private StaticEntity connectionY;
     /** A list of all connections */
-    private List<Pair<StaticEntity,Direction>> connections = new ArrayList<>(4);
+    private List<Pair<StaticEntity, Direction>> connections = new ArrayList<>(4);
 
     public CrossRail() {
         for (int i = 0; i < 4; i++) {
@@ -89,6 +90,14 @@ public class CrossRail extends StaticEntity {
 
     @Override
     public BufferedImage image() {
-        return null;
+        BufferedImage image = ResourceManager.getCrossRail();
+        if (vehicle != null) {
+            boolean abLine = vehicle.lastPosition == connectionB || vehicle.lastPosition == connectionA;
+            boolean fromFirst = abLine ? (vehicle.lastPosition == connectionA) : (vehicle.lastPosition == connectionX);
+            Direction aDir = Direction.values()[(fromFirst ? 0 : 2) + (abLine ? 0 : 1)];
+            BufferedImage vehicleImage = vehicle .image(aDir, aDir.invert());
+            return ResourceManager.mergeImages(image, vehicleImage);
+        }
+        return image;
     }
 }

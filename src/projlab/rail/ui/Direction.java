@@ -14,7 +14,7 @@ public enum Direction {
     }
 
     public int offsetJ(int j){
-        return value == 1 ? j+1 : value == 3 ? j-1 : j;
+        return value == 1 ? j-1 : value == 3 ? j+1 : j;
     }
 
     public Direction rotateCW(){
@@ -23,5 +23,9 @@ public enum Direction {
 
     public Direction rotateCCW(){
         return this == WEST ? SOUTH : this == SOUTH ? EAST : this == EAST ? NORTH : WEST;
+    }
+
+    public Direction invert(){
+        return this == WEST ? EAST : this == EAST ? WEST : this == NORTH ? SOUTH : NORTH;
     }
 }

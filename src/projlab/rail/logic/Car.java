@@ -1,5 +1,8 @@
 package projlab.rail.logic;
 
+import projlab.rail.ui.Direction;
+import projlab.rail.ui.ResourceManager;
+
 import java.awt.image.BufferedImage;
 
 public class Car extends MovingEntity {
@@ -34,7 +37,7 @@ public class Car extends MovingEntity {
     }
 
     @Override
-    public BufferedImage image() {
-        return null;
+    public BufferedImage image(Direction from, Direction to) {
+        return ResourceManager.getCar(from, to, color, hasPassengers);
     }
 }

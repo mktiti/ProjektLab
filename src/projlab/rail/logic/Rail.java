@@ -20,8 +20,8 @@ public class Rail extends StaticEntity {
     /** A list of all connections */
     private List<Pair<StaticEntity,Direction>> connections = new ArrayList<>(2);
 
-    private final Direction aDir;
-    private final Direction bDir;
+    protected final Direction aDir;
+    protected final Direction bDir;
 
     public Rail(Direction aDir, Direction bDir){
         this.aDir = aDir;
@@ -71,18 +71,19 @@ public class Rail extends StaticEntity {
         }
     }
 
+    protected BufferedImage getBaseImage() {
+        return ResourceManager.getRail(aDir, bDir);
+    }
+
     @Override
     public BufferedImage image() {
-        BufferedImage image = ResourceManager.getRail(aDir, bDir);
+        if (isHidden()) return null;
+
+        BufferedImage image = getBaseImage();
         if (vehicle != null) {
-            BufferedImage vehicleImage = vehicle.image();
-            int w = Math.max(image.getWidth(), image.getWidth());
-            int h = Math.max(image.getHeight(), vehicleImage.getHeight());
-            BufferedImage combined = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-            Graphics g = combined.getGraphics();
-            g.drawImage(image, 0, 0, null);
-            g.drawImage(vehicleImage, 0, 0, null);
-            return combined;
+            boolean fromB = vehicle.lastPosition == connectionB;
+            BufferedImage vehicleImage = vehicle .image(fromB ? bDir : aDir, fromB ? aDir : bDir);
+            return ResourceManager.mergeImages(image, vehicleImage);
         }
         return image;
     }
