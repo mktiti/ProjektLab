@@ -92,7 +92,22 @@ public class Switch extends StaticEntity {
 
     @Override
     public BufferedImage image() {
-        return ResourceManager.getSwitch(inDir, isAActive);
+        BufferedImage image = ResourceManager.getSwitch(inDir, isAActive);
+        if (vehicle != null) {
+            Direction fromDir = inDir;
+            if (vehicle.lastPosition == outputA) {
+                fromDir = inDir.rotateCW();
+            } else if (vehicle.lastPosition == outputB) {
+                fromDir = inDir.rotateCCW();
+            }
+            Direction toDir = isAActive ? inDir.rotateCCW() : inDir.rotateCW();
+            if (vehicle.lastPosition == outputA || vehicle.lastPosition == outputB) {
+                toDir = inDir;
+            }
+            BufferedImage vehicleImage = vehicle.image(fromDir, toDir);
+            return ResourceManager.mergeImages(image, vehicleImage);
+        }
+        return image;
     }
 
     /**

@@ -13,6 +13,7 @@ public class TunnelPanel extends EntityPanel implements MouseListener {
         super(entity, engine,x,y,mainPanel);
     }
 
+    @Override
     void click() {
 
     }

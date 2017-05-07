@@ -1,6 +1,8 @@
 package projlab.rail.logic;
 
 import projlab.rail.exception.TrainException;
+import projlab.rail.ui.Direction;
+import projlab.rail.ui.ResourceManager;
 
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
@@ -62,8 +64,8 @@ public class Locomotive extends MovingEntity {
     }
 
     @Override
-    public BufferedImage image() {
-        return null;
+    public BufferedImage image(Direction from, Direction to) {
+        return ResourceManager.getLocomotive(from, to);
     }
 
     /**

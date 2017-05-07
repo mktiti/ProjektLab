@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class EntityPanel {
 
-    public static final int PANEL_SIZE = 50;
+    public static final int PANEL_SIZE = 200;
 
 
     final StaticEntity entity;
@@ -60,4 +60,6 @@ public class EntityPanel {
             graphics.fillRect(x * PANEL_SIZE, y * PANEL_SIZE, PANEL_SIZE, PANEL_SIZE);
         }
     }
+
+    void click() {}
 }
