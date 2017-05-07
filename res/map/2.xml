@@ -13,12 +13,12 @@
             <A>3</A>
             <B>1</B>
         </rail>
-        <rail id="3">
-            <dir-b>NORTH</dir-b>
-            <dir-a>SOUTH</dir-a>
-            <A>4</A>
-            <B>2</B>
-        </rail>
+        <cross id="3">
+			<A>13</A>
+			<B>12</B>
+            <X>2</X>
+            <Y>4</Y>
+        </cross>
         <rail id="4">
             <dir-b>NORTH</dir-b>
             <dir-a>SOUTH</dir-a>
@@ -46,7 +46,60 @@
 		<rail id="8">
             <dir-b>WEST</dir-b>
             <dir-a>EAST</dir-a>
+            <A>9</A>
             <B>7</B>
+        </rail>
+		<rail id="9">
+            <dir-b>WEST</dir-b>
+            <dir-a>NORTH</dir-a>
+            <A>10</A>
+            <B>8</B>
+        </rail>
+		<rail id="10">
+            <dir-b>SOUTH</dir-b>
+            <dir-a>NORTH</dir-a>
+            <A>11</A>
+            <B>9</B>
+        </rail>
+		<rail id="11">
+            <dir-b>SOUTH</dir-b>
+            <dir-a>WEST</dir-a>
+            <A>12</A>
+            <B>10</B>
+        </rail>
+		<rail id="12">
+            <dir-b>EAST</dir-b>
+            <dir-a>WEST</dir-a>
+            <B>3</B>
+        </rail>
+		<rail id="13">
+            <dir-b>EAST</dir-b>
+            <dir-a>SOUTH</dir-a>
+            <A>14</A>
+            <B>3</B>
+        </rail>
+		<rail id="14">
+            <dir-b>NORTH</dir-b>
+            <dir-a>SOUTH</dir-a>
+            <A>15</A>
+            <B>13</B>
+        </rail>
+		<rail id="15">
+            <dir-b>NORTH</dir-b>
+            <dir-a>SOUTH</dir-a>
+            <A>16</A>
+            <B>14</B>
+        </rail>	
+		<switch id="16">
+		    <dir-in>NORTH</dir-in>
+			<IN>15</IN>
+            <A>17</A>
+        </switch>
+		<rail id="17">
+            <dir-b>EAST</dir-b>
+            <dir-a>WEST</dir-a>
+            <A>18</A>
+            <B>16</B>
         </rail>
     </entities>
 </map>
