@@ -1,6 +1,7 @@
 <map>
     <entry x="0" y="0" />
     <entities>
+    <trains>
         <rail id="1">
             <dir-b>WEST</dir-b>
             <dir-a>EAST</dir-a>
@@ -48,5 +49,6 @@
             <dir-a>EAST</dir-a>
             <B>7</B>
         </rail>
+    </trains>
     </entities>
 </map>
