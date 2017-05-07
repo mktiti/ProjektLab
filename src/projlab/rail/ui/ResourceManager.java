@@ -1,6 +1,7 @@
 package projlab.rail.ui;
 
 import com.sun.corba.se.spi.ior.Writeable;
+import projlab.rail.GameEngine;
 import projlab.rail.logic.Color;
 
 import javax.imageio.ImageIO;
@@ -18,7 +19,7 @@ import static projlab.rail.ui.Direction.*;
 
 public class ResourceManager {
 
-    private static final BufferedImage[] MAPS = new BufferedImage[5];
+    private static final BufferedImage[] MAPS = new BufferedImage[GameEngine.MAP_COUNT];
 
     private static final BufferedImage RAIL_STRAIGHT_VERT;
     private static final BufferedImage RAIL_STRAIGHT_HORI;
@@ -33,7 +34,7 @@ public class ResourceManager {
     private static final BufferedImage[] LOCOMOTIVES = new BufferedImage[8];
 
     static {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < GameEngine.MAP_COUNT; i++) {
             MAPS[i] = read("/map/" + (i + 1) + ".png");
         }
 
@@ -58,6 +59,9 @@ public class ResourceManager {
         readRotated(cars, "/train/coal.png", false);
         CARS.put(null, cars);
     }
+
+    /** force load static initializer **/
+    public static void init() {}
 
     private static void readRotated(BufferedImage[] array, String path, boolean quarters) {
         array[0] = read(path);

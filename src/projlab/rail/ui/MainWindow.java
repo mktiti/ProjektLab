@@ -16,13 +16,13 @@ public class MainWindow extends JFrame {
     private final GraphicsEngine graphicsEngine = new GraphicsEngine(this);
     private GameEngine gameEngine = new GameEngine(graphicsEngine);
 
-    MainWindow() {
-        init(1);
+    MainWindow(int map) {
+        init(map);
     }
 
     private void init(int map) {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT + 28));
+        setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
@@ -36,12 +36,12 @@ public class MainWindow extends JFrame {
 
         graphicsEngine.init(gameEngine, map);
         setContentPane(graphicsEngine);
-        pack();
         setVisible(true);
+        pack();
     }
 
     public static void main(String[] args) {
-        new MainWindow();
+        new MainWindow(0);
     }
 
 }

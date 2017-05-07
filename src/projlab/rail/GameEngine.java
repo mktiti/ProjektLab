@@ -23,7 +23,7 @@ import static projlab.rail.logic.StaticEntity.ConnectionType.*;
 /** Controls the logic of the game */
 public class GameEngine {
 
-    private static final int MAP_COUNT = 5;
+    public static final int MAP_COUNT = 3;
 
     /** List of all static entities */
     List<StaticEntity> statics = new LinkedList<>();
