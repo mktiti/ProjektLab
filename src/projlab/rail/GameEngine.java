@@ -25,6 +25,8 @@ public class GameEngine {
 
     public static final int MAP_COUNT = 3;
 
+    private final Random random = new Random();
+
     /** List of all static entities */
     List<StaticEntity> statics = new LinkedList<>();
     /** List of all locomotives */
@@ -49,6 +51,8 @@ public class GameEngine {
     public Point entryCoords;
     public int map;
     private volatile int iteration = 0;
+    private int stepTime = 1000;
+    private int newPassengerFreq = 1;
 
     public GameEngine(GraphicsEngine graphicsEngine) {
         this.graphicsEngine = graphicsEngine;
@@ -75,7 +79,7 @@ public class GameEngine {
             synchronized (this) {
                 try {
                     loop: while (true) {
-                        Thread.sleep(1000);
+                        Thread.sleep(stepTime);
                         Result result = step();
                         if (graphicsEngine != null) {
                             graphicsEngine.update();
@@ -117,28 +121,6 @@ public class GameEngine {
         }
     }
 
-    public void resetMap() {
-        destroyTunnel();
-        if (activeTunnelA != null) {
-            activeTunnelA.isActive = false;
-            activeTunnelA = null;
-        }
-        if (activeTunnelB != null) {
-            activeTunnelB.isActive = false;
-            activeTunnelB = null;
-        }
-
-        for (Switch s : switches) {
-            s.isAActive = true;
-        }
-
-        for (Locomotive loco : locos) {
-            removeTrain(loco);
-        }
-
-        state = GameState.INGAME;
-    }
-
     /** Loads the needed level */
     public void load(int mapId) throws ParserConfigurationException, IOException, SAXException {
         map = mapId;
@@ -160,7 +142,14 @@ public class GameEngine {
             Element entry = (Element)l.item(0);
             entryCoords = getXY(entry);
         }
-
+        String stepTimeString = map.getAttribute("step-time");
+        if (stepTimeString != null && stepTimeString.length() > 0) {
+            stepTime = Integer.parseInt(stepTimeString);
+        }
+        String newPassengersString = map.getAttribute("new-people-freq");
+        if (newPassengersString != null && newPassengersString.length() > 0) {
+            newPassengerFreq = Integer.parseInt(newPassengersString);
+        }
 
         // adding trains
         NodeList trains = byName(map, "trains").getChildNodes();
@@ -286,6 +275,15 @@ public class GameEngine {
         }
     }
 
+    private void addNewPeople() {
+        int rand = random.nextInt((int)(40f / ((10 + newPassengerFreq) * 0.1f)));
+        if (rand == 0) {
+            int station = random.nextInt(stations.size());
+            int color = random.nextInt(Color.values().length);
+            stations.get(station).addPerson(Color.values()[color]);
+        }
+    }
+
     /** Ends lost game */
     public void gameOver() {
         state = GameState.DEFEAT;
@@ -295,6 +293,10 @@ public class GameEngine {
     /** Ends won game */
     public void gameWon() {
         state = GameState.VICTORY;
+        if(map == MAP_COUNT-1)
+            graphicsEngine.showGameWin();
+        else
+            graphicsEngine.showMapWin();
         System.out.println("Game Won");
     }
 
@@ -309,6 +311,7 @@ public class GameEngine {
     /** iterates one on the whole level */
     public Result step() {
         locos.stream().filter(l -> l.startTime == iteration).forEach(this::startTrain);
+        addNewPeople();
 
         iteration++;
 

@@ -1,4 +1,4 @@
-<map>
+<map step-time="500" new-people-freq="10" >
     <entry x="0" y="0" />
 
     <trains>
