@@ -1,4 +1,6 @@
 <map>
+    <entry x="0" y="0" />
+
     <trains>
         <train start="5"> <!-- Launches at fifth iteration -->
             <car color="RED" pass="true" />
@@ -8,8 +10,6 @@
             <car color="GREEN" pass="true" />
         </train>
     </trains>
-
-    <entry x="0" y="0" />
 
     <entities>
         <rail id="1">
