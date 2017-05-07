@@ -159,7 +159,8 @@ public class GraphicsEngine extends JPanel implements MouseListener {
     }
 
     public void showGameWin() {
-
+        JOptionPane.showMessageDialog(this,"You have won the game! Press OK to exit");
+        System.exit(0);
     }
 
     @Override
