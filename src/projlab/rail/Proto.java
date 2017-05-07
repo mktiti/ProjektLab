@@ -117,7 +117,6 @@ public class Proto {
     public final StaticStore<CrossRail> crosses = new StaticStore<>();
     public final StaticStore<Station> stations = new StaticStore<>();
     public final StaticStore<Tunnel> tunnels = new StaticStore<>();
-
     public final GameEngine engine = new GameEngine(graphicsEngine);
 
     public void step() throws TrainException {
