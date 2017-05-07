@@ -14,7 +14,7 @@ import static projlab.rail.logic.Color.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ProtoTest {
-
+/*
     private Proto proto = null;
 
     private int tunnelLeft;
@@ -248,5 +248,5 @@ public class ProtoTest {
 
         assertEquals(sw.outputB, se);
     }
-
+*/
 }

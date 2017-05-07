@@ -26,6 +26,8 @@ public class ResourceManager {
     private static final BufferedImage CROSS_RAIL;
     private static final BufferedImage[] SWITCH_AS = new BufferedImage[4];
     private static final BufferedImage[] SWITCH_BS = new BufferedImage[4];
+    private static final BufferedImage[] OPEN_TUNNELS = new BufferedImage[4];
+    private static final BufferedImage[] CLOSED_TUNNELS = new BufferedImage[4];
 
     private static final Map<Color, BufferedImage[]> CARS = new HashMap<>();
     private static final BufferedImage[] LOCOMOTIVES = new BufferedImage[8];
@@ -38,42 +40,30 @@ public class ResourceManager {
         RAIL_STRAIGHT_HORI = read("/rail_straight.png");
         RAIL_STRAIGHT_VERT = rotate(RAIL_STRAIGHT_HORI, 2);
 
-        RAIL_CURVES[0] = read("/rail_curve.png");
-        for (int i = 1; i < 4; i++) {
-            RAIL_CURVES[i] = rotate(RAIL_CURVES[0], 2 * i);
-        }
+        readRotated(RAIL_CURVES, "/rail_curve.png", true);
         CROSS_RAIL = read("/crossrail.png");
-
-        SWITCH_AS[0] = read("/switch_a.png");
-        for (int i = 1; i < 4; i++) {
-            SWITCH_AS[i] = rotate(SWITCH_AS[0], 2 * i);
-        }
-
-        SWITCH_BS[0] = read("/switch_b.png");
-        for (int i = 1; i < 4; i++) {
-            SWITCH_BS[i] = rotate(SWITCH_BS[0], 2 * i);
-        }
-
-        LOCOMOTIVES[0] = read("/train/locomotive.png");
-        for (int i = 1; i < 8; i++) {
-            LOCOMOTIVES[i] = rotate(LOCOMOTIVES[0], i);
-        }
+        readRotated(SWITCH_AS, "/switch_a.png", true);
+        readRotated(SWITCH_BS, "/switch_b.png", true);
+        readRotated(OPEN_TUNNELS, "/tunnel_open.png", true);
+        readRotated(CLOSED_TUNNELS, "/tunnel_closed.png", true);
+        readRotated(LOCOMOTIVES, "/train/locomotive.png", false);
 
         for (Color c : Color.values()) {
             BufferedImage[] cars = new BufferedImage[8];
-            cars[0] = read("/train/" + c.name().toLowerCase() + ".png");
-            for (int i = 1; i < 8; i++) {
-                cars[i] = rotate(cars[0], i);
-            }
+            readRotated(cars, "/train/" + c.name().toLowerCase() + ".png", false);
             CARS.put(c, cars);
         }
 
         BufferedImage[] cars = new BufferedImage[8];
-        cars[0] = read("/train/coal.png");
-        for (int i = 1; i < 8; i++) {
-            cars[i] = rotate(cars[0], i);
-        }
+        readRotated(cars, "/train/coal.png", false);
         CARS.put(null, cars);
+    }
+
+    private static void readRotated(BufferedImage[] array, String path, boolean quarters) {
+        array[0] = read(path);
+        for (int i = 1; i < (quarters ? 4 : 8); i++) {
+            array[i] = rotate(array[0], (quarters ? 2 * i : i));
+        }
     }
 
     private static BufferedImage read(String path) {
@@ -211,7 +201,8 @@ public class ResourceManager {
     }
 
     public static BufferedImage getTunnel(Direction visibleDir, boolean isActive) {
-        return null;
+        BufferedImage[] array = isActive ? OPEN_TUNNELS : CLOSED_TUNNELS;
+        return array[visibleDir.value];
     }
 
     public static BufferedImage getMoving(BufferedImage[] array, Direction fromDir, Direction toDir, boolean hasPassengers) {

@@ -10,12 +10,18 @@ import java.awt.event.MouseListener;
 public class TunnelPanel extends EntityPanel implements MouseListener {
 
     public TunnelPanel(Tunnel entity, GameEngine engine, int x, int y, JPanel mainPanel) {
-        super(entity, engine,x,y,mainPanel);
+        super(entity, engine, x, y, mainPanel);
     }
 
     @Override
     void click() {
-
+        Tunnel tunnel = (Tunnel)entity;
+        if (tunnel.isActive) {
+            engine.deactivateTunnel(tunnel);
+        } else {
+            engine.activateTunnel(tunnel);
+        }
+        update();
     }
 
     @Override
