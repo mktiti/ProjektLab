@@ -123,32 +123,42 @@ public class GraphicsEngine extends JPanel implements MouseListener {
         repaint();
     }
 
+    private void loadMapWithID(int mapid){
+        engine = new GameEngine(this);
+        try{
+            engine.load(mapid);
+            init(engine,mapid);
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public void showCrash() {
         switch (JOptionPane.showConfirmDialog(this, "Crash! Do you want to restart?", "Crash", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE)) {
             case JOptionPane.YES_OPTION:
-                int mapid = engine.map;
-                engine = new GameEngine(this);
-                try {
-                    engine.load(mapid);
-                    init(engine,mapid);
-                } catch (ParserConfigurationException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (SAXException e) {
-                    e.printStackTrace();
-                }
+                loadMapWithID(engine.map);
                 break;
             default:
                 System.exit(0);
         }
     }
 
-    private void showMapWin() {
-
+    public void showMapWin() {
+        switch (JOptionPane.showConfirmDialog(this, "Map won! Want to load next map?", "Map victory", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE)) {
+            case JOptionPane.YES_OPTION:
+                loadMapWithID(engine.map+1);
+                break;
+            default:
+                System.exit(0);
+        }
     }
 
-    private void showGameWin() {
+    public void showGameWin() {
 
     }
 
