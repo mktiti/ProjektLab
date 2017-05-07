@@ -1,59 +1,68 @@
 package projlab.rail.ui;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MenuWindow extends JFrame{
 
-    private static class BackgroundPanel extends JComponent {
-        private BufferedImage backgroundImage;
+    private final int WIDTH = 300;
+    private final int HEIGHT = 400;
 
-        private BackgroundPanel(BufferedImage backgroundImage) {
-            this.backgroundImage = backgroundImage;
-            setPreferredSize(new Dimension(1000, 1000));
-            setSize(1000, 1000);
-            setLayout(null);
-        }
+    private final Dimension FILL = new Dimension(WIDTH/6, HEIGHT/6);
+
+    JButton ngame, cont, quit;
+
+    private class ButtonListener implements ActionListener{
 
         @Override
-        protected void paintComponent(Graphics graphics) {
-            graphics.drawImage(backgroundImage, 0, 0, this);
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource() == ngame){
+                new MainWindow();
+            }
+            else if(e.getSource() == cont){
+
+            }
+            else if(e.getSource() == quit){
+                System.exit(0);
+            }
         }
     }
 
-    public MenuWindow() {
+    private void init(){
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(1000, 1000);
+        setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);
+        ButtonListener listener = new ButtonListener();
 
-        try {
-            BufferedImage img = ImageIO.read(new File("bground.png"));
-            add(new BackgroundPanel(img));
-        }
-        catch(Exception e){
+        setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 
-        }
+        ngame = new JButton("New Game");
 
+        cont = new JButton("Continue");
 
-        setLayout(null);
+        quit = new JButton("Quit");
 
-        JButton button1 = new JButton();
-        button1.setBounds(this.getWidth()*2/3, this.getHeight()/8, 100, 40);
+        ngame.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cont.setAlignmentX(Component.CENTER_ALIGNMENT);
+        quit.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JButton button2 = new JButton();
-        button2.setBounds(this.getWidth()*2/3, this.getHeight()*2/8, 100, 40);
+        ngame.addActionListener(listener);
+        cont.addActionListener(listener);
+        quit.addActionListener(listener);
 
-        JButton button3 = new JButton();
-        button3.setBounds(this.getWidth()*2/3, this.getHeight()*3/8, 100, 40);
-
-
-        this.add(button1);
-        this.add(button2);
-        this.add(button3);
+        add(new Box.Filler(FILL, FILL, FILL));
+        this.add(ngame);
+        add(new Box.Filler(FILL, FILL, FILL));
+        this.add(cont);
+        add(new Box.Filler(FILL, FILL, FILL));
+        this.add(quit);
 
         setVisible(true);
+    }
+
+    MenuWindow() {
+        init();
     }
 }
