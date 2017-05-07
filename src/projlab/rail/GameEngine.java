@@ -293,6 +293,10 @@ public class GameEngine {
     /** Ends won game */
     public void gameWon() {
         state = GameState.VICTORY;
+        if(map == MAP_COUNT-1)
+            graphicsEngine.showGameWin();
+        else
+            graphicsEngine.showMapWin();
         System.out.println("Game Won");
     }
 
