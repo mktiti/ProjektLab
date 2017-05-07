@@ -17,7 +17,7 @@ import static projlab.rail.logic.Color.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StationTest {
-
+/*
     private Proto proto = null;
 
     private int station;
@@ -112,5 +112,5 @@ public class StationTest {
         }
         assertEquals(GameState.VICTORY, proto.engine.state);
     }
-
+*/
 }

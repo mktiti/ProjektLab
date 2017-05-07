@@ -9,10 +9,10 @@ import java.util.LinkedList;
 
 public class Locomotive extends MovingEntity {
 
-    public Locomotive() {}
+    public final int startTime;
 
-    public Locomotive(Car firstCar) {
-        next = firstCar;
+    public Locomotive(int startTime) {
+        this.startTime = startTime;
     }
 
     /**

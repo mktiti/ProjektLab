@@ -15,6 +15,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public class GraphicsEngine extends JPanel implements MouseListener {
@@ -110,21 +111,16 @@ public class GraphicsEngine extends JPanel implements MouseListener {
         }
     }
 
-    public void init(HiddenRail entry, List<Pair<Tunnel,Point>> tunnels, int startX, int startY, GameEngine engine, int map){
+    public void init(GameEngine engine, int map){
         this.engine = engine;
 
-        int i = startY;
-        int j = startX;
         ArrayList<StaticEntity> processedElements = new ArrayList<>();
 
         try {
-            if(entry != null) {
-                StaticEntity current = entry.next(engine.entrySecond);
-                initPanel(startX, startY, processedElements, current);
-                if(tunnels != null) {
-                    for (Pair<Tunnel, Point> p : tunnels)
-                        initPanel(p.getValue().GetY(), p.getValue().GetX(), processedElements, p.getKey());
-                }
+            StaticEntity current = engine.entryPoint.next(engine.entrySecond);
+            initPanel(engine.entryCoords.getX(), engine.entryCoords.getY(), processedElements, current);
+            for (Map.Entry<Tunnel, Point> p : engine.tunnels.entrySet()) {
+                initPanel(p.getValue().getX(), p.getValue().getY(), processedElements, p.getKey());
             }
         } catch (IllegalMoveException e) {
             e.printStackTrace();

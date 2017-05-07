@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class Interpreter {
 
+    /*
     @FunctionalInterface
     private interface Command {
         String call(String[] params) throws TrainException, IllegalArgumentException, NumberFormatException;
@@ -34,9 +35,9 @@ public class Interpreter {
         commandLookup.put("connect",            this::connect);
         commandLookup.put("addPerson",          this::addPerson);
     }
-
+*/
     /** Checks if the right number of parameters are given */
-    private static void assertParams(String[] params, int num) throws IllegalArgumentException {
+   /* private static void assertParams(String[] params, int num) throws IllegalArgumentException {
         if (params == null) {
             if (num > 0) {
                 throw new IllegalArgumentException("Illegal parameters for command!");
@@ -45,9 +46,9 @@ public class Interpreter {
             throw new IllegalArgumentException("Illegal parameters for command!");
         }
     }
-
+*/
     /** runs specified command */
-    private String callCommand(String in) throws TrainException {
+   /* private String callCommand(String in) throws TrainException {
         String[] ss = in.split(" ");
         String[] params = new String[ss.length - 1];
         for (int i = 0; i < params.length; i++) {
@@ -60,9 +61,9 @@ public class Interpreter {
 
         throw new IllegalArgumentException("Unknown command!");
     }
-
+*/
     /** runs the interpreter */
-    private void run() throws TrainException {
+   /* private void run() throws TrainException {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             String line;
             System.out.print(">");
@@ -74,7 +75,8 @@ public class Interpreter {
             e.printStackTrace();
         }
     }
-
+*/
+    /*
     private String step(String[] params) throws TrainException {
         assertParams(params, 0);
         proto.step();
@@ -202,5 +204,5 @@ public class Interpreter {
             te.printStackTrace();
         }
     }
-
+*/
 }

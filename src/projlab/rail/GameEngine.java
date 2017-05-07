@@ -9,6 +9,7 @@ import projlab.rail.exception.CrashException;
 import projlab.rail.exception.TrainException;
 import projlab.rail.logic.*;
 import projlab.rail.ui.Direction;
+import projlab.rail.ui.Point;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -31,6 +32,7 @@ public class GameEngine {
 
     private final List<Switch> switches = new LinkedList<>();
     private final List<Station> stations = new LinkedList<>();
+    public final Map<Tunnel, Point> tunnels = new HashMap<>();
 
     public Tunnel activeTunnelA;
     public Tunnel activeTunnelB;
@@ -41,7 +43,9 @@ public class GameEngine {
     /** State of the game*/
     public GameState state;
 
+    public Point entryCoords;
     private int map;
+    private volatile int iteration = 0;
 
     public GameEngine() {
         HiddenRail prev = new HiddenRail();
@@ -57,26 +61,7 @@ public class GameEngine {
     }
 
     public void start() throws TrainException {
-        Locomotive loco = new Locomotive();
-        locos.add(loco);
-
-        MovingEntity temp = loco;
-        for (Color c : Color.values()) {
-            Car car = new Car(c);
-            temp.next = car;
-            temp = car;
-        }
-
-        loco.setPosition(entryPoint, entrySecond);
-        StaticEntity pos = entrySecond;
-        StaticEntity posPrev = entryPoint;
-
-        for (Car car = loco.next; car != null; car = car.next) {
-            car.setPosition(pos, pos.next(posPrev));
-            StaticEntity tmp = pos;
-            pos = pos.next(posPrev);
-            posPrev = tmp;
-        }
+        iteration = 0;
 
         state = GameState.INGAME;
 
@@ -85,6 +70,23 @@ public class GameEngine {
 
 
         }).start();
+    }
+
+    public void startTrain(Locomotive train) {
+        try {
+            train.setPosition(entryPoint, entrySecond);
+            StaticEntity pos = entrySecond;
+            StaticEntity posPrev = entryPoint;
+
+            for (Car car = train.next; car != null; car = car.next) {
+                car.setPosition(pos, pos.next(posPrev));
+                StaticEntity tmp = pos;
+                pos = pos.next(posPrev);
+                posPrev = tmp;
+            }
+        } catch (TrainException te) {
+            te.printStackTrace();
+        }
     }
 
     public void resetMap() {
@@ -120,10 +122,43 @@ public class GameEngine {
         DocumentBuilder builder = factory.newDocumentBuilder();
 
         Document doc = builder.parse(GameEngine.class.getResourceAsStream(path));
-
         Element map = (Element)doc.getElementsByTagName("map").item(0);
-        NodeList entities = byName(map, "entities").getChildNodes();
 
+        // map attributes
+        NodeList l = map.getElementsByTagName("entry");
+        if (l == null || l.getLength() == 0) {
+            entryCoords = new Point(0, 0);
+        } else {
+            Element entry = (Element)l.item(0);
+            entryCoords = getXY(entry);
+        }
+
+
+        // adding trains
+        NodeList trains = byName(map, "trains").getChildNodes();
+        for (int i = 0; i < trains.getLength(); i++) {
+            Element train;
+            if (trains.item(i).getNodeType() != Node.ELEMENT_NODE || !"train".equals(((train = (Element)trains.item(i)).getNodeName()))) continue;
+
+            Locomotive locomotive = new Locomotive(Integer.parseInt(train.getAttribute("start")));
+            locos.add(locomotive);
+            NodeList cars = train.getElementsByTagName("car");
+
+            MovingEntity current = locomotive;
+
+            for (int j = 0; j < cars.getLength(); j++) {
+                Element car = (Element)cars.item(j);
+                Color color = Color.lookup(car.getAttribute("color"));
+                boolean pass = car.getAttribute("pass") == null ? false : Boolean.valueOf(car.getAttribute("pass"));
+                Car c = new Car(color, pass);
+                current.next = c;
+                current = c;
+            }
+        }
+
+
+        // adding static entites
+        NodeList entities = byName(map, "entities").getChildNodes();
         for (int i = 0; i < entities.getLength(); i++) {
             if (entities.item(i).getNodeType() != Node.ELEMENT_NODE) continue;
 
@@ -148,7 +183,9 @@ public class GameEngine {
                     se = sw;
                     break;
                 case "tunnel":
-                    se = new Tunnel(getDir(e, "dir-visible"));
+                    Tunnel t = new Tunnel(getDir(e, "dir-visible"));
+                    tunnels.put(t, getXY(e));
+                    se = t;
                     break;
                 default:
                     se = null;
@@ -190,6 +227,10 @@ public class GameEngine {
         }
 
         statics.addAll(allStatics.values());
+    }
+
+    private static Point getXY(Element e) {
+        return new Point(Integer.parseInt(e.getAttribute("x")), Integer.parseInt(e.getAttribute("y")));
     }
 
     private static Element byName(Element e, String name) {
@@ -239,6 +280,10 @@ public class GameEngine {
 
     /** iterates one on the whole level */
     public Result step() {
+        locos.stream().filter(l -> l.startTime == iteration).forEach(this::startTrain);
+
+        iteration++;
+
         try {
             Set<StaticEntity> occupied = new HashSet<>();
             int occupiedCount = 0;
@@ -255,13 +300,12 @@ public class GameEngine {
                 throw new CrashException();
             }
 
-
             Iterator<Locomotive> i = locos.iterator();
             while (i.hasNext()){
                 Locomotive l = i.next();
-                if(l.currentPosition == null)
+                if (l.currentPosition == null)
                     continue;
-                if(l.move()){
+                if (l.move()){
                     removeTrain(l);
                     i.remove();
                 }
@@ -335,7 +379,8 @@ public class GameEngine {
             return;
         }
 
-        HiddenRail[] tunnel = new HiddenRail[10];
+        int dist = tunnels.get(activeTunnelA).getDist(tunnels.get(activeTunnelB));
+        HiddenRail[] tunnel = new HiddenRail[dist];
         for (int i = 0; i < tunnel.length; i++) {
             tunnel[i] = new HiddenRail();
             if (i > 0) {

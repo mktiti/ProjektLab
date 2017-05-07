@@ -4,6 +4,7 @@ import javafx.util.Pair;
 import projlab.rail.exception.IllegalMoveException;
 import projlab.rail.exception.InactiveTunnelException;
 import projlab.rail.ui.Direction;
+import projlab.rail.ui.ResourceManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -78,6 +79,12 @@ public class Tunnel extends StaticEntity {
 
     @Override
     public BufferedImage image() {
-        return null;
+        BufferedImage base = ResourceManager.getTunnel(visDir, isActive);
+        if (vehicle == null) {
+            return base;
+        } else {
+            Direction from = vehicle.lastPosition == visibleConnection ? visDir : visDir.invert();
+            return ResourceManager.mergeImages(base, vehicle.image(from, from.invert()));
+        }
     }
 }

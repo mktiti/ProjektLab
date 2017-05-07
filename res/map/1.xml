@@ -1,6 +1,70 @@
 <map>
     <entry x="0" y="0" />
+
+    <actions>
+
+    </actions>
+
+    <trains>
+        <train start="5"> <!-- Launches at fifth iteration -->
+            <car color="RED" pass="true" />
+            <car color="YELLOW" pass="false" />
+            <car color="BLUE" /> <!-- No passengers by default -->
+            <car /> <!-- Coal car -->
+            <car color="GREEN" pass="true" />
+        </train>
+    </trains>
+
     <entities>
+
+        <rail id="1">
+            <dir-b>WEST</dir-b>
+            <dir-a>EAST</dir-a>
+            <A>2</A>
+            <B>0</B>
+        </rail>
+        <station id="2" color="RED">
+            <dir-b>WEST</dir-b>
+            <dir-a>EAST</dir-a>
+            <A>3</A>
+            <B>1</B>
+        </station>
+        <rail id="3">
+            <dir-b>WEST</dir-b>
+            <dir-a>EAST</dir-a>
+            <A>4</A>
+            <B>2</B>
+        </rail>
+            <tunnel id="4" x="3" y="0" >
+            <dir-visible>WEST</dir-visible>
+            <VISIBLE>3</VISIBLE>
+        </tunnel>
+
+
+        <tunnel id="5" x="6" y="0" >
+            <dir-visible>EAST</dir-visible>
+            <VISIBLE>6</VISIBLE>
+        </tunnel>
+        <rail id="6">
+            <dir-b>WEST</dir-b>
+            <dir-a>EAST</dir-a>
+            <A>7</A>
+            <B>5</B>
+        </rail>
+        <rail id="7">
+            <dir-b>WEST</dir-b>
+            <dir-a>EAST</dir-a>
+            <A>8</A>
+            <B>6</B>
+        </rail>
+        <rail id="8">
+            <dir-b>WEST</dir-b>
+            <dir-a>EAST</dir-a>
+            <A>9</A>
+            <B>7</B>
+        </rail>
+
+        <!--
         <rail id="1">
             <dir-b>WEST</dir-b>
             <dir-a>EAST</dir-a>
@@ -51,8 +115,13 @@
         <switch id="9">
             <dir-in>NORTH</dir-in>
             <IN>8</IN>
+            <A>13</A>
             <B>12</B>
         </switch>
+        <tunnel id="13">
+            <dir-visible>WEST</dir-visible>
+            <VISIBLE>9</VISIBLE>
+        </tunnel>
 
         <rail id="10">
             <dir-b>EAST</dir-b>
@@ -72,5 +141,6 @@
             <A>9</A>
             <B>11</B>
         </rail>
+        -->
     </entities>
 </map>

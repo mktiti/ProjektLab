@@ -1,15 +1,44 @@
 package projlab.rail.ui;
 
-/**
- * Created by Administrator on 5/7/2017.
- */
 public class Point {
-    int x, y;
-    public Point(int x, int y){
+    private final int x, y;
+
+    public Point(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public int GetX(){return x;}
-    public int GetY(){return y;}
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || !(o instanceof Point)) return false;
+        Point p = (Point)o;
+        return p.x == x && p.y == y;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = x;
+        result = 31 * result + y;
+        return result;
+    }
+
+    public int getDist(Point p) {
+        return Math.max(1, (int)Math.sqrt((x - p.x) * (x - p.x) + (y - p.y) * (y - p.y)));
+    }
+
+    @Override
+    public String toString() {
+        return "Point{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }

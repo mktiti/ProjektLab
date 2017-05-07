@@ -151,7 +151,7 @@ public class Proto {
             posPrev = tmp;
         }
     }
-
+/*
     public int createRail(RailType type) {
         switch (type) {
             case CROSS:
@@ -174,7 +174,7 @@ public class Proto {
     }
 
     public int createLocomotive() {
-        Locomotive locomotive = new Locomotive();
+        Locomotive locomotive = new Locomotive(startTime);
         int id = locomotives.add(locomotive);
         engine.locos.add(locomotive);
         return id;
@@ -240,5 +240,5 @@ public class Proto {
             p.step();
         }
     }
-
+*/
 }

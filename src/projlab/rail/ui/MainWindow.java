@@ -16,45 +16,32 @@ public class MainWindow extends JFrame {
     private final GraphicsEngine graphicsEngine = new GraphicsEngine(this);
     private GameEngine gameEngine = new GameEngine();
 
-    private static class BackgroundPanel extends JComponent {
-        private BufferedImage backgroundImage;
-
-        private BackgroundPanel(BufferedImage backgroundImage) {
-            this.backgroundImage = backgroundImage;
-            setPreferredSize(new Dimension(MainWindow.WINDOW_WIDTH, MainWindow.WINDOW_HEIGHT));
-            setSize(MainWindow.WINDOW_WIDTH, MainWindow.WINDOW_HEIGHT);
-            setLayout(null);
-        }
-
-        @Override
-        protected void paintComponent(Graphics graphics) {
-            graphics.drawImage(backgroundImage, 0, 0, this);
-        }
-    }
-
-
     MainWindow() {
-        init(1);
+        init(0);
     }
 
     private void init(int map) {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT+28));
+        setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT + 28));
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
         setResizable(false);
 
         try {
-            gameEngine.load(1);
+            gameEngine.load(map);
         } catch (ParserConfigurationException | IOException | org.xml.sax.SAXException e) {
             e.printStackTrace();
         }
 
-        pack();
-        graphicsEngine.init(gameEngine.entryPoint,null, 0, 0,gameEngine,map);
+        graphicsEngine.init(gameEngine, map);
         setContentPane(graphicsEngine);
+        pack();
         setVisible(true);
-        repaint();
+    }
+
+    public static void main(String[] args) {
+        new MainWindow();
     }
 
 }
