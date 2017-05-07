@@ -72,11 +72,11 @@
             <A>11</A>
             <B>9</B>
         </rail>
-		<rail id="11">
-            <dir-b>SOUTH</dir-b>
-            <dir-a>WEST</dir-a>
-            <B>10</B>
-        </rail>
+		<switch id="11">
+            <dir-in>SOUTH</dir-in>
+            <IN>10</IN>
+            <B>21</B>
+        </switch>
 		<rail id="12">
             <dir-b>EAST</dir-b>
             <dir-a>WEST</dir-a>
@@ -106,10 +106,32 @@
             <A>17</A>
         </switch>
 		<rail id="17">
-            <dir-b>EAST</dir-b>
-            <dir-a>WEST</dir-a>
+            <dir-b>WEST</dir-b>
+            <dir-a>EAST</dir-a>
             <A>18</A>
             <B>16</B>
+        </rail>
+        <station id="18" color="YELLOW">
+            <dir-b>WEST</dir-b>
+            <dir-a>EAST</dir-a>
+            <A>19</A>
+            <B>17</B>
+        </station>
+        <rail id="19">
+            <dir-b>WEST</dir-b>
+            <dir-a>EAST</dir-a>
+            <A>20</A>
+            <B>18</B>
+        </rail>
+        <station id="20" color="RED">
+            <dir-b>WEST</dir-b>
+            <dir-a>EAST</dir-a>
+            <B>19</B>
+        </station>
+        <rail id="21">
+            <dir-b>WEST</dir-b>
+            <dir-a>EAST</dir-a>
+            <B>11</B>
         </rail>
     </entities>
 </map>
