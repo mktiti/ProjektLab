@@ -25,40 +25,17 @@ public class MenuWindow extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == ngame) {
+                ProgressManager.saveProgress(0);
                 new MainWindow(0);
             } else if (e.getSource() == cont) {
-                new MainWindow(getProgress());
+                new MainWindow(ProgressManager.getProgress());
             } else if (e.getSource() == quit) {
                 System.exit(0);
             }
         }
     }
 
-    private int getProgress() {
 
-        URL url = MenuWindow.class.getResource("/progress.txt");
-        try {
-            Path path = Paths.get(url.toURI());
-            if (!Files.exists(path)) {
-                try (BufferedWriter bw = new BufferedWriter(new FileWriter(path.toFile()))) {
-                    bw.write("0");
-                    bw.flush();
-                }
-            }
-        } catch (URISyntaxException | IOException e) {
-            e.printStackTrace();
-        }
-
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(MenuWindow.class.getResourceAsStream("/progress.txt")))) {
-
-            return Integer.parseInt(br.readLine());
-
-        } catch (IOException e) {
-            System.out.println("Cannot read progress, possibly not exists");
-        }
-
-        return 0;
-    }
 
     private void init(){
         setDefaultCloseOperation(EXIT_ON_CLOSE);

@@ -102,6 +102,12 @@ public class GraphicsEngine extends JPanel implements MouseListener {
         }
     }
 
+    private void ResetPanels(){
+        entities = new EntityPanel[SIZE][];
+        for(int i = 0; i < SIZE; i++)
+            entities[i] = new EntityPanel[SIZE];
+    }
+
     public void draw(Graphics g){
         for(int i = 0; i < SIZE; i++){
             for(int j = 0; j < SIZE; j++)
@@ -125,6 +131,8 @@ public class GraphicsEngine extends JPanel implements MouseListener {
 
     private void loadMapWithID(int mapid){
         engine = new GameEngine(this);
+        ResetPanels();
+        ProgressManager.saveProgress(mapid);
         try{
             engine.load(mapid);
             init(engine,mapid);
