@@ -9,16 +9,15 @@
             <car /> <!-- Coal car -->
             <car color="GREEN" pass="true" />
         </train>
-    </trains>
 
-    <trains>
-        <train start="6"> <!-- Launches at fifth iteration -->
+        <train start="25"> <!-- Launches at fifth iteration -->
             <car color="RED" pass="true" />
             <car color="YELLOW" pass="false" />
             <car color="BLUE" /> <!-- No passengers by default -->
             <car /> <!-- Coal car -->
             <car color="GREEN" pass="true" />
         </train>
+
     </trains>
 
     <entities>
