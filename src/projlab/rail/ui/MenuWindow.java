@@ -35,8 +35,6 @@ public class MenuWindow extends JFrame{
         }
     }
 
-
-
     private void init(){
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
