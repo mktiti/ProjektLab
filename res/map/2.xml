@@ -64,7 +64,6 @@
 		<rail id="11">
             <dir-b>SOUTH</dir-b>
             <dir-a>WEST</dir-a>
-            <A>12</A>
             <B>10</B>
         </rail>
 		<rail id="12">
@@ -96,10 +95,15 @@
             <A>17</A>
         </switch>
 		<rail id="17">
-            <dir-b>EAST</dir-b>
-            <dir-a>WEST</dir-a>
+            <dir-b>WEST</dir-b>
+            <dir-a>EAST</dir-a>
             <A>18</A>
             <B>16</B>
         </rail>
+		<station id="18" color="YELLOW">
+			<dir-b>WEST</dir-b>
+            <dir-a>EAST</dir-a>
+            <B>17</B>
+		</station>
     </entities>
 </map>
