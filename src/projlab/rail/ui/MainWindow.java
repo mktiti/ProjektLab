@@ -28,11 +28,11 @@ public class MainWindow extends JFrame {
      */
     private void init(int map) {
         int increment = 0;
-        if(System.getProperty("os.name").toUpperCase().contains("WINDOWS"))
+        if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {
             increment = 28;
+        }
         setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT + increment));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
         setLayout(null);
         setResizable(false);
 
@@ -45,8 +45,9 @@ public class MainWindow extends JFrame {
 
         graphicsEngine.init(gameEngine, map);
         setContentPane(graphicsEngine);
-        setVisible(true);
         pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
 }
