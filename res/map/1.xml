@@ -47,12 +47,12 @@
             <A>7</A>
             <B>5</B>
         </rail>
-        <rail id="7">
+        <station id="7" color="GREEN">
             <dir-b>WEST</dir-b>
             <dir-a>EAST</dir-a>
-            <A>8</A>
-            <B>6</B>
-        </rail>
+            <A>3</A>
+            <B>1</B>
+        </station>
         <rail id="8">
             <dir-b>WEST</dir-b>
             <dir-a>EAST</dir-a>
