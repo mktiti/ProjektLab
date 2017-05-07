@@ -360,6 +360,8 @@ public class GameEngine {
      * @throws IllegalArgumentException if the tunnel is not active
      */
     public void deactivateTunnel(Tunnel tunnel) throws IllegalArgumentException {
+        if (activeTunnelA == null && activeTunnelB == null) return;
+
         tunnel.isActive = false;
         if (activeTunnelA == tunnel) {
             destroyTunnel();
@@ -367,8 +369,6 @@ public class GameEngine {
         } else if (activeTunnelB == tunnel) {
             destroyTunnel();
             activeTunnelB = null;
-        } else {
-            throw new IllegalArgumentException("Tunnel not active!");
         }
     }
 
@@ -376,9 +376,7 @@ public class GameEngine {
      * Destroys the built tunnel
      */
     private void destroyTunnel() {
-        if (activeTunnelA == null || activeTunnelB == null) {
-            return;
-        }
+        if (activeTunnelA == null || activeTunnelB == null) return;
 
         activeTunnelA.connectHidden(null);
         activeTunnelB.connectHidden(null);
@@ -390,6 +388,8 @@ public class GameEngine {
      * @throws IllegalArgumentException if the tunnel is active
      */
     public void activateTunnel(Tunnel tunnel) throws IllegalArgumentException {
+        if (activeTunnelA != null && activeTunnelB != null) return;
+
         tunnel.isActive = true;
         if (activeTunnelA == null) {
             activeTunnelA = tunnel;
@@ -397,8 +397,6 @@ public class GameEngine {
         } else if (activeTunnelB == null) {
             activeTunnelB = tunnel;
             buildTunnel();
-        } else {
-            throw new IllegalArgumentException("Tunnel already built!");
         }
     }
 

@@ -109,9 +109,13 @@ public class GraphicsEngine extends JPanel implements MouseListener {
     }
 
     public void draw(Graphics g){
-        for(int i = 0; i < SIZE; i++){
+        loop: for(int i = 0; i < SIZE; i++){
             for(int j = 0; j < SIZE; j++)
             {
+                if(entities == null)
+                    return;
+                if(entities[i] == null)
+                    return;
                 if(entities[i][j] != null)
                     entities[i][j].paintComponent(g);
             }

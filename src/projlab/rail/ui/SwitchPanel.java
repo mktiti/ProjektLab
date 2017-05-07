@@ -16,8 +16,11 @@ public class SwitchPanel extends EntityPanel implements MouseListener {
 
     @Override
     void click() {
-        ((Switch)entity).toggle();
-        update();
+        Switch s = (Switch)entity;
+        if (!s.hasVehicle()) {
+            s.toggle();
+            update();
+        }
     }
 
     @Override
