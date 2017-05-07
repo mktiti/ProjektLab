@@ -35,14 +35,21 @@ public class MenuWindow extends JFrame{
         setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);
         ButtonListener listener = new ButtonListener();
+        getContentPane().setBackground(Color.lightGray);
 
         setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 
         ngame = new JButton("New Game");
+        ngame.setBackground(Color.darkGray);
+        ngame.setForeground(Color.white);
 
         cont = new JButton("Continue");
+        cont.setBackground(Color.darkGray);
+        cont.setForeground(Color.white);
 
         quit = new JButton("Quit");
+        quit.setBackground(Color.darkGray);
+        quit.setForeground(Color.white);
 
         ngame.setAlignmentX(Component.CENTER_ALIGNMENT);
         cont.setAlignmentX(Component.CENTER_ALIGNMENT);
