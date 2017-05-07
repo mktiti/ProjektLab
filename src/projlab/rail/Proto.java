@@ -88,14 +88,14 @@ public class Proto {
          * @param entity the entity to be added
          * @return the id of the entity
          */
-        private int add(E entity) {
+     /*   private int add(E entity) {
             statics.add(entity);
             int id = statics.size() - 1;
             store.put(id, entity);
             engine.statics.add(entity);
             return id;
         }
-
+*/
         /**
          * Checks if the entity exists
          * @param id the of the entity
@@ -117,8 +117,9 @@ public class Proto {
     public final StaticStore<CrossRail> crosses = new StaticStore<>();
     public final StaticStore<Station> stations = new StaticStore<>();
     public final StaticStore<Tunnel> tunnels = new StaticStore<>();
-    public final GameEngine engine = new GameEngine(graphicsEngine);
 
+    //public final GameEngine engine = new GameEngine(graphicsEngine);
+/*
     public void step() throws TrainException {
         engine.step();
     }
@@ -149,6 +150,7 @@ public class Proto {
             posPrev = tmp;
         }
     }
+    */
 /*
     public int createRail(RailType type) {
         switch (type) {
