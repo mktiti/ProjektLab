@@ -153,6 +153,7 @@
             <dir-in>NORTH</dir-in>
             <IN>24</IN>
             <B>26</B>
+            <A>31</A>
         </switch>
         <rail id="26">
             <dir-b>EAST</dir-b>
@@ -181,6 +182,19 @@
             <dir-visible>WEST</dir-visible>
             <VISIBLE>2</VISIBLE>
         </tunnel>
+
+        <rail id="31">
+            <dir-b>WEST</dir-b>
+            <dir-a>NORTH</dir-a>
+            <A>32</A>
+            <B>25</B>
+        </rail>
+
+        <tunnel id="32" x="8" y="3" >
+            <dir-visible>SOUTH</dir-visible>
+            <VISIBLE>31</VISIBLE>
+        </tunnel>
+
 
     </entities>
 </map>
