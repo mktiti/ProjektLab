@@ -130,6 +130,7 @@ public class GameEngine {
                 pos = pos.next(posPrev);
                 posPrev = tmp;
             }
+            canBeFinished = true;
         } catch (TrainException te) {
             te.printStackTrace();
         }
@@ -330,10 +331,7 @@ public class GameEngine {
 
     /** iterates one on the whole level */
     public Result step() {
-        locos.stream().filter(l -> l.startTime == iteration).forEach(l -> {
-            startTrain(l);
-            canBeFinished = true;
-        });
+        locos.stream().filter(l -> l.startTime == iteration).forEach(this::startTrain);
         addNewPeople();
 
         iteration++;
@@ -369,7 +367,7 @@ public class GameEngine {
             gameOver();
             return Result.CRASH;
         }
-        if (canBeFinished && locos.stream().filter(l -> l.startTime > iteration).count() == 0) {
+        if (canBeFinished && locos.stream().filter(l -> l.startTime < iteration).count() == 0) {
             gameWon();
             return map == MAP_COUNT ? Result.GAME_WIN : Result.MAP_WIN;
         }
