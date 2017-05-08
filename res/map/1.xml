@@ -1,10 +1,18 @@
-<map new-people-freq="1" step-time="1000" > <!-- new peple frequency is relative, step time is in ms -->
+<map new-people-freq="1" step-time="700" > <!-- new peple frequency is relative, step time is in ms -->
     <entry x="0" y="0" />
 
     <trains>
         <train start="0"> <!-- Launches at fifth iteration -->
             <car color="RED" pass="true" />
             <car color="YELLOW" pass="false" />
+            <car color="BLUE" /> <!-- No passengers by default -->
+            <car /> <!-- Coal car -->
+            <car color="GREEN" pass="true" />
+        </train>
+
+        <train start="50"> <!-- Launches at fifth iteration -->
+            <car color="RED" pass="false" />
+            <car color="YELLOW" pass="true" />
             <car color="BLUE" /> <!-- No passengers by default -->
             <car /> <!-- Coal car -->
             <car color="GREEN" pass="true" />
@@ -197,7 +205,7 @@
         </rail>
         <tunnel id="32" x="3" y="0" >
             <dir-visible>EAST</dir-visible>
-            <VISIBLE>25</VISIBLE>
+            <VISIBLE>29</VISIBLE>
         </tunnel>
     </entities>
 </map>
