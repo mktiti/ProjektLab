@@ -9,11 +9,11 @@
             <car color="RED" pass="true" />
         </train>
         <train start="10"> <!-- Launches at fifth iteration -->
-            <car color="YELLOW" pass="true" />
-            <car /> <!-- Coal car -->
-            <car /> <!-- Coal car -->
+            <car color="RED" pass="true" />
             <car /> <!-- Coal car -->
             <car color="BLUE" pass="true" />
+            <car color="GREEN" pass="true" />
+            <car color="YELLOW" pass="true" />
         </train>
     </trains>
 
