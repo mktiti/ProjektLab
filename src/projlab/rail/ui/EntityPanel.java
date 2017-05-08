@@ -6,7 +6,6 @@ import projlab.rail.logic.StaticEntity;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Random;
 
 public class EntityPanel {
 

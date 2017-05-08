@@ -5,8 +5,6 @@ import projlab.rail.ui.ResourceManager;
 
 import java.awt.image.BufferedImage;
 import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.Set;
 
 /** Represents a station */
 public class Station extends Rail{

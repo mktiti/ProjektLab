@@ -1,15 +1,5 @@
 package projlab.rail;
 
-import projlab.rail.exception.TrainException;
-import projlab.rail.logic.Color;
-import projlab.rail.logic.StaticEntity;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
-
 public class Interpreter {
 
     /*

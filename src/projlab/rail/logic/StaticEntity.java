@@ -3,10 +3,7 @@ package projlab.rail.logic;
 import javafx.util.Pair;
 import projlab.rail.exception.TrainException;
 import projlab.rail.ui.Direction;
-import projlab.rail.ui.EntityPanel;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
