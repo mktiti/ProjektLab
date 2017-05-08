@@ -70,7 +70,7 @@ public class GameEngine {
         this.graphicsEngine = graphicsEngine;
 
         HiddenRail prev = new HiddenRail();
-        for (int i = 0; i <= Color.values().length; i++) {
+        for (int i = 0; i <= Color.values().length+1; i++) {
             HiddenRail current = new HiddenRail();
             prev.connectA(current);
             current.connectB(prev);

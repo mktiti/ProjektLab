@@ -8,7 +8,7 @@
             <car color="BLUE" /> <!-- No passengers by default -->
             <car color="RED" pass="true" />
         </train>
-        <train start="10"> <!-- Launches at fifth iteration -->
+        <train start="20"> <!-- Launches at fifth iteration -->
             <car color="RED" pass="true" />
             <car /> <!-- Coal car -->
             <car color="BLUE" pass="true" />

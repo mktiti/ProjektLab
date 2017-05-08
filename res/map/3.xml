@@ -4,13 +4,13 @@
     <trains>
         <train start="2"> <!-- Launches at fifth iteration -->
             <car /> <!-- Coal car -->
-            <car color="RED" pass="false" />
-            <car color="GREEN" /> <!-- No passengers by default -->
-            <car color="BLUE" /> <!-- No passengers by default -->
+            <car color="RED" pass="true" />
+            <car color="GREEN" pass="true"/> <!-- No passengers by default -->
+            <car color="BLUE" pass="true"/> <!-- No passengers by default -->
             <car color="YELLOW" pass="true" />
         </train>
 
-        <train start="20"> <!-- Launches at fifth iteration -->
+        <train start="35"> <!-- Launches at fifth iteration -->
             <car color="BLUE" pass="true" />
             <car color="RED" pass="true" />
             <car color="GREEN" pass="true" />
@@ -19,7 +19,7 @@
             <car /> <!-- Coal car -->
         </train>
 
-        <train start="40"> <!-- Launches at fifth iteration -->
+        <train start="55"> <!-- Launches at fifth iteration -->
             <car color="YELLOW" pass="true" />
             <car color="BLUE" pass="false" />
             <car color="GREEN" /> <!-- No passengers by default -->
