@@ -197,7 +197,7 @@
         </rail>
         <tunnel id="32" x="3" y="0" >
             <dir-visible>EAST</dir-visible>
-            <VISIBLE>25</VISIBLE>
+            <VISIBLE>29</VISIBLE>
         </tunnel>
     </entities>
 </map>
