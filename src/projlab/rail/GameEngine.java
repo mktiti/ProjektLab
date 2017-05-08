@@ -358,6 +358,7 @@ public class GameEngine {
                 if (l.currentPosition == null)
                     continue;
                 if (l.move()){
+                    graphicsEngine.update();
                     removeTrain(l);
                     i.remove();
                 }
