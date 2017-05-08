@@ -51,6 +51,8 @@ public class MenuWindow extends JFrame{
      * Initializes the Windows
      */
     private void init(){
+        setTitle("<3 IIT");
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setLocationRelativeTo(null);
