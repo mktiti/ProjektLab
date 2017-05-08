@@ -27,7 +27,7 @@ public class MainWindow extends JFrame {
      * @param map Map to initialize
      */
     private void init(int map) {
-        setTitle("<3 IIT");
+        setTitle("Order 66 - Level " + (map + 1));
 
         int increment = 0;
         if (System.getProperty("os.name").toUpperCase().contains("WINDOWS")) {

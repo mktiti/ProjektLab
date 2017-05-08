@@ -1,14 +1,5 @@
 package projlab.rail;
 
-import projlab.rail.logic.Car;
-import projlab.rail.logic.Locomotive;
-import projlab.rail.logic.Switch;
-import projlab.rail.logic.Tunnel;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 public class Szkeleton {
 /*
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

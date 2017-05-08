@@ -4,15 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class MenuWindow extends JFrame{
-    private static boolean DEBUG = true;
+    private static boolean DEBUG = false;
     private final int WINDOW_WIDTH = 300;
     private final int WINDOW_HEIGHT = 400;
 
@@ -51,7 +45,7 @@ public class MenuWindow extends JFrame{
      * Initializes the Windows
      */
     private void init(){
-        setTitle("<3 IIT");
+        setTitle("Order 66");
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -136,6 +130,7 @@ public class MenuWindow extends JFrame{
     public static void main(String[] args){
         // Kis gyorsító mágia
         new Thread(ResourceManager::init).start();
+        DEBUG = args != null && args.length == 1 && "-debug".equals(args[0]);
         new MenuWindow();
     }
 }

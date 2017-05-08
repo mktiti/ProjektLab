@@ -6,7 +6,6 @@ import projlab.rail.exception.InactiveTunnelException;
 import projlab.rail.ui.Direction;
 import projlab.rail.ui.ResourceManager;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;

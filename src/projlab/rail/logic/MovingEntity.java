@@ -1,10 +1,8 @@
 package projlab.rail.logic;
 
-import projlab.rail.exception.IllegalMoveException;
 import projlab.rail.exception.TrainException;
 import projlab.rail.ui.Direction;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /** Represents a vehicle (Car or Locomotive) */
